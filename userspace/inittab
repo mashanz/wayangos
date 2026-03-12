@@ -1,4 +1,4 @@
-# [DistroName]OS inittab
+# WayangOS inittab
 # BusyBox init configuration
 
 # System initialization
@@ -10,7 +10,7 @@ tty1::respawn:/sbin/getty 38400 tty1
 tty2::respawn:/sbin/getty 38400 tty2
 
 # Stuff to do before rebooting
-::shutdown:/bin/echo "Shutting down..."
+::shutdown:/bin/echo "Shutting down WayangOS..."
 ::shutdown:/bin/umount -a -r
 ::shutdown:/sbin/swapoff -a
 

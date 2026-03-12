@@ -1,4 +1,4 @@
-# Building [DistroName]OS
+# Building WayangOS
 
 ## Prerequisites
 

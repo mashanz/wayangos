@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# [DistroName]OS Kernel Build Script
+# WayangOS Kernel Build Script
 # Usage: ./build-kernel.sh [ARCH] [CONFIG_PROFILE]
 #
 # Examples:
@@ -52,7 +52,7 @@ if [ ! -f "$CONFIG_FILE" ]; then
 fi
 
 echo "============================================"
-echo "  [DistroName]OS Kernel Build"
+echo "  WayangOS Kernel Build"
 echo "============================================"
 echo "  Architecture : $ARCH ($KERNEL_ARCH)"
 echo "  Config       : $CONFIG"

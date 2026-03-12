@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# [DistroName]OS Root Filesystem Build Script
+# WayangOS Root Filesystem Build Script
 # Builds a minimal rootfs with musl + BusyBox
 #
 # Usage: ./build-rootfs.sh [ARCH]
@@ -20,7 +20,7 @@ BUSYBOX_VERSION="1.36.1"
 MUSL_VERSION="1.2.5"
 
 echo "============================================"
-echo "  [DistroName]OS Rootfs Build"
+echo "  WayangOS Rootfs Build"
 echo "============================================"
 echo "  Architecture : $ARCH"
 echo "  BusyBox      : $BUSYBOX_VERSION"

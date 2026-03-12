@@ -1,14 +1,16 @@
-# [DistroName]OS
+# ꦮꦪꦁ WayangOS
 
-**Ultra-minimal Linux distribution for the edge.**
+**The lightweight Linux distribution that controls your hardware like a dalang (puppet master) controls the shadows.**
 
 Built from the ground up for embedded systems, real-time applications, IoT devices, robotics, server clustering, and virtualization. No bloat. No compromises. Just Linux.
+
+> *Named after Wayang, the ancient Javanese shadow puppet art — WayangOS is the invisible hand that controls your hardware with precision and grace.*
 
 ---
 
 ## Overview
 
-[DistroName]OS is a custom Linux distribution built on the latest stable kernel (v6.13+) with PREEMPT_RT support. It uses musl libc and BusyBox for a tiny userspace footprint, boots in seconds, and runs comfortably on **64MB of RAM**.
+WayangOS is a custom Linux distribution built on the latest stable kernel (v6.19+) with PREEMPT_RT support. It uses musl libc and BusyBox for a tiny userspace footprint, boots in seconds, and runs comfortably on **64MB of RAM**.
 
 There is no systemd. No D-Bus. No polkit. Just a clean, auditable init system you can read in 5 minutes.
 
@@ -16,7 +18,7 @@ There is no systemd. No D-Bus. No polkit. Just a clean, auditable init system yo
 
 | Feature | Details |
 |---------|---------|
-| **Kernel** | Linux 6.13+ with PREEMPT_RT patches |
+| **Kernel** | Linux 6.19+ with PREEMPT_RT patches |
 | **Libc** | musl — small, correct, static-linking friendly |
 | **Userspace** | BusyBox — 400+ utilities in a single binary |
 | **Init** | Custom shell-based init (no systemd) |
@@ -65,7 +67,7 @@ Real-time variant with `PREEMPT_RT` enabled. Tuned for deterministic, low-latenc
 
 ```
 linux-distro/
-├── kernel/          # Linux kernel source (shallow clone)
+├── kernel/          # Linux kernel source (v6.19)
 ├── configs/         # Kernel configurations
 │   ├── minimal.config
 │   ├── server.config
@@ -152,4 +154,4 @@ Userspace & configs: MIT
 
 **Built by [Hans Sumardhi](https://github.com/mashanz)**
 
-*[DistroName]OS — Because your OS should be smaller than your application.*
+*WayangOS — Because your OS should be smaller than your application.*

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# [DistroName]OS — System initialization script
+# WayangOS — System initialization script
 #
 
 echo "[init] Mounting filesystems..."
@@ -29,4 +29,4 @@ if [ -d /etc/modules-load.d ]; then
     done
 fi
 
-echo "[init] System ready."
+echo "[init] WayangOS ready."

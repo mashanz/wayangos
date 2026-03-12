@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# [DistroName]OS Init Script
+# WayangOS Init Script
 # Minimal PID 1 — no systemd, no openrc, just shell
 #
 
@@ -18,7 +18,7 @@ mount -t tmpfs tmpfs /run
 if [ -f /etc/hostname ]; then
     hostname "$(cat /etc/hostname)"
 else
-    hostname "distroname"
+    hostname "wayang"
 fi
 
 # Kernel messages
@@ -45,15 +45,15 @@ fi
 
 # Print banner
 echo ""
-echo "  ____  _     _             _   _                  ___  ____  "
-echo " |  _ \(_)___| |_ _ __ ___ | \ | | __ _ _ __ ___  / _ \/ ___| "
-echo " | | | | / __| __| '__/ _ \|  \| |/ _\` | '_ \` _ \| | | \___ \ "
-echo " | |_| | \__ \ |_| | | (_) | |\  | (_| | | | | | | |_| |___) |"
-echo " |____/|_|___/\__|_|  \___/|_| \_|\__,_|_| |_| |_|\___/|____/ "
+echo "  ___       __  __                       ___  ____  "
+echo " / _ \     / / / /__ _____ ____  ___ _  / _ \/ __/  "
+echo "/ ___/ _  / /_/ / _ \`/ _ \/ __ \/ _ \`/ / // /\ \   "
+echo "/_/   (_)  \____/\_,_/_//_/\_, /\_, /  \___/___/   "
+echo "                          /___//___/                 "
 echo ""
-echo " [DistroName]OS — Ultra-minimal Linux"
-echo " Kernel: $(uname -r)"
-echo " Memory: $(free -m 2>/dev/null | awk '/Mem:/{print $2}')MB"
+echo "  WayangOS — The Shadow that Powers the Machine"
+echo "  Kernel: $(uname -r)"
+echo "  Memory: $(free -m 2>/dev/null | awk '/Mem:/{print $2}')MB"
 echo ""
 
 # Start getty on serial console

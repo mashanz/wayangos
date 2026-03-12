@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[DistroName]OS — Ultra-Minimal Linux</title>
+    <title>WayangOS — The Shadow that Powers the Machine</title>
     <style>
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: #1a1a2e;
-            --bg-card-hover: #1f1f35;
-            --accent: #00d4ff;
-            --accent-dim: #00d4ff22;
-            --accent-glow: #00d4ff44;
-            --text-primary: #e8e8f0;
-            --text-secondary: #8888aa;
-            --text-dim: #555577;
-            --border: #2a2a3e;
-            --success: #00ff88;
-            --warning: #ffaa00;
+            --bg-primary: #0a0806;
+            --bg-secondary: #110e09;
+            --bg-card: #1a1410;
+            --bg-card-hover: #221b13;
+            --accent: #c8941a;
+            --accent-dim: #c8941a22;
+            --accent-glow: #c8941a44;
+            --accent-bright: #f0b830;
+            --text-primary: #f0e8d8;
+            --text-secondary: #a09070;
+            --text-dim: #5a4a30;
+            --border: #2e2318;
+            --border-gold: #c8941a44;
+            --success: #7ec87e;
+            --warning: #c8941a;
         }
 
         * {
@@ -35,7 +37,7 @@
             overflow-x: hidden;
         }
 
-        /* Background grid effect */
+        /* Batik-inspired background pattern */
         body::before {
             content: '';
             position: fixed;
@@ -44,9 +46,11 @@
             width: 100%;
             height: 100%;
             background-image:
-                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
+                linear-gradient(rgba(200, 148, 26, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 148, 26, 0.025) 1px, transparent 1px),
+                radial-gradient(ellipse at 30% 60%, rgba(200, 148, 26, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 20%, rgba(200, 148, 26, 0.03) 0%, transparent 40%);
+            background-size: 60px 60px, 60px 60px, 100% 100%, 100% 100%;
             pointer-events: none;
             z-index: 0;
         }
@@ -65,9 +69,9 @@
             top: 0;
             width: 100%;
             padding: 16px 0;
-            background: rgba(10, 10, 15, 0.9);
+            background: rgba(10, 8, 6, 0.92);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border-gold);
             z-index: 100;
         }
 
@@ -83,6 +87,15 @@
             color: var(--accent);
             text-decoration: none;
             letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-logo .aksara-small {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            color: var(--accent-bright);
         }
 
         .nav-logo span {
@@ -124,9 +137,9 @@
             top: 20%;
             left: 50%;
             transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
             pointer-events: none;
         }
 
@@ -136,7 +149,7 @@
             gap: 8px;
             padding: 6px 16px;
             background: var(--accent-dim);
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(200, 148, 26, 0.3);
             border-radius: 100px;
             font-size: 0.8rem;
             color: var(--accent);
@@ -156,12 +169,25 @@
             50% { opacity: 0.4; }
         }
 
+        /* Javanese aksara — the soul of WayangOS */
+        .aksara-hero {
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--accent-bright);
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 60px rgba(200, 148, 26, 0.5), 0 0 120px rgba(200, 148, 26, 0.2);
+            opacity: 0.9;
+            line-height: 1.2;
+        }
+
         .hero h1 {
             font-size: clamp(3rem, 8vw, 5.5rem);
             font-weight: 800;
             letter-spacing: -2px;
             line-height: 1.1;
-            margin-bottom: 24px;
+            margin-bottom: 8px;
             position: relative;
             z-index: 1;
         }
@@ -170,10 +196,20 @@
             color: var(--accent);
         }
 
+        .hero .tagline-main {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--accent-bright);
+            font-style: italic;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.85;
+        }
+
         .hero .tagline {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 620px;
             margin-bottom: 48px;
             position: relative;
             z-index: 1;
@@ -188,7 +224,7 @@
 
         .btn {
             padding: 14px 32px;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 0.95rem;
             font-weight: 600;
             text-decoration: none;
@@ -203,14 +239,14 @@
         }
 
         .btn-primary:hover {
-            background: #33ddff;
+            background: var(--accent-bright);
             box-shadow: 0 0 30px var(--accent-glow);
         }
 
         .btn-secondary {
             background: transparent;
             color: var(--text-primary);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-gold);
         }
 
         .btn-secondary:hover {
@@ -244,6 +280,59 @@
             letter-spacing: 1px;
         }
 
+        /* Cultural note */
+        .cultural-note {
+            padding: 48px 0;
+        }
+
+        .cultural-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(200, 148, 26, 0.05) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            padding: 32px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cultural-card::before {
+            content: '꧅';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 8rem;
+            color: var(--accent);
+            opacity: 0.04;
+            line-height: 1;
+        }
+
+        .cultural-card::after {
+            content: '꧅';
+            position: absolute;
+            bottom: -30px;
+            right: 20px;
+            font-size: 8rem;
+            color: var(--accent);
+            opacity: 0.04;
+            line-height: 1;
+        }
+
+        .cultural-card .aksara-deco {
+            font-size: 2.5rem;
+            color: var(--accent);
+            opacity: 0.6;
+            margin-bottom: 16px;
+        }
+
+        .cultural-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
         /* Terminal preview */
         .terminal-section {
             padding: 80px 0;
@@ -251,7 +340,7 @@
 
         .terminal {
             background: var(--bg-secondary);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-gold);
             border-radius: 12px;
             overflow: hidden;
             max-width: 700px;
@@ -263,8 +352,8 @@
             align-items: center;
             gap: 8px;
             padding: 12px 16px;
-            background: rgba(255,255,255,0.03);
-            border-bottom: 1px solid var(--border);
+            background: rgba(200, 148, 26, 0.05);
+            border-bottom: 1px solid var(--border-gold);
         }
 
         .terminal-dot {
@@ -276,6 +365,13 @@
         .terminal-dot.red { background: #ff5f57; }
         .terminal-dot.yellow { background: #febc2e; }
         .terminal-dot.green { background: #28c840; }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
 
         .terminal-body {
             padding: 20px 24px;
@@ -340,7 +436,7 @@
 
         .feature-card:hover {
             background: var(--bg-card-hover);
-            border-color: rgba(0, 212, 255, 0.3);
+            border-color: var(--border-gold);
             transform: translateY(-2px);
         }
 
@@ -352,6 +448,7 @@
         .feature-card h3 {
             font-size: 1.2rem;
             margin-bottom: 8px;
+            color: var(--text-primary);
         }
 
         .feature-card p {
@@ -364,6 +461,7 @@
             margin-top: 12px;
             padding: 4px 10px;
             background: var(--accent-dim);
+            border: 1px solid var(--border-gold);
             border-radius: 4px;
             font-size: 0.75rem;
             color: var(--accent);
@@ -401,7 +499,7 @@
         }
 
         .comparison-table tr:hover td {
-            background: rgba(0, 212, 255, 0.03);
+            background: rgba(200, 148, 26, 0.03);
         }
 
         .highlight-row td {
@@ -446,6 +544,7 @@
             font-weight: 700;
             margin-bottom: 4px;
             font-family: monospace;
+            color: var(--accent);
         }
 
         .arch-card .arch-desc {
@@ -460,8 +559,8 @@
         }
 
         .download-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(200, 148, 26, 0.06) 100%);
+            border: 1px solid var(--border-gold);
             border-radius: 16px;
             padding: 64px 48px;
             max-width: 600px;
@@ -482,18 +581,33 @@
             display: inline-block;
             padding: 8px 20px;
             background: var(--accent-dim);
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(200, 148, 26, 0.3);
             border-radius: 8px;
             color: var(--accent);
             font-size: 0.9rem;
             font-weight: 600;
         }
 
+        /* Divider */
+        .gold-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 0 auto 24px;
+        }
+
         /* Footer */
         footer {
             padding: 48px 0;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid var(--border-gold);
             text-align: center;
+        }
+
+        footer .footer-aksara {
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.4;
+            margin-bottom: 16px;
         }
 
         footer p {
@@ -527,13 +641,16 @@
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <a href="#" class="nav-logo">[DistroName]<span>OS</span></a>
+            <a href="#" class="nav-logo">
+                <span class="aksara-small">ꦮꦪꦁ</span>
+                Wayang<span>OS</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#performance">Performance</a></li>
                 <li><a href="#architectures">Architectures</a></li>
                 <li><a href="#download">Download</a></li>
-                <li><a href="https://github.com/mashanz" target="_blank">GitHub</a></li>
+                <li><a href="https://github.com/mashanz/wayangos" target="_blank">GitHub</a></li>
             </ul>
         </div>
     </nav>
@@ -542,13 +659,15 @@
     <section class="hero">
         <div class="hero-badge">
             <span class="dot"></span>
-            Built on Linux 6.13 with PREEMPT_RT
+            Built on Linux 6.19 with PREEMPT_RT
         </div>
-        <h1>[DistroName]<span class="accent">OS</span></h1>
-        <p class="tagline">Ultra-minimal Linux distribution for embedded systems, real-time applications, and edge computing. Your OS should be smaller than your application.</p>
+        <div class="aksara-hero">ꦮꦪꦁ</div>
+        <h1>Wayang<span class="accent">OS</span></h1>
+        <p class="tagline-main">The Shadow that Powers the Machine</p>
+        <p class="tagline">Ultra-minimal Linux distribution for embedded systems, real-time applications, and edge computing. Ancient art. Bare metal.</p>
         <div class="hero-buttons">
             <a href="#download" class="btn btn-primary">Get Started</a>
-            <a href="https://github.com/mashanz" class="btn btn-secondary" target="_blank">View Source →</a>
+            <a href="https://github.com/mashanz/wayangos" class="btn btn-secondary" target="_blank">View Source →</a>
         </div>
         <div class="hero-stats">
             <div class="stat">
@@ -570,6 +689,22 @@
         </div>
     </section>
 
+    <!-- Cultural Note -->
+    <section class="cultural-note">
+        <div class="container">
+            <div class="cultural-card">
+                <div class="aksara-deco">ꦮꦪꦁ</div>
+                <div class="gold-divider"></div>
+                <p>
+                    Named after Wayang, the ancient Javanese shadow puppet art —
+                    WayangOS is the invisible hand that controls your hardware with precision and grace.
+                    Like the <em>dalang</em> who commands hundreds of puppets from behind the screen,
+                    WayangOS orchestrates your hardware with total control and zero waste.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Terminal Preview -->
     <section class="terminal-section">
         <div class="container">
@@ -578,22 +713,23 @@
                     <div class="terminal-dot red"></div>
                     <div class="terminal-dot yellow"></div>
                     <div class="terminal-dot green"></div>
+                    <div class="terminal-title">WayangOS — v6.19</div>
                 </div>
                 <div class="terminal-body">
                     <div><span class="comment"># Build for x86_64 with minimal config</span></div>
                     <div><span class="prompt">$ </span><span class="cmd">./build/build-kernel.sh x86_64 minimal</span></div>
-                    <div><span class="output">  [DistroName]OS Kernel Build</span></div>
+                    <div><span class="output">  WayangOS Kernel Build</span></div>
                     <div><span class="output">  Architecture : x86_64</span></div>
                     <div><span class="output">  Config       : minimal</span></div>
                     <div>&nbsp;</div>
                     <div><span class="comment"># Boot with QEMU — 64MB RAM</span></div>
                     <div><span class="prompt">$ </span><span class="cmd">qemu-system-x86_64 -kernel bzImage -initrd initramfs.cpio.gz -m 64M -nographic</span></div>
-                    <div><span class="output">  [DistroName]OS — Ultra-minimal Linux</span></div>
-                    <div><span class="output">  Kernel: 6.13.0-distroname-minimal</span></div>
+                    <div><span class="output">  WayangOS — The Shadow that Powers the Machine</span></div>
+                    <div><span class="output">  Kernel: 6.19.0-wayang-minimal</span></div>
                     <div><span class="output">  Memory: 64MB</span></div>
                     <div><span class="output">  Boot time: 0.8s</span></div>
                     <div>&nbsp;</div>
-                    <div><span class="prompt">root@distroname:~# </span><span class="cmd">_</span></div>
+                    <div><span class="prompt">root@wayang:~# </span><span class="cmd">_</span></div>
                 </div>
             </div>
         </div>
@@ -639,7 +775,7 @@
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🤖</div>
-                    <h3>IoT & Robotics</h3>
+                    <h3>IoT &amp; Robotics</h3>
                     <p>GPIO, I2C, SPI support in the RT config. Built for sensor nodes, actuators, and edge compute. Runs on the smallest SBCs.</p>
                     <span class="feature-tag">GPIO + I2C + SPI</span>
                 </div>
@@ -658,7 +794,7 @@
                 <thead>
                     <tr>
                         <th>Metric</th>
-                        <th>[DistroName]OS</th>
+                        <th>WayangOS</th>
                         <th>Alpine Linux</th>
                         <th>Ubuntu Server</th>
                         <th>Debian Minimal</th>
@@ -753,14 +889,76 @@
     <!-- Download -->
     <section class="download" id="download">
         <div class="container">
-            <div class="download-box">
-                <h2>Get [DistroName]OS</h2>
-                <p>Pre-built images and ISO downloads are coming soon. For now, build from source.</p>
-                <div style="margin-bottom: 24px;">
-                    <span class="coming-soon">🚧 Pre-built images coming soon</span>
+            <div style="text-align: center; margin-bottom: 40px;">
+                <div style="font-size: 2.5rem; color: var(--accent); margin-bottom: 8px; opacity: 0.7;">ꦮꦪꦁ</div>
+                <h2 style="color: var(--text-primary); font-size: 2rem; margin-bottom: 8px;">Download WayangOS</h2>
+                <p style="color: var(--text-secondary);">Prebuilt images ready to flash. Pick your architecture.</p>
+            </div>
+
+            <!-- Download Cards Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                
+                <!-- x86_64 -->
+                <div style="background: var(--bg-card); border: 1px solid var(--accent); border-radius: 12px; padding: 28px; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 12px;">🖥️</div>
+                    <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 4px;">x86_64</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">Servers, VMs, Intel/AMD desktops</p>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+                        <div style="color: var(--text-primary); font-size: 0.9rem;">wayangos-0.1-x86_64.iso</div>
+                        <div style="color: var(--text-dim); font-size: 0.75rem; margin-top: 4px;">~12 MB · SHA256 verified</div>
+                    </div>
+                    <a href="#" style="display: inline-block; background: var(--accent); color: #000; padding: 10px 28px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">⬇ Download ISO</a>
+                    <div style="margin-top: 10px;">
+                        <a href="#" style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: none;">📦 Raw Image</a>
+                        <span style="color: var(--text-dim); margin: 0 8px;">·</span>
+                        <a href="#" style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: none;">☁️ Cloud Image</a>
+                    </div>
                 </div>
-                <div>
-                    <a href="https://github.com/mashanz" class="btn btn-primary" target="_blank">Build from Source</a>
+
+                <!-- ARM64 -->
+                <div style="background: var(--bg-card); border: 1px solid var(--accent); border-radius: 12px; padding: 28px; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 12px;">🤖</div>
+                    <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 4px;">ARM64</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">Raspberry Pi, SBCs, edge & IoT</p>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+                        <div style="color: var(--text-primary); font-size: 0.9rem;">wayangos-0.1-arm64.img.xz</div>
+                        <div style="color: var(--text-dim); font-size: 0.75rem; margin-top: 4px;">~10 MB · Flash with dd or Etcher</div>
+                    </div>
+                    <a href="#" style="display: inline-block; background: var(--accent); color: #000; padding: 10px 28px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">⬇ Download Image</a>
+                    <div style="margin-top: 10px;">
+                        <a href="#" style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: none;">🍓 RPi Config</a>
+                        <span style="color: var(--text-dim); margin: 0 8px;">·</span>
+                        <a href="#" style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: none;">📋 Device Tree</a>
+                    </div>
+                </div>
+
+                <!-- RISC-V -->
+                <div style="background: var(--bg-card); border: 1px solid var(--accent); border-radius: 12px; padding: 28px; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 12px;">⚡</div>
+                    <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 4px;">RISC-V</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">VisionFive, open silicon, future-proof</p>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+                        <div style="color: var(--text-primary); font-size: 0.9rem;">wayangos-0.1-riscv64.img.xz</div>
+                        <div style="color: var(--text-dim); font-size: 0.75rem; margin-top: 4px;">~10 MB · Experimental</div>
+                    </div>
+                    <a href="#" style="display: inline-block; background: var(--accent); color: #000; padding: 10px 28px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">⬇ Download Image</a>
+                    <div style="margin-top: 10px;">
+                        <a href="#" style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: none;">📖 RISC-V Guide</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Start + Build from Source -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 700px; margin: 0 auto;">
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center;">
+                    <div style="font-size: 1.2rem; margin-bottom: 8px;">🚀</div>
+                    <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 6px;">Quick Start</h4>
+                    <code style="color: var(--accent); font-size: 0.8rem;">dd if=wayangos.img of=/dev/sdX</code>
+                </div>
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center;">
+                    <div style="font-size: 1.2rem; margin-bottom: 8px;">🔧</div>
+                    <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 6px;">Build from Source</h4>
+                    <a href="https://github.com/mashanz/wayangos" target="_blank" style="color: var(--accent); font-size: 0.8rem; text-decoration: none;">View on GitHub →</a>
                 </div>
             </div>
         </div>
@@ -769,12 +967,16 @@
     <!-- Footer -->
     <footer>
         <div class="container">
+            <div class="footer-aksara">ꦮꦪꦁ</div>
             <p style="margin-bottom: 8px;">
-                <strong>[DistroName]OS</strong> — Because your OS should be smaller than your application.
+                <strong>WayangOS</strong> — The Shadow that Powers the Machine
+            </p>
+            <p style="margin-bottom: 8px; font-style: italic; color: var(--text-secondary);">
+                Ancient Art. Bare Metal.
             </p>
             <p>
                 Built by <a href="https://github.com/mashanz" target="_blank">Hans Sumardhi</a> ·
-                <a href="mailto:hans@mashanz.com">hans@mashanz.com</a> ·
+                <a href="https://github.com/mashanz/wayangos" target="_blank">github.com/mashanz/wayangos</a> ·
                 GPLv2 (kernel) · MIT (userspace)
             </p>
         </div>
