@@ -4,38 +4,29 @@ set -e
 echo "=== WayangOS Build Script ==="
 echo "Started at: $(date)"
 
-# Step 1: Install dependencies
-echo ""
-echo ">>> Step 1: Installing build dependencies..."
-sudo apt-get update -qq
-sudo apt-get install -y -qq build-essential flex bison bc libelf-dev libssl-dev wget xz-utils cpio gzip bzip2 2>&1 | tail -5
-echo "Dependencies installed."
+NPROC=$(nproc)
+echo "CPUs: $NPROC"
 
-# Step 2: Setup build directory
-echo ""
-echo ">>> Step 2: Setting up build directory..."
+# Setup build directory
 mkdir -p ~/wayangos-build
 cd ~/wayangos-build
 
-# Step 3: Download and extract kernel
+# Download and extract kernel
 echo ""
-echo ">>> Step 3: Downloading kernel..."
+echo ">>> Downloading kernel..."
 if [ -d "linux-6.12.6" ]; then
     echo "Kernel source already exists, skipping download."
-elif [ -f "linux-6.12.6.tar.xz" ]; then
-    echo "Tarball exists, extracting..."
-    tar xf linux-6.12.6.tar.xz
 else
-    # Use 6.12.6 (stable LTS) instead of 6.19.6 which doesn't exist yet
-    echo "Downloading linux-6.12.6..."
-    wget -q --show-progress https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.6.tar.xz
+    if [ ! -f "linux-6.12.6.tar.xz" ]; then
+        wget -q --show-progress https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.6.tar.xz
+    fi
     echo "Extracting..."
     tar xf linux-6.12.6.tar.xz
 fi
 
-# Step 4: Configure kernel
+# Configure kernel
 echo ""
-echo ">>> Step 4: Configuring kernel..."
+echo ">>> Configuring kernel..."
 cd ~/wayangos-build/linux-6.12.6
 make allnoconfig 2>&1 | tail -3
 
@@ -88,51 +79,45 @@ EOF
 make olddefconfig 2>&1 | tail -5
 echo "Kernel configured."
 
-# Step 5: Build kernel
+# Build kernel
 echo ""
-echo ">>> Step 5: Building kernel (this takes a while)..."
-NPROC=$(nproc)
-echo "Using $NPROC cores..."
+echo ">>> Building kernel with $NPROC cores..."
 make -j$NPROC 2>&1 | tail -20
 echo ""
 if [ -f arch/x86/boot/bzImage ]; then
     echo "Kernel built successfully!"
     ls -lh arch/x86/boot/bzImage
 else
-    echo "ERROR: Kernel build failed - bzImage not found"
+    echo "ERROR: Kernel build failed"
     exit 1
 fi
 
-# Step 6: Download and build BusyBox
+# Download and build BusyBox
 echo ""
-echo ">>> Step 6: Building BusyBox..."
+echo ">>> Building BusyBox..."
 cd ~/wayangos-build
 if [ ! -d "busybox-1.37.0" ]; then
     if [ ! -f "busybox-1.37.0.tar.bz2" ]; then
-        echo "Downloading BusyBox..."
         wget -q --show-progress https://busybox.net/downloads/busybox-1.37.0.tar.bz2
     fi
-    echo "Extracting BusyBox..."
     tar xf busybox-1.37.0.tar.bz2
 fi
 
 cd busybox-1.37.0
 make defconfig 2>&1 | tail -3
 sed -i 's/# CONFIG_STATIC is not set/CONFIG_STATIC=y/' .config
-echo "Building BusyBox statically..."
 make -j$NPROC 2>&1 | tail -10
 make install 2>&1 | tail -5
 echo "BusyBox built."
 
-# Step 7: Create initramfs
+# Create initramfs
 echo ""
-echo ">>> Step 7: Creating initramfs/rootfs..."
+echo ">>> Creating initramfs..."
 cd ~/wayangos-build
 rm -rf rootfs
 mkdir -p rootfs/{bin,sbin,etc,proc,sys,dev,tmp,var,root,usr/bin,usr/sbin}
 cp -a busybox-1.37.0/_install/* rootfs/
 
-# Create init script
 cat > rootfs/init << 'INITEOF'
 #!/bin/sh
 mount -t proc proc /proc
@@ -155,21 +140,19 @@ exec /bin/sh
 INITEOF
 chmod +x rootfs/init
 
-# Create /etc files
 echo "root:x:0:0:root:/root:/bin/sh" > rootfs/etc/passwd
 echo "root:x:0:" > rootfs/etc/group
 echo "wayangos" > rootfs/etc/hostname
 
-# Pack initramfs
 cd rootfs
 find . | cpio -o -H newc 2>/dev/null | gzip > ../wayangos-initramfs-x86_64.img
 cd ..
-echo "Initramfs created."
+echo "Initramfs created:"
 ls -lh wayangos-initramfs-x86_64.img
 
-# Step 8: Package everything
+# Package
 echo ""
-echo ">>> Step 8: Packaging..."
+echo ">>> Packaging..."
 rm -rf wayangos-0.1-x86_64
 mkdir -p wayangos-0.1-x86_64
 cp linux-6.12.6/arch/x86/boot/bzImage wayangos-0.1-x86_64/vmlinuz
@@ -186,43 +169,23 @@ qemu-system-x86_64 \
 EOF
 chmod +x wayangos-0.1-x86_64/run-qemu.sh
 
-cat > wayangos-0.1-x86_64/README.md << 'EOF'
-# WayangOS v0.1 (x86_64)
-
-Minimal Linux distribution built with:
-- Linux kernel 6.12.6
-- BusyBox 1.37.0 (static)
-
-## Boot with QEMU
-```bash
-./run-qemu.sh
-```
-
-## Manual boot
-```bash
-qemu-system-x86_64 -kernel vmlinuz -initrd initramfs.img -append "console=ttyS0" -nographic -m 128M
-```
-EOF
-
 tar czf wayangos-0.1-x86_64.tar.gz wayangos-0.1-x86_64/
-echo ""
-echo "Package created:"
+echo "Package:"
 ls -lh wayangos-0.1-x86_64.tar.gz
 
-# Step 9: Copy to Windows
+# Copy to Windows
 echo ""
-echo ">>> Step 9: Copying to Windows..."
+echo ">>> Copying to Windows..."
 WINDIR="/mnt/c/Users/Desktop PC/.openclaw/workspace/linux-distro"
 mkdir -p "$WINDIR"
 cp wayangos-0.1-x86_64.tar.gz "$WINDIR/"
 cp wayangos-0.1-x86_64/vmlinuz "$WINDIR/"
 cp wayangos-initramfs-x86_64.img "$WINDIR/"
 cp wayangos-0.1-x86_64/run-qemu.sh "$WINDIR/"
-cp wayangos-0.1-x86_64/README.md "$WINDIR/"
 
 echo ""
-echo "=== Build Complete ==="
-echo "Files copied to Windows:"
+echo "=== BUILD COMPLETE ==="
+echo "Files in Windows:"
 ls -lh "$WINDIR/vmlinuz" "$WINDIR/wayangos-initramfs-x86_64.img" "$WINDIR/wayangos-0.1-x86_64.tar.gz"
 echo ""
 echo "Finished at: $(date)"

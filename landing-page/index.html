@@ -29,12 +29,16 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         /* Batik-inspired background pattern */
@@ -67,12 +71,16 @@
         nav {
             position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             width: 100%;
+            max-width: 100vw;
             padding: 16px 0;
             background: rgba(10, 8, 6, 0.92);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-gold);
             z-index: 100;
+            overflow: hidden;
         }
 
         nav .container {
@@ -137,8 +145,8 @@
             top: 20%;
             left: 50%;
             transform: translateX(-50%);
-            width: 700px;
-            height: 700px;
+            width: min(700px, 100vw);
+            height: min(700px, 100vw);
             background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
             pointer-events: none;
         }
@@ -624,15 +632,144 @@
             text-decoration: underline;
         }
 
-        /* Responsive */
+        /* Mobile hamburger */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* Tablet breakpoint */
+        @media (max-width: 1024px) {
+            .nav-toggle { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 8, 6, 0.97);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                gap: 0;
+                padding: 8px 0;
+                border-bottom: 1px solid var(--border-gold);
+            }
+            .nav-links.active { display: flex; }
+            .nav-links li { border-bottom: 1px solid var(--border); }
+            .nav-links a {
+                display: block;
+                padding: 14px 24px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Mobile breakpoint */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero-stats { flex-direction: column; gap: 24px; }
-            .hero-buttons { flex-direction: column; }
-            .features-grid { grid-template-columns: 1fr; }
-            .arch-grid { grid-template-columns: 1fr; }
-            .comparison-table { font-size: 0.85rem; }
-            .comparison-table th, .comparison-table td { padding: 12px 16px; }
+            .hero { padding: 100px 16px 60px; min-height: auto; }
+            .hero h1 { font-size: 2.5rem; letter-spacing: -1px; }
+            .hero .tagline { font-size: 0.9rem; margin-bottom: 32px; }
+            .hero-badge { font-size: 0.7rem; padding: 5px 12px; }
+            .hero-buttons { flex-direction: column; width: 100%; }
+            .hero-buttons .btn { text-align: center; width: 100%; }
+            .hero-stats {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 16px;
+                margin-top: 48px;
+            }
+            .stat { min-width: 80px; }
+            .stat-value { font-size: 1.8rem; }
+            .stat-label { font-size: 0.65rem; }
+
+            .cultural-card { padding: 24px 20px; }
+            .cultural-card p { font-size: 0.9rem; }
+
+            .terminal { margin: 0 -8px; border-radius: 8px; }
+            .terminal-body { padding: 14px 12px; font-size: 0.72rem; line-height: 1.7; overflow-x: auto; }
+            .terminal-title { font-size: 0.65rem; }
+
+            .features { padding: 60px 0; }
+            .features-grid { grid-template-columns: 1fr; gap: 12px; }
+            .feature-card { padding: 24px 20px; }
+            .section-header h2 { font-size: 1.8rem; }
+            .section-header { margin-bottom: 40px; }
+
+            .comparison { padding: 60px 0; }
+            .comparison-table { font-size: 0.75rem; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .comparison-table th, .comparison-table td { padding: 10px 12px; white-space: nowrap; }
+
+            .arch-section { padding: 60px 0; }
+            .arch-grid { grid-template-columns: 1fr; gap: 12px; }
+            .arch-card { padding: 24px 20px; }
+
+            .download { padding: 60px 0; }
+            .download-box { padding: 32px 20px; }
+            .download-box h2 { font-size: 1.5rem; }
+
+            .container { padding: 0 16px; max-width: 100vw; }
+            section { overflow-x: hidden; }
+
+            /* Install guide card padding */
+            .install-guide-card { padding: 20px 16px !important; }
+            .install-guide-card h3 { font-size: 0.95rem !important; }
+            .install-guide-card .step-content h4 { font-size: 0.9rem !important; }
+
+            /* Download section compact */
+            .download-cards { grid-template-columns: 1fr !important; }
+            .edition-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+            .edition-card { padding: 14px !important; }
+            .edition-card h3 { font-size: 0.95rem !important; }
+            .edition-card .edition-icon { font-size: 1.4rem !important; margin-bottom: 2px !important; }
+            .edition-card .edition-features { padding: 6px 8px !important; font-size: 0.7rem !important; line-height: 1.5 !important; margin-bottom: 8px !important; }
+            .edition-card .edition-size { font-size: 1rem !important; }
+            .edition-card .edition-usecase { font-size: 0.65rem !important; margin-bottom: 6px !important; }
+            .edition-card .edition-btn { padding: 7px !important; font-size: 0.78rem !important; }
+            .edition-help { font-size: 0.8rem !important; margin-bottom: 12px !important; }
+            .download .section-header { margin-bottom: 12px !important; }
+            .download .section-header h2 { font-size: 1.5rem !important; }
+            .download .section-header p { font-size: 0.82rem !important; }
+            .download .aksara-deco { display: none; }
+
+            /* Architecture inline grid */
+            .arch-inline-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; font-size: 0.75rem !important; }
+
+            /* Screenshots side by side → stack */
+            .screenshot-grid { grid-template-columns: 1fr !important; }
+
+            /* Use cases grid */
+            .usecases-grid { grid-template-columns: 1fr !important; }
+
+            /* QEMU command in install section */
+            .install-code { font-size: 0.7rem !important; word-break: break-all; }
+
+            /* Key table in install */
+            .boot-key-grid { grid-template-columns: auto 1fr !important; font-size: 0.78rem !important; }
+
+            /* Compact all sections */
+            .features { padding: 40px 0 !important; }
+            .comparison { padding: 40px 0 !important; }
+            .arch-section { padding: 40px 0 !important; }
+            .download { padding: 40px 0 !important; }
+            .terminal-section { padding: 40px 0 !important; }
+            .cultural-note { padding: 24px 0 !important; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .aksara-hero { font-size: 2.5rem; }
+            .hero-stats { gap: 12px; }
+            .stat-value { font-size: 1.5rem; }
+            .terminal-body { font-size: 0.65rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .comparison-table { font-size: 0.7rem; }
+            .comparison-table th, .comparison-table td { padding: 8px 8px; }
+            .edition-grid { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
         }
     </style>
 </head>
@@ -645,11 +782,13 @@
                 <span class="aksara-small">ꦮꦪꦁ</span>
                 Wayang<span>OS</span>
             </a>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
             <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#performance">Performance</a></li>
-                <li><a href="#architectures">Architectures</a></li>
-                <li><a href="#download">Download</a></li>
+                <li><a href="#features" onclick="document.querySelector('.nav-links').classList.remove('active')">Features</a></li>
+                <li><a href="#performance" onclick="document.querySelector('.nav-links').classList.remove('active')">Performance</a></li>
+                <li><a href="#architectures" onclick="document.querySelector('.nav-links').classList.remove('active')">Architectures</a></li>
+                <li><a href="#download" onclick="document.querySelector('.nav-links').classList.remove('active')">Download</a></li>
+                <li><a href="#usecases" onclick="document.querySelector('.nav-links').classList.remove('active')">Use Cases</a></li>
                 <li><a href="https://github.com/mashanz/wayangos" target="_blank">GitHub</a></li>
             </ul>
         </div>
@@ -659,20 +798,20 @@
     <section class="hero">
         <div class="hero-badge">
             <span class="dot"></span>
-            Built on Linux 6.19 with PREEMPT_RT
+            Linux 6.19 · PREEMPT_RT Available · 4 Editions · Zero Dependencies
         </div>
         <div class="aksara-hero">ꦮꦪꦁ</div>
         <h1>Wayang<span class="accent">OS</span></h1>
         <p class="tagline-main">The Shadow that Powers the Machine</p>
-        <p class="tagline">Ultra-minimal Linux distribution for embedded systems, real-time applications, and edge computing. Ancient art. Bare metal.</p>
+        <p class="tagline">Ultra-minimal deployment Linux. Boot in 2 seconds, SSH ready, deploy static binaries via scp. No package manager, no systemd, no bloat.</p>
         <div class="hero-buttons">
             <a href="#download" class="btn btn-primary">Get Started</a>
             <a href="https://github.com/mashanz/wayangos" class="btn btn-secondary" target="_blank">View Source →</a>
         </div>
         <div class="hero-stats">
             <div class="stat">
-                <div class="stat-value">~8MB</div>
-                <div class="stat-label">Root filesystem</div>
+                <div class="stat-value">13MB</div>
+                <div class="stat-label">Bootable ISO</div>
             </div>
             <div class="stat">
                 <div class="stat-value">64MB</div>
@@ -683,8 +822,8 @@
                 <div class="stat-label">Boot to shell</div>
             </div>
             <div class="stat">
-                <div class="stat-value">3</div>
-                <div class="stat-label">Architectures</div>
+                <div class="stat-value">4</div>
+                <div class="stat-label">Static binaries</div>
             </div>
         </div>
     </section>
@@ -713,23 +852,26 @@
                     <div class="terminal-dot red"></div>
                     <div class="terminal-dot yellow"></div>
                     <div class="terminal-dot green"></div>
-                    <div class="terminal-title">WayangOS — v6.19</div>
+                    <div class="terminal-title">WayangOS v0.5 — wayang:/#</div>
                 </div>
                 <div class="terminal-body">
-                    <div><span class="comment"># Build for x86_64 with minimal config</span></div>
-                    <div><span class="prompt">$ </span><span class="cmd">./build/build-kernel.sh x86_64 minimal</span></div>
-                    <div><span class="output">  WayangOS Kernel Build</span></div>
-                    <div><span class="output">  Architecture : x86_64</span></div>
-                    <div><span class="output">  Config       : minimal</span></div>
+                    <div><span class="comment"># Boot with QEMU — 128MB RAM</span></div>
+                    <div><span class="prompt">$ </span><span class="cmd">qemu-system-x86_64 -cdrom wayangos-0.5-headless-x86_64.iso -m 128M</span></div>
                     <div>&nbsp;</div>
-                    <div><span class="comment"># Boot with QEMU — 64MB RAM</span></div>
-                    <div><span class="prompt">$ </span><span class="cmd">qemu-system-x86_64 -kernel bzImage -initrd initramfs.cpio.gz -m 64M -nographic</span></div>
-                    <div><span class="output">  WayangOS — The Shadow that Powers the Machine</span></div>
-                    <div><span class="output">  Kernel: 6.19.0-wayang-minimal</span></div>
-                    <div><span class="output">  Memory: 64MB</span></div>
-                    <div><span class="output">  Boot time: 0.8s</span></div>
+                    <div><span class="output">  ꦮꦪꦁ  WayangOS v0.5 ready</span></div>
                     <div>&nbsp;</div>
-                    <div><span class="prompt">root@wayang:~# </span><span class="cmd">_</span></div>
+                    <div><span class="output">  ꦮꦪꦁ  WayangOS v0.5</span></div>
+                    <div><span class="output">  The Shadow that Powers the Machine</span></div>
+                    <div>&nbsp;</div>
+                    <div><span class="prompt">wayang:/# </span><span class="cmd">uname -r</span></div>
+                    <div><span class="output">6.19.3-rt1</span></div>
+                    <div>&nbsp;</div>
+                    <div><span class="comment"># Deploy a static binary — that's your package manager</span></div>
+                    <div><span class="prompt">wayang:/# </span><span class="cmd">scp user@dev:/app/myserver /usr/bin/</span></div>
+                    <div><span class="prompt">wayang:/# </span><span class="cmd">/usr/bin/myserver &amp;</span></div>
+                    <div><span class="output">[1] Server listening on :8080</span></div>
+                    <div>&nbsp;</div>
+                    <div><span class="prompt">wayang:/# </span><span class="cmd">_</span></div>
                 </div>
             </div>
         </div>
@@ -746,38 +888,38 @@
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Ultra-Minimal</h3>
-                    <p>~8MB root filesystem. musl libc + BusyBox. No systemd, no D-Bus, no polkit. Just Linux, stripped to the essentials.</p>
-                    <span class="feature-tag">CC_OPTIMIZE_FOR_SIZE</span>
+                    <p>13 MB bootable ISO. BusyBox + Dropbear SSH + curl. No systemd, no D-Bus, no polkit. 4 static binaries, zero shared libraries.</p>
+                    <span class="feature-tag">4 binaries · 13 MB · done</span>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Real-Time</h3>
-                    <p>PREEMPT_RT kernel with 1000Hz tick, IRQ forced threading, and CPU isolation. Deterministic scheduling for when microseconds matter.</p>
-                    <span class="feature-tag">CONFIG_PREEMPT_RT=y</span>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏗️</div>
-                    <h3>Multi-Architecture</h3>
-                    <p>First-class support for x86_64, ARM64, and RISC-V. One codebase, three architectures. Cross-compile from any host.</p>
-                    <span class="feature-tag">x86_64 | arm64 | riscv</span>
+                    <div class="feature-icon">🔌</div>
+                    <h3>SSH + Networking on Boot</h3>
+                    <p>DHCP auto-configures on boot. Dropbear SSH server starts automatically on port 22. curl with TLS for pulling configs and APIs. Manage remotely from day one.</p>
+                    <span class="feature-tag">dropbear + curl + udhcpc</span>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📦</div>
-                    <h3>Container-Ready</h3>
-                    <p>Full namespace and cgroup support out of the box. Run containers on a 64MB system. OverlayFS, veth, bridge networking included.</p>
-                    <span class="feature-tag">namespaces + cgroups</span>
+                    <h3>Static Binary Deploy</h3>
+                    <p>No package manager. No dependency hell. Build your app as a static binary, scp it to the machine, run it. That's deployment. If it compiles, it ships.</p>
+                    <span class="feature-tag">scp is your pkg manager</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🖼️</div>
+                    <h3>GUI Edition Available</h3>
+                    <p>15 MB ISO with framebuffer + SDL2. Boot straight into a kiosk app — POS, digital signage, dashboards. No X11, no Wayland. Just framebuffer.</p>
+                    <span class="feature-tag">SDL2 + DRM/KMS + fbdev</span>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔒</div>
-                    <h3>Secure by Default</h3>
-                    <p>Minimal attack surface. No unnecessary services, no package manager bloat. Seccomp filters, read-only rootfs capable.</p>
+                    <h3>Minimal Attack Surface</h3>
+                    <p>4 binaries total. No unnecessary services, no listening ports except SSH. Fewer packages = fewer CVEs. The best security is code that doesn't exist.</p>
                     <span class="feature-tag">fewer packages = fewer CVEs</span>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>IoT &amp; Robotics</h3>
-                    <p>GPIO, I2C, SPI support in the RT config. Built for sensor nodes, actuators, and edge compute. Runs on the smallest SBCs.</p>
-                    <span class="feature-tag">GPIO + I2C + SPI</span>
+                    <div class="feature-icon">🏗️</div>
+                    <h3>PREEMPT_RT Real-Time Kernel</h3>
+                    <p>Linux 6.19.3-rt1 with full real-time preemption, 1000Hz tick, and high-res timers. Deterministic scheduling for when microseconds matter. RTOS by default.</p>
+                    <span class="feature-tag">CONFIG_PREEMPT_RT=y · 1000Hz · x86_64</span>
                 </div>
             </div>
         </div>
@@ -802,11 +944,11 @@
                 </thead>
                 <tbody>
                     <tr class="highlight-row">
-                        <td>Root FS Size</td>
-                        <td>~8 MB</td>
-                        <td>~130 MB</td>
+                        <td>ISO Size</td>
+                        <td>13 MB</td>
+                        <td>~200 MB</td>
                         <td>~1.2 GB</td>
-                        <td>~300 MB</td>
+                        <td>~600 MB</td>
                     </tr>
                     <tr class="highlight-row">
                         <td>Min RAM</td>
@@ -830,29 +972,29 @@
                         <td>systemd</td>
                     </tr>
                     <tr>
-                        <td>Libc</td>
-                        <td>musl</td>
-                        <td>musl</td>
-                        <td>glibc</td>
-                        <td>glibc</td>
-                    </tr>
-                    <tr>
-                        <td>PREEMPT_RT</td>
+                        <td>SSH on Boot</td>
                         <td><span class="check">✓ Built-in</span></td>
-                        <td><span class="cross">✗ Manual</span></td>
-                        <td><span class="cross">✗ Manual</span></td>
-                        <td><span class="cross">✗ Manual</span></td>
+                        <td><span class="cross">✗ Install</span></td>
+                        <td><span class="check">✓ Optional</span></td>
+                        <td><span class="cross">✗ Install</span></td>
                     </tr>
                     <tr>
-                        <td>RISC-V</td>
-                        <td><span class="check">✓ Native</span></td>
-                        <td><span class="check">✓</span></td>
-                        <td><span class="check">✓</span></td>
-                        <td><span class="check">✓</span></td>
+                        <td>Package Manager</td>
+                        <td>None (scp)</td>
+                        <td>apk</td>
+                        <td>apt</td>
+                        <td>apt</td>
+                    </tr>
+                    <tr>
+                        <td>GUI Edition</td>
+                        <td><span class="check">✓ SDL2/fbdev</span></td>
+                        <td><span class="cross">✗ Manual</span></td>
+                        <td><span class="check">✓ Desktop</span></td>
+                        <td><span class="cross">✗ Manual</span></td>
                     </tr>
                     <tr>
                         <td>Packages</td>
-                        <td>~1 (BusyBox)</td>
+                        <td>4 (static)</td>
                         <td>~14 (base)</td>
                         <td>~300+ (base)</td>
                         <td>~150+ (base)</td>
@@ -866,21 +1008,24 @@
     <section class="arch-section" id="architectures">
         <div class="container">
             <div class="section-header">
-                <h2>Run Everywhere</h2>
-                <p>One distro. Three architectures. Zero compromises.</p>
+                <h2>Architectures</h2>
+                <p>x86_64 ready now. ARM64 and RISC-V on the roadmap.</p>
             </div>
             <div class="arch-grid">
-                <div class="arch-card">
+                <div class="arch-card" style="border-color: var(--accent);">
                     <div class="arch-name">x86_64</div>
                     <div class="arch-desc">Servers, VMs, desktops, Intel/AMD</div>
+                    <div style="margin-top: 8px; color: var(--success); font-size: 0.8rem;">✓ Available now</div>
                 </div>
                 <div class="arch-card">
                     <div class="arch-name">ARM64</div>
                     <div class="arch-desc">Raspberry Pi, SBCs, edge devices</div>
+                    <div style="margin-top: 8px; color: var(--text-dim); font-size: 0.8rem;">⏳ Planned</div>
                 </div>
                 <div class="arch-card">
                     <div class="arch-name">RISC-V</div>
                     <div class="arch-desc">VisionFive, open silicon, the future</div>
+                    <div style="margin-top: 8px; color: var(--text-dim); font-size: 0.8rem;">⏳ Planned</div>
                 </div>
             </div>
         </div>
@@ -889,76 +1034,324 @@
     <!-- Download -->
     <section class="download" id="download">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 40px;">
-                <div style="font-size: 2.5rem; color: var(--accent); margin-bottom: 8px; opacity: 0.7;">ꦮꦪꦁ</div>
-                <h2 style="color: var(--text-primary); font-size: 2rem; margin-bottom: 8px;">Download WayangOS</h2>
-                <p style="color: var(--text-secondary);">Prebuilt images ready to flash. Pick your architecture.</p>
+            <div class="section-header" style="margin-bottom: 24px;">
+                <div class="aksara-deco" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 8px; opacity: 0.7; text-align: center;">ꦮꦪꦁ</div>
+                <h2 style="text-align: center;">Download WayangOS</h2>
+                <p class="edition-help" style="color: var(--text-secondary); text-align: center; font-size: 0.88rem; margin-top: 8px;">All editions include BusyBox, SSH, curl, and auto-networking.</p>
             </div>
 
-            <!-- Download Cards Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px;">
-                
-                <!-- x86_64 -->
-                <div style="background: var(--bg-card); border: 1px solid var(--accent); border-radius: 12px; padding: 28px; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 12px;">🖥️</div>
-                    <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 4px;">x86_64</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">Servers, VMs, Intel/AMD desktops</p>
-                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
-                        <div style="color: var(--text-primary); font-size: 0.9rem;">wayangos-0.1-x86_64.iso</div>
-                        <div style="color: var(--text-dim); font-size: 0.75rem; margin-top: 4px;">~12 MB · SHA256 verified</div>
+                <!-- 4-Edition Grid -->
+                <div class="edition-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 960px; margin: 0 auto 24px;">
+
+                    <!-- 1. Headless -->
+                    <div class="edition-card" style="background: var(--bg-card); border: 2px solid var(--accent); border-radius: 10px; padding: 18px; position: relative;">
+                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #000; font-size: 0.65rem; font-weight: 800; padding: 2px 10px; border-radius: 20px; white-space: nowrap;">POPULAR</div>
+                        <div style="text-align: center; margin-bottom: 8px;">
+                            <div class="edition-icon" style="font-size: 1.6rem; margin-bottom: 4px;">🖥️</div>
+                            <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 1px;">Headless</h3>
+                            <p style="color: var(--text-dim); font-size: 0.7rem;">6.19.7</p>
+                        </div>
+                        <div class="edition-features" style="background: var(--bg-secondary); border-radius: 6px; padding: 8px; margin-bottom: 8px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5;">
+                            ✅ SSH · curl · NTP<br>➖ No RT · No GUI
+                        </div>
+                        <div style="text-align: center; margin-bottom: 6px;">
+                            <span class="edition-size" style="color: var(--accent); font-size: 1.1rem; font-weight: 800;">14 MB</span>
+                        </div>
+                        <div class="edition-usecase" style="font-size: 0.68rem; color: var(--text-dim); text-align: center; margin-bottom: 8px;">Servers · VMs · Edge</div>
+                        <a class="edition-btn" href="https://github.com/mashanz/wayangos/releases/download/v0.5.0/wayangos-0.5-headless-x86_64.iso" style="display: block; text-align: center; background: var(--accent); color: #000; padding: 8px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.82rem;">⬇ Download</a>
                     </div>
-                    <a href="#" style="display: inline-block; background: var(--accent); color: #000; padding: 10px 28px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">⬇ Download ISO</a>
-                    <div style="margin-top: 10px;">
-                        <a href="#" style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: none;">📦 Raw Image</a>
-                        <span style="color: var(--text-dim); margin: 0 8px;">·</span>
-                        <a href="#" style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: none;">☁️ Cloud Image</a>
+
+                    <!-- 2. Headless RT -->
+                    <div class="edition-card" style="background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: 10px; padding: 18px; position: relative;">
+                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg-secondary); border: 1px solid var(--accent); color: var(--accent); font-size: 0.65rem; font-weight: 800; padding: 2px 10px; border-radius: 20px; white-space: nowrap;">REAL-TIME</div>
+                        <div style="text-align: center; margin-bottom: 8px;">
+                            <div class="edition-icon" style="font-size: 1.6rem; margin-bottom: 4px;">⚡</div>
+                            <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 1px;">Headless RT</h3>
+                            <p style="color: var(--text-dim); font-size: 0.7rem;">6.19.3-rt1</p>
+                        </div>
+                        <div class="edition-features" style="background: var(--bg-secondary); border-radius: 6px; padding: 8px; margin-bottom: 8px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5;">
+                            ✅ SSH · curl · PREEMPT_RT<br>➖ No GUI
+                        </div>
+                        <div style="text-align: center; margin-bottom: 6px;">
+                            <span class="edition-size" style="color: var(--accent); font-size: 1.1rem; font-weight: 800;">14 MB</span>
+                        </div>
+                        <div class="edition-usecase" style="font-size: 0.68rem; color: var(--text-dim); text-align: center; margin-bottom: 8px;">IoT · Robotics · Industrial</div>
+                        <a class="edition-btn" href="https://github.com/mashanz/wayangos/releases/download/v0.5.0/wayangos-0.5-headless-rt-x86_64.iso" style="display: block; text-align: center; background: var(--bg-secondary); color: var(--accent); padding: 8px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.82rem; border: 1px solid var(--accent);">⬇ Download</a>
                     </div>
+
+                    <!-- 3. GUI -->
+                    <div class="edition-card" style="background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: 10px; padding: 18px; position: relative;">
+                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg-secondary); border: 1px solid var(--accent); color: var(--accent); font-size: 0.65rem; font-weight: 800; padding: 2px 10px; border-radius: 20px; white-space: nowrap;">GUI</div>
+                        <div style="text-align: center; margin-bottom: 8px;">
+                            <div class="edition-icon" style="font-size: 1.6rem; margin-bottom: 4px;">🖼️</div>
+                            <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 1px;">GUI</h3>
+                            <p style="color: var(--text-dim); font-size: 0.7rem;">6.19.7 + SDL2</p>
+                        </div>
+                        <div class="edition-features" style="background: var(--bg-secondary); border-radius: 6px; padding: 8px; margin-bottom: 8px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5;">
+                            ✅ Headless + Framebuffer<br>✅ SDL2 · DRM · Input
+                        </div>
+                        <div style="text-align: center; margin-bottom: 6px;">
+                            <span class="edition-size" style="color: var(--accent); font-size: 1.1rem; font-weight: 800;">15 MB</span>
+                        </div>
+                        <div class="edition-usecase" style="font-size: 0.68rem; color: var(--text-dim); text-align: center; margin-bottom: 8px;">Kiosk · Signage · Dashboard</div>
+                        <a class="edition-btn" href="https://github.com/mashanz/wayangos/releases/download/v0.5.0/wayangos-0.5-gui-x86_64.iso" style="display: block; text-align: center; background: var(--bg-secondary); color: var(--accent); padding: 8px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.82rem; border: 1px solid var(--accent);">⬇ Download</a>
+                    </div>
+
+                    <!-- 4. GUI RT -->
+                    <div class="edition-card" style="background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: 10px; padding: 18px; position: relative;">
+                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg-secondary); border: 1px solid var(--accent); color: var(--accent); font-size: 0.65rem; font-weight: 800; padding: 2px 10px; border-radius: 20px; white-space: nowrap;">GUI + RT</div>
+                        <div style="text-align: center; margin-bottom: 8px;">
+                            <div class="edition-icon" style="font-size: 1.6rem; margin-bottom: 4px;">⚡🖼️</div>
+                            <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 1px;">GUI RT</h3>
+                            <p style="color: var(--text-dim); font-size: 0.7rem;">6.19.3-rt1 + SDL2</p>
+                        </div>
+                        <div class="edition-features" style="background: var(--bg-secondary); border-radius: 6px; padding: 8px; margin-bottom: 8px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5;">
+                            ✅ GUI + PREEMPT_RT<br>✅ 1000Hz · Hi-res timers
+                        </div>
+                        <div style="text-align: center; margin-bottom: 6px;">
+                            <span class="edition-size" style="color: var(--accent); font-size: 1.1rem; font-weight: 800;">15 MB</span>
+                        </div>
+                        <div class="edition-usecase" style="font-size: 0.68rem; color: var(--text-dim); text-align: center; margin-bottom: 8px;">POS · HMI · RT Displays</div>
+                        <a class="edition-btn" href="https://github.com/mashanz/wayangos/releases/download/v0.5.0/wayangos-0.5-gui-rt-x86_64.iso" style="display: block; text-align: center; background: var(--bg-secondary); color: var(--accent); padding: 8px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.82rem; border: 1px solid var(--accent);">⬇ Download</a>
+                    </div>
+
                 </div>
 
-                <!-- ARM64 -->
-                <div style="background: var(--bg-card); border: 1px solid var(--accent); border-radius: 12px; padding: 28px; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 12px;">🤖</div>
-                    <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 4px;">ARM64</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">Raspberry Pi, SBCs, edge & IoT</p>
-                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
-                        <div style="color: var(--text-primary); font-size: 0.9rem;">wayangos-0.1-arm64.img.xz</div>
-                        <div style="color: var(--text-dim); font-size: 0.75rem; margin-top: 4px;">~10 MB · Flash with dd or Etcher</div>
-                    </div>
-                    <a href="#" style="display: inline-block; background: var(--accent); color: #000; padding: 10px 28px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">⬇ Download Image</a>
-                    <div style="margin-top: 10px;">
-                        <a href="#" style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: none;">🍓 RPi Config</a>
-                        <span style="color: var(--text-dim); margin: 0 8px;">·</span>
-                        <a href="#" style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: none;">📋 Device Tree</a>
-                    </div>
+                <!-- All releases link -->
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <a href="https://github.com/mashanz/wayangos/releases/tag/v0.5.0" style="color: var(--text-dim); font-size: 0.8rem; text-decoration: none;">📋 View all releases on GitHub →</a>
                 </div>
 
-                <!-- RISC-V -->
-                <div style="background: var(--bg-card); border: 1px solid var(--accent); border-radius: 12px; padding: 28px; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 12px;">⚡</div>
-                    <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 4px;">RISC-V</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">VisionFive, open silicon, future-proof</p>
-                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
-                        <div style="color: var(--text-primary); font-size: 0.9rem;">wayangos-0.1-riscv64.img.xz</div>
-                        <div style="color: var(--text-dim); font-size: 0.75rem; margin-top: 4px;">~10 MB · Experimental</div>
-                    </div>
-                    <a href="#" style="display: inline-block; background: var(--accent); color: #000; padding: 10px 28px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">⬇ Download Image</a>
-                    <div style="margin-top: 10px;">
-                        <a href="#" style="color: var(--text-secondary); font-size: 0.8rem; text-decoration: none;">📖 RISC-V Guide</a>
-                    </div>
+            </div>
+
+            <!-- Architecture availability -->
+            <div class="arch-inline-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 600px; margin: 0 auto 40px; text-align: center; font-size: 0.82rem;">
+                <div style="background: var(--bg-card); border: 2px solid var(--accent); border-radius: 8px; padding: 12px;">
+                    <div style="font-family: monospace; font-size: 1rem; color: var(--accent); font-weight: 700;">x86_64</div>
+                    <div style="color: var(--text-secondary); margin-top: 4px;">Intel · AMD</div>
+                    <div style="color: var(--success); margin-top: 4px; font-size: 0.75rem;">✅ Available</div>
+                </div>
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+                    <div style="font-family: monospace; font-size: 1rem; color: var(--text-secondary); font-weight: 700;">ARM64</div>
+                    <div style="color: var(--text-secondary); margin-top: 4px;">RPi · SBCs</div>
+                    <div style="color: var(--text-dim); margin-top: 4px; font-size: 0.75rem;">⏳ Coming soon</div>
+                </div>
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+                    <div style="font-family: monospace; font-size: 1rem; color: var(--text-secondary); font-weight: 700;">RISC-V</div>
+                    <div style="color: var(--text-secondary); margin-top: 4px;">VisionFive · SiFive</div>
+                    <div style="color: var(--text-dim); margin-top: 4px; font-size: 0.75rem;">⏳ Coming soon</div>
                 </div>
             </div>
 
-            <!-- Quick Start + Build from Source -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 700px; margin: 0 auto;">
-                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center;">
-                    <div style="font-size: 1.2rem; margin-bottom: 8px;">🚀</div>
-                    <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 6px;">Quick Start</h4>
-                    <code style="color: var(--accent); font-size: 0.8rem;">dd if=wayangos.img of=/dev/sdX</code>
+            <!-- Installation Tutorial -->
+            <div class="install-guide-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin-bottom: 32px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <h3 style="color: var(--accent); margin-bottom: 8px; text-align: center;">📖 Install Guide — 3 Easy Steps</h3>
+                <p style="color: var(--text-secondary); text-align: center; font-size: 0.9rem; margin-bottom: 4px;">No terminal skills needed. Works on any PC or laptop.</p>
+                <p style="color: var(--text-dim); text-align: center; font-size: 0.8rem; margin-bottom: 24px;">Same steps for both editions — just pick the ISO you want.</p>
+
+                <!-- Step 1: Download -->
+                <div style="margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-start;">
+                    <div style="background: var(--accent); color: #000; font-weight: 800; font-size: 1.1rem; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+                    <div style="flex: 1;">
+                        <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 6px;">Download the ISO</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Grab the bootable ISO (13 MB). Includes kernel, OS, SSH server, curl — everything in one file.</p>
+                        <a href="https://github.com/mashanz/wayangos/releases/download/v0.5.0/wayangos-0.5-headless-x86_64.iso" style="display: inline-block; background: var(--accent); color: #000; padding: 10px 24px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">⬇ Download ISO (13 MB)</a>
+                    </div>
                 </div>
-                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center;">
-                    <div style="font-size: 1.2rem; margin-bottom: 8px;">🔧</div>
-                    <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 6px;">Build from Source</h4>
-                    <a href="https://github.com/mashanz/wayangos" target="_blank" style="color: var(--accent); font-size: 0.8rem; text-decoration: none;">View on GitHub →</a>
+
+                <!-- Step 2: Flash -->
+                <div style="margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-start;">
+                    <div style="background: var(--accent); color: #000; font-weight: 800; font-size: 1.1rem; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+                    <div style="flex: 1;">
+                        <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 6px;">Flash to USB drive</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Use any USB flashing tool. Pick your platform:</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+                            <a href="https://rufus.ie" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-primary); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.85rem;">🪟 Rufus <span style="color: var(--text-dim);">(Windows)</span></a>
+                            <a href="https://etcher.balena.io" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-primary); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.85rem;">🍎 balenaEtcher <span style="color: var(--text-dim);">(Mac/Win/Linux)</span></a>
+                            <a href="https://ventoy.net" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-primary); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.85rem;">💿 Ventoy <span style="color: var(--text-dim);">(Multi-ISO)</span></a>
+                        </div>
+                        <p style="color: var(--text-dim); font-size: 0.8rem;">Open the tool → Select the .iso file → Select your USB → Click Flash. Done.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3: Boot -->
+                <div style="margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-start;">
+                    <div style="background: var(--accent); color: #000; font-weight: 800; font-size: 1.1rem; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
+                    <div style="flex: 1;">
+                        <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 6px;">Boot from USB</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px;">Plug the USB into your PC/laptop and restart. Press the boot menu key during startup:</p>
+                        <div style="background: var(--bg-secondary); border-radius: 8px; padding: 14px; margin-bottom: 8px;">
+                            <div class="boot-key-grid" style="display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; font-size: 0.85rem;">
+                                <span style="color: var(--accent); font-weight: 600;">F12</span> <span style="color: var(--text-secondary);">Dell, Lenovo, most laptops</span>
+                                <span style="color: var(--accent); font-weight: 600;">F2</span> <span style="color: var(--text-secondary);">ASUS, Acer, Samsung</span>
+                                <span style="color: var(--accent); font-weight: 600;">F9</span> <span style="color: var(--text-secondary);">HP</span>
+                                <span style="color: var(--accent); font-weight: 600;">Esc</span> <span style="color: var(--text-secondary);">Some ASUS, other brands</span>
+                                <span style="color: var(--accent); font-weight: 600;">Del</span> <span style="color: var(--text-secondary);">Custom desktops, motherboards</span>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Select your USB from the boot menu → WayangOS boots to a shell in <strong style="color: var(--accent);">&lt;2 seconds</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Screenshots -->
+                <div class="screenshot-grid" style="margin: 28px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div>
+                        <img src="grub.jpg" alt="WayangOS GRUB bootloader menu" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                        <p style="color: var(--text-dim); font-size: 0.75rem; text-align: center; margin-top: 6px;">GRUB menu — auto-boots in 3 seconds</p>
+                    </div>
+                    <div>
+                        <img src="booted.jpg" alt="WayangOS booted with SSH ready" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                        <p style="color: var(--text-dim); font-size: 0.75rem; text-align: center; margin-top: 6px;">Booted — SSH ready, networking up</p>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div style="border-top: 1px solid var(--border); margin: 24px 0; padding-top: 20px;">
+                    <h4 style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px; text-align: center;">🧪 No USB? Try it in a virtual machine</h4>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.8rem; color: var(--text-primary); text-align: center; overflow-x: auto; word-break: break-all;">
+                        qemu-system-x86_64 -cdrom wayangos-0.5-headless-x86_64.iso -m 128M
+                    </div>
+                    <p style="color: var(--text-dim); font-size: 0.8rem; text-align: center; margin-top: 8px;">Or open the .iso in VirtualBox / VMware — it just works.</p>
+                </div>
+
+                <!-- Advanced toggle -->
+                <details style="margin-top: 16px;">
+                    <summary style="color: var(--text-dim); font-size: 0.85rem; cursor: pointer;">🔧 Advanced: Manual USB install with GRUB (for developers)</summary>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 14px; margin-top: 12px; font-family: monospace; font-size: 0.78rem; color: var(--text-primary); line-height: 1.7; overflow-x: auto; word-break: break-word;">
+                        <span style="color: var(--text-dim);"># Download tar.gz instead of ISO</span><br>
+                        tar xzf wayangos-0.5-headless-x86_64.iso &amp;&amp; cd wayangos-0.5-headless-x86_64<br><br>
+                        <span style="color: var(--text-dim);"># Partition &amp; format USB (replace sdX)</span><br>
+                        sudo fdisk /dev/sdX <span style="color: var(--text-dim);"># create 1 partition, type 83</span><br>
+                        sudo mkfs.ext4 /dev/sdX1<br>
+                        sudo mount /dev/sdX1 /mnt<br><br>
+                        <span style="color: var(--text-dim);"># Install kernel + GRUB</span><br>
+                        sudo mkdir -p /mnt/boot/grub<br>
+                        sudo cp vmlinuz initramfs.img /mnt/boot/<br>
+                        sudo grub-install --target=i386-pc --boot-directory=/mnt/boot /dev/sdX<br>
+                        printf 'set timeout=3\nset default=0\nmenuentry "WayangOS" {\n  linux /boot/vmlinuz console=tty0\n  initrd /boot/initramfs.img\n}' | sudo tee /mnt/boot/grub/grub.cfg<br>
+                        sudo umount /mnt
+                    </div>
+                </details>
+            </div>
+
+            <!-- Build from Source + Example Apps -->
+            <div style="text-align: center;">
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Want to customize? Build from source:</p>
+                <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                    <a href="https://github.com/mashanz/wayangos" target="_blank" style="color: var(--accent); font-size: 0.9rem; text-decoration: none; background: var(--bg-card); border: 1px solid var(--border); padding: 10px 20px; border-radius: 6px;">🔧 WayangOS Source</a>
+                    <a href="https://github.com/mashanz/wayangos-pos" target="_blank" style="color: var(--accent); font-size: 0.9rem; text-decoration: none; background: var(--bg-card); border: 1px solid var(--border); padding: 10px 20px; border-radius: 6px;">🏪 POS Kiosk Example</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real-World Use Cases -->
+    <section id="usecases" style="padding: 100px 0; border-top: 1px solid var(--border);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Real-World Use Cases</h2>
+                <p>WayangOS isn't a toy. Here's where it runs in production.</p>
+            </div>
+
+            <div class="usecases-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 60px;">
+
+                <!-- Use Case 1: Edge Server -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🖥️</div>
+                    <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 8px;">Edge Server / Home Lab</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Turn any old PC or laptop into a headless server. Boot from USB, SSH in, deploy your apps. No GUI waste, no systemd overhead. Perfect for home automation hubs, NAS controllers, or development servers.</p>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: var(--text-primary); line-height: 1.6;">
+                        <span style="color: var(--text-dim);"># Deploy a Go web server</span><br>
+                        scp myapp root@wayang:/usr/bin/<br>
+                        ssh root@wayang '/usr/bin/myapp &amp;'
+                    </div>
+                </div>
+
+                <!-- Use Case 2: IoT Gateway -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">📡</div>
+                    <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 8px;">IoT Gateway</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Collect sensor data, relay MQTT messages, bridge networks. Runs on 64 MB RAM — works on the cheapest SBCs. Auto-connects to network on boot, SSH for remote management. Deploy your collector as a static binary.</p>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: var(--text-primary); line-height: 1.6;">
+                        <span style="color: var(--text-dim);"># Pull config from API on boot</span><br>
+                        curl -s https://api.example.com/config &gt; /etc/sensor.conf
+                    </div>
+                </div>
+
+                <!-- Use Case 3: Kiosk / Single-App -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🏪</div>
+                    <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 8px;">Kiosk / Single-App Appliance</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Boot straight into your application. POS terminal, digital signage, monitoring dashboard. No login screen, no desktop environment, no updates popping up. Add your binary to init.d — it starts on boot, every boot.</p>
+                    <img src="pos-demo.png" alt="WayangOS POS Kiosk Demo — Warung Kopi Nusantara" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 12px;">
+                    <p style="color: var(--text-dim); font-size: 0.75rem; margin-bottom: 12px; text-align: center;">POS kiosk demo — runs on 23 MB RAM, renders via SDL2 framebuffer · <a href="https://github.com/mashanz/wayangos-pos" target="_blank" style="color: var(--accent);">View Source →</a></p>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: var(--text-primary); line-height: 1.6;">
+                        <span style="color: var(--text-dim);"># Auto-start app on every boot</span><br>
+                        echo '/usr/bin/myapp &amp;' &gt;&gt; /etc/init.d/rcS
+                    </div>
+                </div>
+
+                <!-- Use Case 4: Network Appliance -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🔒</div>
+                    <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 8px;">Network Appliance / Firewall</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Minimal attack surface = maximum security. Build a custom firewall, VPN gateway, or traffic monitor. No unnecessary packages means fewer CVEs. iptables + static binaries only — nothing to exploit.</p>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: var(--text-primary); line-height: 1.6;">
+                        <span style="color: var(--text-dim);"># ~1 package installed. Good luck finding a CVE.</span><br>
+                        iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+                    </div>
+                </div>
+
+                <!-- Use Case 5: CI/CD Runner -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">⚙️</div>
+                    <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 8px;">CI/CD Build Runner</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Spin up disposable build environments in seconds. Boot a VM from the ISO, run your build, tear it down. No state, no drift, no cleanup. Perfect for ephemeral CI runners — each build starts from a known-clean image.</p>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: var(--text-primary); line-height: 1.6;">
+                        <span style="color: var(--text-dim);"># Spin up, build, destroy</span><br>
+                        qemu-system-x86_64 -cdrom wayangos.iso -m 256M
+                    </div>
+                </div>
+
+                <!-- Use Case 6: Embedded / Robotics -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🤖</div>
+                    <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 8px;">Embedded / Lightweight Compute</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">5 processes at boot vs Ubuntu's 200+. Boots in under 2 seconds, uses 23 MB RAM. When you need a machine to do one thing well — collect data, serve an API, run a daemon — WayangOS stays out of the way.</p>
+                    <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: var(--text-primary); line-height: 1.6;">
+                        <span style="color: var(--text-dim);"># WayangOS process count vs Ubuntu</span><br>
+                        wayang: 5 processes &nbsp;| &nbsp;Ubuntu: 200+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Philosophy callout -->
+            <div style="background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary)); border: 1px solid var(--accent); border-radius: 12px; padding: 40px; max-width: 700px; margin: 0 auto; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 12px;">ꦮꦪꦁ</div>
+                <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 12px;">The Deployment Philosophy</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">
+                    No package manager. No dependency hell. No <code style="background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">apt install</code>.
+                    <br><br>
+                    Your "package manager" is <code style="background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; font-size: 0.85rem;">scp</code>. Build your app as a static binary. 
+                    Copy it to the machine. Run it. That's deployment.
+                    <br><br>
+                    Every binary stands alone. No shared libraries, no version conflicts, no "works on my machine." 
+                    If it compiles, it ships.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="color: var(--accent); font-size: 1.5rem; font-weight: 800;">0</div>
+                        <div style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase;">Dependencies</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="color: var(--accent); font-size: 1.5rem; font-weight: 800;">0</div>
+                        <div style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase;">Package updates</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="color: var(--accent); font-size: 1.5rem; font-weight: 800;">0</div>
+                        <div style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase;">Surprises</div>
+                    </div>
                 </div>
             </div>
         </div>
