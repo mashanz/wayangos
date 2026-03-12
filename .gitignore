@@ -17,3 +17,12 @@ kernel/System.map
 # OS
 .DS_Store
 Thumbs.db
+
+.wrangler/
+kernel/
+*.tar.xz
+*.tar.gz
+vmlinuz
+*.img
+deploy.js
+node_modules/
