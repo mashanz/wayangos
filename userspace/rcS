@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# [DistroName]OS — System initialization script
+#
+
+echo "[init] Mounting filesystems..."
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+mount -t tmpfs tmpfs /tmp
+mount -t tmpfs tmpfs /run
+
+echo "[init] Setting up mdev..."
+echo /sbin/mdev > /proc/sys/kernel/hotplug
+mdev -s
+
+echo "[init] Setting hostname..."
+[ -f /etc/hostname ] && hostname $(cat /etc/hostname)
+
+echo "[init] Configuring network..."
+ip link set lo up
+
+# Load modules if needed
+if [ -d /etc/modules-load.d ]; then
+    for mod in /etc/modules-load.d/*.conf; do
+        [ -f "$mod" ] && while read -r m; do
+            [ -n "$m" ] && [ "${m#\#}" = "$m" ] && modprobe "$m" 2>/dev/null
+        done < "$mod"
+    done
+fi
+
+echo "[init] System ready."

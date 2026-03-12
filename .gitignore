@@ -1,0 +1,19 @@
+# Build output
+build/output/
+
+# Kernel build artifacts (if building in-tree)
+kernel/.config
+kernel/.config.old
+kernel/vmlinux
+kernel/System.map
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
