@@ -6,6 +6,16 @@ build/
 
 # Embedded git repos (separate repos)
 wayangos-viewer/
+wayangos-pos/
+
+# POS app code (lives in wayangos-pos repo)
+fbpos-v3.c
+fbpos-v2.c
+fbpos.c
+fbkiosk.c
+font8x16.h
+pos-screenshot.c
+build-v3.sh
 
 # Build artifacts
 *.iso
@@ -33,7 +43,6 @@ wx-static
 !landing-page/**/*.jpg
 !docs/**/*.png
 !docs/**/*.jpg
-!wayangos-pos/screenshot.png
 
 # Node/Wrangler
 node_modules/
