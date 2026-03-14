@@ -1,11 +1,11 @@
 ﻿/*
- * WayangOS POS Kiosk v3.1 - Full POS System
- * Direct Framebuffer + Input, SQLite backend
+ * WayangPOS v3 - Point of Sale System
+ * Direct Framebuffer + Input, persistent database
  * Amber/gold theme, double buffered
  * Keyboard + mouse + touchscreen via /dev/input + /dev/tty
  *
- * Build without SQLite: gcc -static -O2 -o pos fbpos-v3.c -lm
- * Build with SQLite:    gcc -static -O2 -o pos fbpos-v3.c sqlite3.c -lm -lpthread -DSQLITE_INTEGRATION
+ * Build without DB: gcc -static -O2 -o pos fbpos-v3.c -lm
+ * Build with DB:    gcc -static -O2 -o pos fbpos-v3.c sqlite3.c -lm -lpthread -DSQLITE_INTEGRATION
  */
 
 #include <stdio.h>
@@ -100,6 +100,7 @@ enum {
     STATE_USER_MGMT,
     STATE_ORDER_HISTORY,
     STATE_PAID_CONFIRM,
+    STATE_SETTINGS,
 };
 
 static int app_state = STATE_WELCOME;
@@ -172,6 +173,13 @@ static int hist_detail_id = 0;
 /* Paid confirmation timer */
 static time_t paid_time = 0;
 
+/* Shop name (editable via settings) */
+static char shop_name[64] = "Toko Saya";
+
+/* Settings state */
+static int settings_field = 0;  /* 0=shop_name */
+static char settings_shop_name[64] = "";
+
 /* User list for management */
 typedef struct { int id; char username[32]; char role[16]; } UserEntry;
 static UserEntry user_list[64];
@@ -197,7 +205,8 @@ static int kb_target_field = -1;     /* which field triggered the keyboard */
 /* kb_target_field codes:
    0=login_user, 1=login_pass,
    2=mgmt_name, 3=mgmt_price,
-   4=umgmt_uname, 5=umgmt_pass */
+   4=umgmt_uname, 5=umgmt_pass,
+   6=settings_shop_name */
 
 static void kb_show(char *buf, int maxlen, int field, int password) {
     kb_visible = 1;
@@ -360,6 +369,10 @@ static int db_init(void) {
         "  menu_item_id INTEGER,"
         "  qty INTEGER,"
         "  price INTEGER"
+        ");"
+        "CREATE TABLE IF NOT EXISTS settings ("
+        "  key TEXT PRIMARY KEY,"
+        "  value TEXT"
         ");";
 
     char *err = NULL;
@@ -607,6 +620,28 @@ static void db_load_order_detail(int order_id) {
     sqlite3_finalize(stmt);
 }
 
+static void db_load_settings(void) {
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(db, "SELECT value FROM settings WHERE key='shop_name'", -1, &stmt, NULL);
+    if(sqlite3_step(stmt) == SQLITE_ROW) {
+        const char *v = (const char*)sqlite3_column_text(stmt, 0);
+        if(v && v[0]) {
+            strncpy(shop_name, v, 63);
+            shop_name[63] = 0;
+        }
+    }
+    sqlite3_finalize(stmt);
+}
+
+static void db_save_setting(const char *key, const char *value) {
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(db, "INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)", -1, &stmt, NULL);
+    sqlite3_bind_text(stmt, 1, key, -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, value, -1, SQLITE_STATIC);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+}
+
 #else
 /* No SQLite - stub functions */
 static int db_init(void) { load_default_menu(); return 0; }
@@ -631,6 +666,8 @@ static void db_toggle_menu_item(int id) { (void)id; }
 static void db_delete_menu_item(int id) { (void)id; }
 static void db_load_order_history(void) { hist_count=0; }
 static void db_load_order_detail(int id) { (void)id; hist_item_count=0; }
+static void db_load_settings(void) { /* no-op */ }
+static void db_save_setting(const char *key, const char *value) { (void)key; (void)value; }
 #endif
 
 /* ===== Draw: Virtual Keyboard Overlay ===== */
@@ -834,9 +871,9 @@ static void draw_back_button(FB *f, int y) {
 
 /* ===== Draw: Navigation Buttons (POS header area) ===== */
 static void draw_nav_buttons(FB *f, int y) {
-    const char *labels[] = {"MENU", "USERS", "HISTORY", "HELP", "LOGOUT"};
-    int actions[] = {700, 701, 702, 703, 704};
-    int nbtns = 5;
+    const char *labels[] = {"MENU", "USERS", "HISTORY", "SETTING", "HELP", "LOGOUT"};
+    int actions[] = {700, 701, 702, 705, 703, 704};
+    int nbtns = 6;
     int W = f->w;
     int RPW_nav = W*42/100;
     int LPW_nav = W - RPW_nav - 2;
@@ -854,8 +891,8 @@ static void draw_nav_buttons(FB *f, int y) {
         int bx = start_x + i * (btn_w + gap);
         int by = y + 3;
 
-        /* Admin-only: dim USERS button for non-admins */
-        int is_dim = (i == 1 && strcmp(current_role, "admin") != 0);
+        /* Admin-only: dim USERS and SETTING buttons for non-admins */
+        int is_dim = ((i == 1 || i == 3) && strcmp(current_role, "admin") != 0);
 
         rect(f, bx, by, btn_w, btn_h,
              is_dim ? C_PNL_R : C_PNL_R+10,
@@ -882,6 +919,69 @@ static void draw_nav_buttons(FB *f, int y) {
                     is_dim ? C_DIM_G/2 : C_GOLD_G,
                     is_dim ? C_DIM_B/2 : C_GOLD_B);
         if(nhit<256){hits[nhit]=(Hit){bx, by, btn_w, btn_h, actions[i]};nhit++;}
+    }
+}
+
+/* ===== Draw: Settings Page ===== */
+static void draw_settings(FB *f) {
+    int W=f->w, H=f->h;
+    nhit=0;
+
+    rect(f,0,0,W,H,C_BG_R,C_BG_G,C_BG_B);
+
+    /* Header */
+    rect(f,0,0,W,40,C_PNL_R,C_PNL_G,C_PNL_B);
+    hline(f,0,39,W,C_BRD_R,C_BRD_G,C_BRD_B);
+    text(f,100,12,"PENGATURAN",2,C_GOLD_R,C_GOLD_G,C_GOLD_B);
+    draw_back_button(f, 2);
+
+    int bx=W/2-220, by=80, bw=440, bh=200;
+    rect(f,bx,by,bw,bh,C_PNL_R,C_PNL_G,C_PNL_B);
+    hline(f,bx,by,bw,C_BRD_R,C_BRD_G,C_BRD_B);
+    hline(f,bx,by+bh-1,bw,C_BRD_R,C_BRD_G,C_BRD_B);
+    vline(f,bx,by,bh,C_BRD_R,C_BRD_G,C_BRD_B);
+    vline(f,bx+bw-1,by,bh,C_BRD_R,C_BRD_G,C_BRD_B);
+
+    int fy=by+20;
+    text(f,bx+20,fy,"Nama Toko:",1,C_GOLD_R,C_GOLD_G,C_GOLD_B);
+    fy+=20;
+    int fx=bx+20, fw=bw-40, fh=28;
+    rect(f,fx,fy,fw,fh,C_SEL_R,C_SEL_G,C_SEL_B);
+    hline(f,fx,fy,fw,C_GOLD_R,C_GOLD_G,C_GOLD_B);
+    hline(f,fx,fy+fh-1,fw,C_GOLD_R,C_GOLD_G,C_GOLD_B);
+    vline(f,fx,fy,fh,C_GOLD_R,C_GOLD_G,C_GOLD_B);
+    vline(f,fx+fw-1,fy,fh,C_GOLD_R,C_GOLD_G,C_GOLD_B);
+    text(f,fx+4,fy+6,settings_shop_name,1,C_TXT_R,C_TXT_G,C_TXT_B);
+    {
+        int cx=fx+4+tw(settings_shop_name,1);
+        rect(f,cx,fy+4,2,fh-8,C_GOLD_R,C_GOLD_G,C_GOLD_B);
+    }
+    if(nhit<256){hits[nhit]=(Hit){fx,fy,fw,fh,800};nhit++;} /* 800=shop name field */
+
+    /* Current value display */
+    fy+=fh+12;
+    text(f,bx+20,fy,"Saat ini:",1,C_DIM_R,C_DIM_G,C_DIM_B);
+    text(f,bx+110,fy,shop_name,1,C_TXT_R,C_TXT_G,C_TXT_B);
+
+    /* SAVE button */
+    fy+=30;
+    {
+        int save_w=160, save_h=40;
+        int save_x=bx+(bw-save_w)/2;
+        rect(f,save_x,fy,save_w,save_h,C_GRN_R/2,C_GRN_G/2,C_GRN_B/2);
+        hline(f,save_x,fy,save_w,C_GRN_R,C_GRN_G,C_GRN_B);
+        hline(f,save_x,fy+save_h-1,save_w,C_GRN_R,C_GRN_G,C_GRN_B);
+        vline(f,save_x,fy,save_h,C_GRN_R,C_GRN_G,C_GRN_B);
+        vline(f,save_x+save_w-1,fy,save_h,C_GRN_R,C_GRN_G,C_GRN_B);
+        text_center(f,save_x+save_w/2,fy+(save_h-16)/2,"SIMPAN",1,C_GRN_R,C_GRN_G,C_GRN_B);
+        if(nhit<256){hits[nhit]=(Hit){save_x,fy,save_w,save_h,801};nhit++;} /* 801=save settings */
+    }
+
+    text_center(f,W/2,by+bh+20,"Sentuh kolom nama toko untuk mengedit",1,C_DIM_R,C_DIM_G,C_DIM_B);
+
+    /* Virtual Keyboard Overlay */
+    if(kb_visible) {
+        draw_keyboard(f, H - 210);
     }
 }
 
@@ -982,7 +1082,7 @@ static void draw_pos(FB *f) {
     /* -- Header -- */
     rect(f,0,0,W,HDR,C_PNL_R,C_PNL_G,C_PNL_B);
     hline(f,0,HDR-1,W,C_BRD_R,C_BRD_G,C_BRD_B);
-    text(f,10,12,"WAYANG POS",2,C_GOLD_R,C_GOLD_G,C_GOLD_B);
+    text(f,10,12,shop_name,2,C_GOLD_R,C_GOLD_G,C_GOLD_B);
 
     /* Show logged in user */
     if(current_username[0]) {
@@ -1348,8 +1448,8 @@ static void draw_pos(FB *f) {
     hline(f,0,H-FTR,W,C_BRD_R,C_BRD_G,C_BRD_B);
     {
         char status[128];
-        snprintf(status,sizeof(status),"wayang:pos | %s | %dx%d | Page %d/%d | [F1] Help",
-            current_username[0]?current_username:"?", W, H, menu_page+1, total_pages);
+        snprintf(status,sizeof(status),"%s | %s | Hal %d/%d",
+            shop_name, current_username[0]?current_username:"?", menu_page+1, total_pages);
         text(f,8,H-FTR+3,status,1,C_DIM_R,C_DIM_G,C_DIM_B);
     }
 
@@ -1372,7 +1472,7 @@ static void draw_login(FB *f) {
     rect(f,0,0,W,H,C_BG_R,C_BG_G,C_BG_B);
 
     /* Title */
-    text_center(f,W/2,80,"W A Y A N G  P O S",2,C_GOLD_R,C_GOLD_G,C_GOLD_B);
+    text_center(f,W/2,80,"WayangPOS",2,C_GOLD_R,C_GOLD_G,C_GOLD_B);
     int sepw=300;
     rect(f,W/2-sepw/2,120,sepw,2,C_BRD_R,C_BRD_G,C_BRD_B);
 
@@ -2005,6 +2105,7 @@ int main(void) {
     }
 #ifdef SQLITE_INTEGRATION
     db_load_menu();
+    db_load_settings();
 #endif
     if(menu_count == 0) load_default_menu();
 
@@ -2037,7 +2138,7 @@ int main(void) {
         int mfd=open("/dev/input/mice",O_RDONLY|O_NONBLOCK);
         if(mfd>=0){inp[ninp++]=mfd;fprintf(stderr,"Input: /dev/input/mice fd=%d\n",mfd);}
     }
-    fprintf(stderr,"WayangOS POS v3.1: %dx%d, %d bpp, %d inputs, tty=%d\n",fb.w,fb.h,fb.bpp*8,ninp,tty_fd);
+    fprintf(stderr,"WayangPOS v3: %dx%d, %d bpp, %d inputs, tty=%d\n",fb.w,fb.h,fb.bpp*8,ninp,tty_fd);
 
     int mx=fb.w/2, my=fb.h/2;
     int redraw=1, last_min=-1;
@@ -2060,21 +2161,15 @@ welcome:
         rect(&fb,0,0,fb.w,fb.h,15,12,8);
         rect(&fb,0,0,fb.w,3,212,175,55);
         int cy=fb.h/2;
-        text_center(&fb,fb.w/2,cy-90,"W A Y A N G O S",3,212,175,55);
+        text_center(&fb,fb.w/2,cy-80,"WayangPOS",3,212,175,55);
         int sepw=300;
-        rect(&fb,fb.w/2-sepw/2,cy-45,sepw,2,120,100,40);
-        text_center(&fb,fb.w/2,cy-25,"Point of Sale System",1,180,150,60);
-        text_center(&fb,fb.w/2,cy-5,"Warung Kopi Nusantara",1,140,120,50);
-        text_center(&fb,fb.w/2,cy+25,"v3.1.0",1,100,85,35);
-#ifdef SQLITE_INTEGRATION
-        text_center(&fb,fb.w/2,cy+40,"+ SQLite",1,80,70,30);
-#endif
-        rect(&fb,fb.w/2-sepw/2,cy+55,sepw,2,120,100,40);
-        rect(&fb,fb.w/2-140,cy+70,280,36,35,28,15);
-        rect(&fb,fb.w/2-139,cy+71,278,34,45,35,18);
-        text_center(&fb,fb.w/2,cy+80,"Tap or press ENTER",1,212,175,55);
-        text_center(&fb,fb.w/2,fb.h-30,"Powered by WayangOS - Ultra Minimal Linux",1,80,65,30);
-        text_center(&fb,fb.w/2,fb.h-50,"[ESC] Exit to shell",1,60,50,25);
+        rect(&fb,fb.w/2-sepw/2,cy-35,sepw,2,120,100,40);
+        text_center(&fb,fb.w/2,cy-10,shop_name,1,180,150,60);
+        rect(&fb,fb.w/2-sepw/2,cy+15,sepw,2,120,100,40);
+        rect(&fb,fb.w/2-160,cy+30,320,36,35,28,15);
+        rect(&fb,fb.w/2-159,cy+31,318,34,45,35,18);
+        text_center(&fb,fb.w/2,cy+40,"Sentuh layar untuk mulai",1,212,175,55);
+        text_center(&fb,fb.w/2,fb.h-30,"v3",1,60,50,25);
         rect(&fb,0,fb.h-3,fb.w,3,212,175,55);
         memcpy(fbmem,back,fb.size);
 
@@ -2117,6 +2212,7 @@ welcome:
                 case STATE_USER_MGMT: draw_user_mgmt(&fb); break;
                 case STATE_ORDER_HISTORY: draw_order_history(&fb); break;
                 case STATE_PAID_CONFIRM: draw_paid(&fb); break;
+                case STATE_SETTINGS: draw_settings(&fb); break;
                 default: draw_pos(&fb); break;
             }
             memcpy(clean,back,fb.size);
@@ -2278,6 +2374,15 @@ welcome:
                                             umgmt_mode=0;
                                         }
                                     }
+                                } else if(app_state == STATE_SETTINGS) {
+                                    /* Save shop name */
+                                    if(settings_shop_name[0]) {
+                                        strncpy(shop_name, settings_shop_name, 63);
+                                        shop_name[63]=0;
+                                        db_save_setting("shop_name", shop_name);
+                                    }
+                                    kb_hide();
+                                    app_state=STATE_POS;
                                 } else {
                                     kb_hide();
                                 }
@@ -2298,7 +2403,7 @@ welcome:
                     /* ===== NAV BUTTON HANDLING (POS state) ===== */
                     if(app_state == STATE_POS && (ev.code==BTN_LEFT||ev.code==BTN_TOUCH)) {
                         int a=hit_test(mx,my);
-                        if(a >= 700 && a <= 704) {
+                        if(a >= 700 && a <= 705) {
                             kb_hide();
                             if(a == 700) {
                                 /* MENU management */
@@ -2322,6 +2427,15 @@ welcome:
                             } else if(a == 703) {
                                 /* HELP */
                                 show_help=!show_help;
+                            } else if(a == 705) {
+                                /* SETTINGS (admin only) */
+                                if(strcmp(current_role,"admin")==0) {
+                                    strncpy(settings_shop_name, shop_name, 63);
+                                    settings_shop_name[63]=0;
+                                    settings_field=0;
+                                    app_state=STATE_SETTINGS;
+                                    kb_show(settings_shop_name, 63, 6, 0);
+                                }
                             } else if(a == 704) {
                                 /* LOGOUT */
                                 current_user_id=0; current_username[0]=0; current_role[0]=0;
@@ -2334,7 +2448,7 @@ welcome:
                     }
 
                     /* ===== BACK BUTTON HANDLING (sub-pages) ===== */
-                    if((app_state==STATE_MENU_MGMT||app_state==STATE_USER_MGMT||app_state==STATE_ORDER_HISTORY)
+                    if((app_state==STATE_MENU_MGMT||app_state==STATE_USER_MGMT||app_state==STATE_ORDER_HISTORY||app_state==STATE_SETTINGS)
                        && (ev.code==BTN_LEFT||ev.code==BTN_TOUCH)) {
                         int a=hit_test(mx,my);
                         if(a == 710) {
@@ -2392,6 +2506,22 @@ welcome:
                         if(a == 731 && app_state==STATE_USER_MGMT && umgmt_mode > 0) {
                             umgmt_field = 1;
                             kb_show(umgmt_pass, 31, 5, 1);
+                            redraw=1; continue;
+                        }
+                        /* Settings page touch handlers */
+                        if(a == 800 && app_state==STATE_SETTINGS) {
+                            kb_show(settings_shop_name, 63, 6, 0);
+                            redraw=1; continue;
+                        }
+                        if(a == 801 && app_state==STATE_SETTINGS) {
+                            /* Save settings */
+                            if(settings_shop_name[0]) {
+                                strncpy(shop_name, settings_shop_name, 63);
+                                shop_name[63]=0;
+                                db_save_setting("shop_name", shop_name);
+                            }
+                            kb_hide();
+                            app_state=STATE_POS;
                             redraw=1; continue;
                         }
                     }
@@ -2840,6 +2970,29 @@ welcome:
                             }
                         } else {
                             if(ev.code==KEY_ESC){kb_hide();hist_detail=0;redraw=1;}
+                        }
+                    }
+
+                    /* ===== SETTINGS STATE ===== */
+                    else if(app_state == STATE_SETTINGS) {
+                        if(ev.code==KEY_ESC){kb_hide();app_state=STATE_POS;redraw=1;}
+                        else if(ev.code==KEY_ENTER||ev.code==KEY_KPENTER){
+                            if(settings_shop_name[0]) {
+                                strncpy(shop_name, settings_shop_name, 63);
+                                shop_name[63]=0;
+                                db_save_setting("shop_name", shop_name);
+                            }
+                            kb_hide();
+                            app_state=STATE_POS;
+                            redraw=1;
+                        }
+                        else if(ev.code==KEY_BACKSPACE){
+                            text_input_backspace(settings_shop_name);
+                            redraw=1;
+                        }
+                        else {
+                            char c=key_to_char(ev.code,shift_held);
+                            if(c){ text_input_char(settings_shop_name,63,c); redraw=1; }
                         }
                     }
 

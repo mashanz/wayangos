@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+# WayangOS Init Script
+# Minimal PID 1 — no systemd, no openrc, just shell
+#
+
+# Mount essential filesystems
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+mkdir -p /dev/pts /dev/shm
+mount -t devpts devpts /dev/pts
+mount -t tmpfs tmpfs /dev/shm
+mount -t tmpfs tmpfs /tmp
+mount -t tmpfs tmpfs /run
+
+# Set hostname
+if [ -f /etc/hostname ]; then
+    hostname "$(cat /etc/hostname)"
+else
+    hostname "wayang"
+fi
+
+# Kernel messages
+dmesg -n 1
+
+# Set PATH
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+# Run init scripts
+if [ -d /etc/init.d ]; then
+    for script in /etc/init.d/S*; do
+        [ -x "$script" ] && "$script" start
+    done
+fi
+
+# Configure networking
+if [ -x /sbin/ip ]; then
+    ip link set lo up
+    # DHCP or static config from /etc/network/
+    if [ -f /etc/network/interfaces ]; then
+        . /etc/network/interfaces
+    fi
+fi
+
+# Print banner
+echo ""
+echo "  ___       __  __                       ___  ____  "
+echo " / _ \     / / / /__ _____ ____  ___ _  / _ \/ __/  "
+echo "/ ___/ _  / /_/ / _ \`/ _ \/ __ \/ _ \`/ / // /\ \   "
+echo "/_/   (_)  \____/\_,_/_//_/\_, /\_, /  \___/___/   "
+echo "                          /___//___/                 "
+echo ""
+echo "  WayangOS — The Shadow that Powers the Machine"
+echo "  Kernel: $(uname -r)"
+echo "  Memory: $(free -m 2>/dev/null | awk '/Mem:/{print $2}')MB"
+echo ""
+
+# Start getty on serial console
+exec /sbin/getty -L console 115200 vt100

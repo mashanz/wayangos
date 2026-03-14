@@ -1,20 +1,51 @@
-# Ignore everything by default
-*
+# Kernel source tree (build separately, too large for repo)
+kernel/
 
-# Allow specific files
-!.gitignore
-!README.md
-!LICENSE
-!fbpos-v3.c
-!font8x16.h
-!input-test.c
-!kiosk-init.sh
-!build-final.sh
+# Old build dir (replaced by scripts/)
+build/
 
-# Allow landing page
-!landing-page/
-!landing-page/**
-landing-page/.wrangler/
-landing-page/node_modules/
+# Embedded git repos (separate repos)
+wayangos-viewer/
 
+# Build artifacts
+*.iso
+*.img
+*.tar.gz
+*.zip
+*.o
+*.ppm
+*.bmp
 
+# Kernel binaries
+bzImage*
+vmlinuz*
+
+# Old binaries
+fbpos-v3
+wayang-pos-v4
+wx
+wx-static
+
+# Images (except docs/)
+*.jpg
+*.png
+!landing-page/**/*.png
+!landing-page/**/*.jpg
+!docs/**/*.png
+!docs/**/*.jpg
+!wayangos-pos/screenshot.png
+
+# Node/Wrangler
+node_modules/
+.wrangler/
+
+# Temp files
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SQLite amalgamation (large, download separately)
+sqlite3.c
+sqlite3.h

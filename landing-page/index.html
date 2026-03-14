@@ -29,7 +29,13 @@
             box-sizing: border-box;
         }
 
-        html, body {
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
             overflow-x: hidden;
             width: 100%;
         }
@@ -405,9 +411,62 @@
             color: var(--accent);
         }
 
+        /* Standard section padding */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* Standardized card */
+        .std-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .std-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Standardized CTA button */
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .cta-btn-primary:hover {
+            background: var(--accent-bright);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .cta-btn-outline {
+            background: var(--bg-secondary);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .cta-btn-outline:hover {
+            background: var(--accent-dim);
+        }
+
         /* Features */
         .features {
-            padding: 100px 0;
+            padding: 80px 0;
         }
 
         .section-header {
@@ -416,16 +475,21 @@
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 800;
             letter-spacing: -1px;
             margin-bottom: 16px;
+        }
+
+        .section-header h3 {
+            font-size: 1.2rem;
         }
 
         .section-header p {
             color: var(--text-secondary);
             max-width: 500px;
             margin: 0 auto;
+            font-size: 0.95rem;
         }
 
         .features-grid {
@@ -461,7 +525,7 @@
 
         .feature-card p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .feature-tag {
@@ -478,7 +542,7 @@
 
         /* Comparison */
         .comparison {
-            padding: 100px 0;
+            padding: 80px 0;
         }
 
         .comparison-table {
@@ -524,7 +588,7 @@
 
         /* Architectures */
         .arch-section {
-            padding: 100px 0;
+            padding: 80px 0;
         }
 
         .arch-grid {
@@ -562,7 +626,7 @@
 
         /* Download */
         .download {
-            padding: 100px 0;
+            padding: 80px 0;
             text-align: center;
         }
 
@@ -789,7 +853,7 @@
                 <li><a href="#architectures" onclick="document.querySelector('.nav-links').classList.remove('active')">Architectures</a></li>
                 <li><a href="#download" onclick="document.querySelector('.nav-links').classList.remove('active')">Download</a></li>
                 <li><a href="#usecases" onclick="document.querySelector('.nav-links').classList.remove('active')">Use Cases</a></li>
-                <li><a href="#pos" onclick="document.querySelector('.nav-links').classList.remove('active')">POS System</a></li>
+                <li><a href="apps.html" onclick="document.querySelector('.nav-links').classList.remove('active')">Apps</a></li>
                 <li><a href="https://github.com/mashanz/wayangos" target="_blank">GitHub</a></li>
             </ul>
         </div>
@@ -799,7 +863,7 @@
     <section class="hero">
         <div class="hero-badge">
             <span class="dot"></span>
-            Linux 6.19 · PREEMPT_RT Available · 4 Editions · Zero Dependencies
+            Linux 6.19 · UEFI + BIOS · GPU Support · 9 Editions · x86_64 + ARM64
         </div>
         <div class="aksara-hero">ꦮꦪꦁ</div>
         <h1>Wayang<span class="accent">OS</span></h1>
@@ -811,7 +875,7 @@
         </div>
         <div class="hero-stats">
             <div class="stat">
-                <div class="stat-value">13MB</div>
+                <div class="stat-value">20MB</div>
                 <div class="stat-label">Bootable ISO</div>
             </div>
             <div class="stat">
@@ -841,6 +905,13 @@
                     Like the <em>dalang</em> who commands hundreds of puppets from behind the screen,
                     WayangOS orchestrates your hardware with total control and zero waste.
                 </p>
+                <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-gold);">
+                    <p style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Built by the team behind</p>
+                    <a href="https://dalang.io" target="_blank" style="display: inline-block;">
+                        <img src="dalang-logo.png" alt="Dalang.io" style="height: 60px; width: 60px; border-radius: 12px; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+                    </a>
+                    <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 8px;"><a href="https://dalang.io" target="_blank" style="color: var(--accent); text-decoration: none;">dalang.io</a> — The Dalang behind the curtain</p>
+                </div>
             </div>
         </div>
     </section>
@@ -889,8 +960,8 @@
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Ultra-Minimal</h3>
-                    <p>13 MB bootable ISO. BusyBox + Dropbear SSH + curl. No systemd, no D-Bus, no polkit. 4 static binaries, zero shared libraries.</p>
-                    <span class="feature-tag">4 binaries · 13 MB · done</span>
+                    <p>20 MB bootable ISO. BusyBox + Dropbear SSH + curl. No systemd, no D-Bus, no polkit. 4 static binaries, zero shared libraries. UEFI + BIOS hybrid boot.</p>
+                    <span class="feature-tag">4 binaries · 20 MB · UEFI+BIOS · done</span>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔌</div>
@@ -907,8 +978,14 @@
                 <div class="feature-card">
                     <div class="feature-icon">🖼️</div>
                     <h3>GUI Edition Available</h3>
-                    <p>15 MB ISO with framebuffer + SDL2. Boot straight into a kiosk app — POS, digital signage, dashboards. No X11, no Wayland. Just framebuffer.</p>
-                    <span class="feature-tag">SDL2 + DRM/KMS + fbdev</span>
+                    <p>21 MB ISO with framebuffer rendering. GUI edition boots with display drivers for kiosk apps, digital signage, and dashboards. No X11, no Wayland.</p>
+                    <span class="feature-tag">DRM/KMS + Framebuffer</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>GPU Support</h3>
+                    <p>Vendor-specific GPU drivers for Intel (i915), AMD (amdgpu), and NVIDIA (nouveau). ARM SBC support with Raspberry Pi 3 HDMI (VideoCore IV) and Orange Pi Zero 2W HDMI (Mali). Hardware-accelerated graphics out of the box.</p>
+                    <span class="feature-tag">Intel · AMD · NVIDIA · RPi3 · OPi Zero 2W</span>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔒</div>
@@ -946,7 +1023,7 @@
                 <tbody>
                     <tr class="highlight-row">
                         <td>ISO Size</td>
-                        <td>13 MB</td>
+                        <td>20 MB</td>
                         <td>~200 MB</td>
                         <td>~1.2 GB</td>
                         <td>~600 MB</td>
@@ -988,7 +1065,7 @@
                     </tr>
                     <tr>
                         <td>GUI Edition</td>
-                        <td><span class="check">✓ SDL2/fbdev</span></td>
+                        <td><span class="check">✓ fbdev/DRM</span></td>
                         <td><span class="cross">✗ Manual</span></td>
                         <td><span class="check">✓ Desktop</span></td>
                         <td><span class="cross">✗ Manual</span></td>
@@ -1010,7 +1087,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>Architectures</h2>
-                <p>x86_64 ready now. ARM64 and RISC-V on the roadmap.</p>
+                <p>x86_64 and ARM64 available. RISC-V on the roadmap.</p>
             </div>
             <div class="arch-grid">
                 <div class="arch-card" style="border-color: var(--accent);">
@@ -1018,10 +1095,10 @@
                     <div class="arch-desc">Servers, VMs, desktops, Intel/AMD</div>
                     <div style="margin-top: 8px; color: var(--success); font-size: 0.8rem;">✓ Available now</div>
                 </div>
-                <div class="arch-card">
+                <div class="arch-card" style="border-color: var(--accent);">
                     <div class="arch-name">ARM64</div>
-                    <div class="arch-desc">Raspberry Pi, SBCs, edge devices</div>
-                    <div style="margin-top: 8px; color: var(--text-dim); font-size: 0.8rem;">⏳ Planned</div>
+                    <div class="arch-desc">Raspberry Pi 3, Orange Pi Zero 2W</div>
+                    <div style="margin-top: 8px; color: var(--success); font-size: 0.8rem;">✓ Available now (v0.6.0)</div>
                 </div>
                 <div class="arch-card">
                     <div class="arch-name">RISC-V</div>
@@ -1038,110 +1115,20 @@
             <div class="section-header" style="margin-bottom: 24px;">
                 <div class="aksara-deco" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 8px; opacity: 0.7; text-align: center;">ꦮꦪꦁ</div>
                 <h2 style="text-align: center;">Download WayangOS</h2>
-                <p class="edition-help" style="color: var(--text-secondary); text-align: center; font-size: 0.88rem; margin-top: 8px;">All editions include BusyBox, SSH, curl, and auto-networking.</p>
+                <p style="color: var(--text-secondary); text-align: center; font-size: 0.95rem; margin-top: 8px;">WayangOS is available for Intel, AMD, NVIDIA, Raspberry Pi, and Orange Pi.</p>
             </div>
 
-                <!-- 4-Edition Grid -->
-                <div class="edition-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 960px; margin: 0 auto 24px;">
-
-                    <!-- 1. Headless -->
-                    <div class="edition-card" style="background: var(--bg-card); border: 2px solid var(--accent); border-radius: 10px; padding: 18px; position: relative;">
-                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #000; font-size: 0.65rem; font-weight: 800; padding: 2px 10px; border-radius: 20px; white-space: nowrap;">POPULAR</div>
-                        <div style="text-align: center; margin-bottom: 8px;">
-                            <div class="edition-icon" style="font-size: 1.6rem; margin-bottom: 4px;">🖥️</div>
-                            <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 1px;">Headless</h3>
-                            <p style="color: var(--text-dim); font-size: 0.7rem;">6.19.7</p>
-                        </div>
-                        <div class="edition-features" style="background: var(--bg-secondary); border-radius: 6px; padding: 8px; margin-bottom: 8px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5;">
-                            ✅ SSH · curl · NTP<br>➖ No RT · No GUI
-                        </div>
-                        <div style="text-align: center; margin-bottom: 6px;">
-                            <span class="edition-size" style="color: var(--accent); font-size: 1.1rem; font-weight: 800;">14 MB</span>
-                        </div>
-                        <div class="edition-usecase" style="font-size: 0.68rem; color: var(--text-dim); text-align: center; margin-bottom: 8px;">Servers · VMs · Edge</div>
-                        <a class="edition-btn" href="https://github.com/mashanz/wayangos/releases/download/v0.5.0/wayangos-0.5-headless-x86_64.iso" style="display: block; text-align: center; background: var(--accent); color: #000; padding: 8px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.82rem;">⬇ Download</a>
-                    </div>
-
-                    <!-- 2. Headless RT -->
-                    <div class="edition-card" style="background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: 10px; padding: 18px; position: relative;">
-                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg-secondary); border: 1px solid var(--accent); color: var(--accent); font-size: 0.65rem; font-weight: 800; padding: 2px 10px; border-radius: 20px; white-space: nowrap;">REAL-TIME</div>
-                        <div style="text-align: center; margin-bottom: 8px;">
-                            <div class="edition-icon" style="font-size: 1.6rem; margin-bottom: 4px;">⚡</div>
-                            <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 1px;">Headless RT</h3>
-                            <p style="color: var(--text-dim); font-size: 0.7rem;">6.19.3-rt1</p>
-                        </div>
-                        <div class="edition-features" style="background: var(--bg-secondary); border-radius: 6px; padding: 8px; margin-bottom: 8px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5;">
-                            ✅ SSH · curl · PREEMPT_RT<br>➖ No GUI
-                        </div>
-                        <div style="text-align: center; margin-bottom: 6px;">
-                            <span class="edition-size" style="color: var(--accent); font-size: 1.1rem; font-weight: 800;">14 MB</span>
-                        </div>
-                        <div class="edition-usecase" style="font-size: 0.68rem; color: var(--text-dim); text-align: center; margin-bottom: 8px;">IoT · Robotics · Industrial</div>
-                        <a class="edition-btn" href="https://github.com/mashanz/wayangos/releases/download/v0.5.0/wayangos-0.5-headless-rt-x86_64.iso" style="display: block; text-align: center; background: var(--bg-secondary); color: var(--accent); padding: 8px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.82rem; border: 1px solid var(--accent);">⬇ Download</a>
-                    </div>
-
-                    <!-- 3. GUI -->
-                    <div class="edition-card" style="background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: 10px; padding: 18px; position: relative;">
-                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg-secondary); border: 1px solid var(--accent); color: var(--accent); font-size: 0.65rem; font-weight: 800; padding: 2px 10px; border-radius: 20px; white-space: nowrap;">GUI</div>
-                        <div style="text-align: center; margin-bottom: 8px;">
-                            <div class="edition-icon" style="font-size: 1.6rem; margin-bottom: 4px;">🖼️</div>
-                            <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 1px;">GUI</h3>
-                            <p style="color: var(--text-dim); font-size: 0.7rem;">6.19.7 + SDL2</p>
-                        </div>
-                        <div class="edition-features" style="background: var(--bg-secondary); border-radius: 6px; padding: 8px; margin-bottom: 8px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5;">
-                            ✅ Headless + Framebuffer<br>✅ SDL2 · DRM · Input
-                        </div>
-                        <div style="text-align: center; margin-bottom: 6px;">
-                            <span class="edition-size" style="color: var(--accent); font-size: 1.1rem; font-weight: 800;">15 MB</span>
-                        </div>
-                        <div class="edition-usecase" style="font-size: 0.68rem; color: var(--text-dim); text-align: center; margin-bottom: 8px;">Kiosk · Signage · Dashboard</div>
-                        <a class="edition-btn" href="https://github.com/mashanz/wayangos/releases/download/v0.5.0/wayangos-0.5-gui-x86_64.iso" style="display: block; text-align: center; background: var(--bg-secondary); color: var(--accent); padding: 8px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.82rem; border: 1px solid var(--accent);">⬇ Download</a>
-                    </div>
-
-                    <!-- 4. GUI RT -->
-                    <div class="edition-card" style="background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: 10px; padding: 18px; position: relative;">
-                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--bg-secondary); border: 1px solid var(--accent); color: var(--accent); font-size: 0.65rem; font-weight: 800; padding: 2px 10px; border-radius: 20px; white-space: nowrap;">GUI + RT</div>
-                        <div style="text-align: center; margin-bottom: 8px;">
-                            <div class="edition-icon" style="font-size: 1.6rem; margin-bottom: 4px;">⚡🖼️</div>
-                            <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 1px;">GUI RT</h3>
-                            <p style="color: var(--text-dim); font-size: 0.7rem;">6.19.3-rt1 + SDL2</p>
-                        </div>
-                        <div class="edition-features" style="background: var(--bg-secondary); border-radius: 6px; padding: 8px; margin-bottom: 8px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.5;">
-                            ✅ GUI + PREEMPT_RT<br>✅ 1000Hz · Hi-res timers
-                        </div>
-                        <div style="text-align: center; margin-bottom: 6px;">
-                            <span class="edition-size" style="color: var(--accent); font-size: 1.1rem; font-weight: 800;">15 MB</span>
-                        </div>
-                        <div class="edition-usecase" style="font-size: 0.68rem; color: var(--text-dim); text-align: center; margin-bottom: 8px;">POS · HMI · RT Displays</div>
-                        <a class="edition-btn" href="https://github.com/mashanz/wayangos/releases/download/v0.5.0/wayangos-0.5-gui-rt-x86_64.iso" style="display: block; text-align: center; background: var(--bg-secondary); color: var(--accent); padding: 8px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.82rem; border: 1px solid var(--accent);">⬇ Download</a>
-                    </div>
-
-                </div>
-
-                <!-- All releases link -->
-                <div style="text-align: center; margin-bottom: 40px;">
-                    <a href="https://github.com/mashanz/wayangos/releases/tag/v0.5.0" style="color: var(--text-dim); font-size: 0.8rem; text-decoration: none;">📋 View all releases on GitHub →</a>
-                </div>
-
+            <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 28px; font-size: 2rem;">
+                <span title="Intel GPU">🔵</span>
+                <span title="AMD GPU">🔴</span>
+                <span title="NVIDIA GPU">🟢</span>
+                <span title="Raspberry Pi">🍓</span>
+                <span title="Orange Pi">🍊</span>
             </div>
 
-            <!-- Architecture availability -->
-            <div class="arch-inline-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 600px; margin: 0 auto 40px; text-align: center; font-size: 0.82rem;">
-                <div style="background: var(--bg-card); border: 2px solid var(--accent); border-radius: 8px; padding: 12px;">
-                    <div style="font-family: monospace; font-size: 1rem; color: var(--accent); font-weight: 700;">x86_64</div>
-                    <div style="color: var(--text-secondary); margin-top: 4px;">Intel · AMD</div>
-                    <div style="color: var(--success); margin-top: 4px; font-size: 0.75rem;">✅ Available</div>
-                </div>
-                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
-                    <div style="font-family: monospace; font-size: 1rem; color: var(--text-secondary); font-weight: 700;">ARM64</div>
-                    <div style="color: var(--text-secondary); margin-top: 4px;">RPi · SBCs</div>
-                    <div style="color: var(--text-dim); margin-top: 4px; font-size: 0.75rem;">⏳ Coming soon</div>
-                </div>
-                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
-                    <div style="font-family: monospace; font-size: 1rem; color: var(--text-secondary); font-weight: 700;">RISC-V</div>
-                    <div style="color: var(--text-secondary); margin-top: 4px;">VisionFive · SiFive</div>
-                    <div style="color: var(--text-dim); margin-top: 4px; font-size: 0.75rem;">⏳ Coming soon</div>
-                </div>
+            <div style="text-align: center; margin-bottom: 48px;">
+                <a href="download.html" style="display: inline-block; background: var(--accent); color: #000; padding: 18px 48px; border-radius: 10px; font-weight: 800; text-decoration: none; font-size: 1.15rem; transition: all 0.2s; box-shadow: 0 0 30px var(--accent-glow);">Choose &amp; Download →</a>
+                <p style="color: var(--text-dim); font-size: 0.82rem; margin-top: 12px;">v0.6.0 — GPU Support · x86_64 + ARM64 · 17–35 MB</p>
             </div>
 
             <!-- Installation Tutorial -->
@@ -1155,8 +1142,17 @@
                     <div style="background: var(--accent); color: #000; font-weight: 800; font-size: 1.1rem; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
                     <div style="flex: 1;">
                         <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 6px;">Download the ISO</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Grab the bootable ISO (13 MB). Includes kernel, OS, SSH server, curl — everything in one file.</p>
-                        <a href="https://github.com/mashanz/wayangos/releases/download/v0.5.0/wayangos-0.5-headless-x86_64.iso" style="display: inline-block; background: var(--accent); color: #000; padding: 10px 24px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">⬇ Download ISO (13 MB)</a>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Select your GPU/platform and grab the bootable ISO. UEFI + BIOS hybrid — works on any modern or legacy hardware. Includes kernel, OS, SSH server, curl — everything in one file.</p>
+                        <select id="install-iso-select" style="background: var(--bg-card); color: var(--text-primary); border: 2px solid var(--accent); border-radius: 8px; padding: 12px 16px; font-size: 1rem; width: 100%; max-width: 400px; cursor: pointer; appearance: none; -webkit-appearance: none; margin-bottom: 12px; display: block;">
+                            <option value="">-- Select your GPU / Platform --</option>
+                            <option value="https://github.com/mashanz/wayangos/releases/download/v0.6.0/wayangos-intel.iso">🔵 Intel GPU (HD/UHD/Iris) — 30 MB</option>
+                            <option value="https://github.com/mashanz/wayangos/releases/download/v0.6.0/wayangos-amd.iso">🔴 AMD GPU (Radeon/RX/Vega) — 35 MB</option>
+                            <option value="https://github.com/mashanz/wayangos/releases/download/v0.6.0/wayangos-nvidia.iso">🟢 NVIDIA GPU (GeForce/GTX/RTX) — 31 MB</option>
+                            <option value="https://github.com/mashanz/wayangos/releases/download/v0.6.0/wayangos-rpi3-gpu.zip">🍓 Raspberry Pi 3 — 18 MB</option>
+                            <option value="https://github.com/mashanz/wayangos/releases/download/v0.6.0/wayangos-orangepi-zero2w.zip">🍊 Orange Pi Zero 2W — 17 MB</option>
+                        </select>
+                        <a id="install-download-btn" href="#" onclick="var sel=document.getElementById('install-iso-select');if(sel.value){window.location.href=sel.value}else{alert('Please select your GPU/platform first.')};return false;" style="display: inline-block; background: var(--accent); color: #000; padding: 10px 24px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem; opacity: 0.5; pointer-events: none;" class="btn">⬇ Download Selected</a>
+                        <script>document.getElementById('install-iso-select').addEventListener('change',function(){var btn=document.getElementById('install-download-btn');if(this.value){btn.style.opacity='1';btn.style.pointerEvents='auto';btn.href=this.value;}else{btn.style.opacity='0.5';btn.style.pointerEvents='none';btn.href='#';}});</script>
                     </div>
                 </div>
 
@@ -1247,7 +1243,7 @@
     </section>
 
     <!-- Real-World Use Cases -->
-    <section id="usecases" style="padding: 100px 0; border-top: 1px solid var(--border);">
+    <section id="usecases" style="padding: 80px 0; border-top: 1px solid var(--border);">
         <div class="container">
             <div class="section-header">
                 <h2>Real-World Use Cases</h2>
@@ -1285,7 +1281,7 @@
                     <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 8px;">Kiosk / Single-App Appliance</h3>
                     <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Boot straight into your application. POS terminal, digital signage, monitoring dashboard. No login screen, no desktop environment, no updates popping up. Add your binary to init.d — it starts on boot, every boot.</p>
                     <img src="pos-demo.png" alt="WayangOS POS Kiosk Demo — Warung Kopi Nusantara" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 12px;">
-                    <p style="color: var(--text-dim); font-size: 0.75rem; margin-bottom: 12px; text-align: center;">POS kiosk demo — runs on 23 MB RAM, renders via SDL2 framebuffer · <a href="https://github.com/mashanz/wayangos-pos" target="_blank" style="color: var(--accent);">POS Source →</a> · <a href="https://github.com/mashanz/wayangos-viewer" target="_blank" style="color: var(--accent);">Image Viewer →</a></p>
+                    <p style="color: var(--text-dim); font-size: 0.75rem; margin-bottom: 12px; text-align: center;">POS kiosk demo — runs on 23 MB RAM, POS v3 renders via direct framebuffer — zero dependencies · <a href="https://github.com/mashanz/wayangos-pos" target="_blank" style="color: var(--accent);">POS Source →</a> · <a href="https://github.com/mashanz/wayangos-viewer" target="_blank" style="color: var(--accent);">Image Viewer →</a></p>
                     <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: var(--text-primary); line-height: 1.6;">
                         <span style="color: var(--text-dim);"># Auto-start app on every boot</span><br>
                         echo '/usr/bin/myapp &amp;' &gt;&gt; /etc/init.d/rcS
@@ -1358,66 +1354,19 @@
         </div>
     </section>
 
-    <!-- POS System -->
-    <section id="pos" style="padding: 100px 0; border-top: 1px solid var(--border);">
+    <!-- Apps CTA -->
+    <section id="apps" style="padding: 80px 0; border-top: 1px solid var(--border);">
         <div class="container">
-            <div class="section-header">
-                <h2>🏪 WayangOS <span style="color: var(--accent);">POS</span></h2>
-                <p>Touchscreen Point of Sale for Indonesian UMKM</p>
-            </div>
-
-            <div style="max-width: 800px; margin: 0 auto;">
-                <!-- POS Hero Card -->
-                <div style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(200, 148, 26, 0.08) 100%); border: 2px solid var(--accent); border-radius: 16px; padding: 48px 40px; margin-bottom: 32px; text-align: center;">
-                    <div style="font-size: 3rem; margin-bottom: 16px;">🧾</div>
-                    <h3 style="color: var(--accent-bright); font-size: 1.5rem; margin-bottom: 12px;">Complete POS System — Zero Subscription</h3>
-                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.8; margin-bottom: 24px;">
-                        Production-grade point of sale built for <strong style="color: var(--text-primary);">warung, kafe, dan toko</strong>.
-                        Touchscreen-ready with virtual keyboard — no physical keyboard needed.
-                        Boots from an 18 MB ISO, runs entirely from RAM.
-                    </p>
-
-                    <!-- Feature Pills -->
-                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 32px;">
-                        <span style="background: var(--accent-dim); border: 1px solid var(--border-gold); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; color: var(--accent);">👆 Touchscreen Ready</span>
-                        <span style="background: var(--accent-dim); border: 1px solid var(--border-gold); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; color: var(--accent);">⌨️ Virtual Keyboard</span>
-                        <span style="background: var(--accent-dim); border: 1px solid var(--border-gold); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; color: var(--accent);">🗄️ SQLite Database</span>
-                        <span style="background: var(--accent-dim); border: 1px solid var(--border-gold); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; color: var(--accent);">👥 Multi-User Auth</span>
-                        <span style="background: var(--accent-dim); border: 1px solid var(--border-gold); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; color: var(--accent);">📋 Order History</span>
-                        <span style="background: var(--accent-dim); border: 1px solid var(--border-gold); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; color: var(--accent);">📂 Category Management</span>
-                        <span style="background: var(--accent-dim); border: 1px solid var(--border-gold); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; color: var(--accent);">📄 Pagination</span>
-                        <span style="background: var(--accent-dim); border: 1px solid var(--border-gold); border-radius: 20px; padding: 6px 14px; font-size: 0.8rem; color: var(--accent);">🔌 100% Offline</span>
-                    </div>
-
-                    <!-- Download Button -->
-                    <a href="https://github.com/mashanz/wayangos-pos/releases/download/v3.0.0/wayangos-pos-v3.iso" style="display: inline-block; background: var(--accent); color: #000; padding: 14px 36px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem; margin-bottom: 12px;">⬇ Download POS ISO (18 MB)</a>
-                    <p style="color: var(--text-dim); font-size: 0.8rem;">v3.0.0 · Bootable ISO · Flash to USB and go</p>
-                </div>
-
-                <!-- Hardware + Cost -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
-                    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">🍊</div>
-                        <h4 style="color: var(--text-primary); margin-bottom: 4px;">Hardware Target</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Orange Pi Zero 2W + 7" touchscreen LCD</p>
-                        <div style="color: var(--accent); font-size: 1.5rem; font-weight: 800; margin-top: 8px;">~$50</div>
-                        <p style="color: var(--text-dim); font-size: 0.75rem;">Total hardware cost</p>
-                    </div>
-                    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center;">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">🚫</div>
-                        <h4 style="color: var(--text-primary); margin-bottom: 4px;">No Hidden Costs</h4>
-                        <p style="color: var(--text-secondary); font-size: 0.85rem;">No subscription, no cloud, no internet required</p>
-                        <div style="color: var(--accent); font-size: 1.5rem; font-weight: 800; margin-top: 8px;">Rp 0/bln</div>
-                        <p style="color: var(--text-dim); font-size: 0.75rem;">Monthly fee — forever</p>
-                    </div>
-                </div>
-
-                <!-- Source + Docs Links -->
-                <div style="text-align: center;">
-                    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-                        <a href="https://github.com/mashanz/wayangos-pos" target="_blank" style="color: var(--accent); font-size: 0.9rem; text-decoration: none; background: var(--bg-card); border: 1px solid var(--border); padding: 10px 20px; border-radius: 6px;">📦 Source Code</a>
-                        <a href="https://github.com/mashanz/wayangos-pos/releases/tag/v3.0.0" target="_blank" style="color: var(--accent); font-size: 0.9rem; text-decoration: none; background: var(--bg-card); border: 1px solid var(--border); padding: 10px 20px; border-radius: 6px;">📋 Release Notes</a>
-                    </div>
+            <div style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(200, 148, 26, 0.08) 100%); border: 2px solid var(--accent); border-radius: 16px; padding: 48px 40px; max-width: 800px; margin: 0 auto; text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 16px;">🛒</div>
+                <h2 style="font-size: 1.8rem; margin-bottom: 8px;">WayangOS <span style="color: var(--accent);">Apps</span></h2>
+                <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.8; margin-bottom: 8px;">
+                    Production-ready applications built for WayangOS — starting with <strong style="color: var(--text-primary);">WayangPOS</strong>, a complete touchscreen point of sale system for small businesses.
+                </p>
+                <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 24px;">Direct framebuffer rendering · SQLite · ~$85 total hardware cost · $0/mo forever</p>
+                <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                    <a href="apps/pos.html" style="display: inline-block; background: var(--accent); color: #000; padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: all 0.2s;">Learn More about WayangPOS →</a>
+                    <a href="apps.html" style="display: inline-block; background: transparent; color: var(--text-primary); border: 1px solid var(--border-gold); padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: all 0.2s;">Browse All Apps →</a>
                 </div>
             </div>
         </div>

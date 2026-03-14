@@ -1,0 +1,21 @@
+# Orange Pi Zero 2W - Allwinner H618
+# SoC: Allwinner H618 (Cortex-A53 quad-core, ARM64)
+# GPU: Mali G31 MP2 (Arm)
+# Display: HDMI 2.0a (4K@60)
+
+## Required kernel configs:
+CONFIG_DRM=y
+CONFIG_DRM_SUN4I=y
+CONFIG_DRM_SUN8I_DW_HDMI=y
+CONFIG_DRM_SUN8I_MIXER=y
+CONFIG_DRM_PANFROST=y
+CONFIG_ARCH_SUNXI=y
+CONFIG_PINCTRL_SUN50I_H616=y
+CONFIG_MMC=y
+CONFIG_MMC_SUNXI=y
+CONFIG_USB_MUSB_HDRC=y
+CONFIG_USB_EHCI_HCD_PLATFORM=y
+CONFIG_USB_OHCI_HCD_PLATFORM=y
+
+## DTB: sun50i-h618-orangepi-zero2w.dtb
+## Boot: U-Boot (SPL at sector 16)
