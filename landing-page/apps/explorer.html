@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WayangExplorer — Dual-Pane File Explorer for Framebuffer</title>
+    <style>
+        :root {
+            --bg-primary: #0a0806;
+            --bg-secondary: #110e09;
+            --bg-card: #1a1410;
+            --bg-card-hover: #221b13;
+            --accent: #c8941a;
+            --accent-dim: #c8941a22;
+            --accent-glow: #c8941a44;
+            --accent-bright: #f0b830;
+            --text-primary: #f0e8d8;
+            --text-secondary: #a09070;
+            --text-dim: #5a4a30;
+            --border: #2e2318;
+            --border-gold: #c8941a44;
+            --success: #7ec87e;
+            --warning: #c8941a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; width: 100%; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                linear-gradient(rgba(200, 148, 26, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 148, 26, 0.025) 1px, transparent 1px),
+                radial-gradient(ellipse at 30% 60%, rgba(200, 148, 26, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 20%, rgba(200, 148, 26, 0.03) 0%, transparent 40%);
+            background-size: 60px 60px, 60px 60px, 100% 100%, 100% 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            width: 100%; max-width: 100vw;
+            padding: 16px 0;
+            background: rgba(10, 8, 6, 0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-gold);
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 24px; list-style: none; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0 60px;
+            text-align: center;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-bright);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border-gold);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-dim);
+        }
+
+        /* Screenshots */
+        .screenshots {
+            padding: 40px 0 60px;
+        }
+
+        .screenshots h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 32px;
+        }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .screenshot-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .screenshot-card:hover {
+            border-color: var(--border-gold);
+        }
+
+        .screenshot-card img {
+            width: 100%;
+            display: block;
+            image-rendering: pixelated;
+        }
+
+        .screenshot-card .caption {
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* Features */
+        .features {
+            padding: 60px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 32px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .feature-card .feature-icon {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card h3 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Keyboard Shortcuts */
+        .shortcuts {
+            padding: 60px 0;
+        }
+
+        .shortcuts h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 32px;
+        }
+
+        .config-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        .config-table th,
+        .config-table td {
+            padding: 10px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .config-table th {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .config-table td {
+            color: var(--text-secondary);
+        }
+
+        .config-table code {
+            background: var(--bg-secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-bright);
+        }
+
+        /* Build */
+        .build {
+            padding: 60px 0;
+        }
+
+        .build h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 32px;
+        }
+
+        .code-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        .code-block code {
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            white-space: pre;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        footer .footer-aksara {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--accent-dim);
+            letter-spacing: 8px;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero .subtitle { font-size: 1rem; }
+            .screenshot-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container" style="max-width: 1200px;">
+            <a href="../index.html" class="nav-logo">ꦮ WayangOS</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../apps.html">Apps</a></li>
+                <li><a href="../download.html">Download</a></li>
+                <li><a href="https://github.com/mashanz/wayangos" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-icon">📁</div>
+            <h1>WayangExplorer</h1>
+            <p class="subtitle">
+                Dual-pane file explorer with directory listing and file preview.
+                Keyboard-driven navigation, file operations, and text preview — all on the framebuffer.
+            </p>
+            <div class="hero-buttons">
+                <a href="../download.html" class="btn btn-primary">⬇ Download ISO</a>
+                <a href="https://github.com/mashanz/wayangos-explorer" target="_blank" class="btn btn-secondary">GitHub →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots -->
+    <section class="screenshots">
+        <div class="container">
+            <h2>Screenshots</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot-card">
+                    <img src="../assets/screenshots/wx-01-welcome.png" alt="Welcome Screen">
+                    <div class="caption">Welcome Screen — launch into the file explorer</div>
+                </div>
+                <div class="screenshot-card">
+                    <img src="../assets/screenshots/wx-02-explorer.png" alt="Dual-Pane Explorer">
+                    <div class="caption">Dual-Pane View — directory listing with file details</div>
+                </div>
+                <div class="screenshot-card">
+                    <img src="../assets/screenshots/wx-03-nav.png" alt="File Navigation">
+                    <div class="caption">Navigation — browse directories with keyboard</div>
+                </div>
+                <div class="screenshot-card">
+                    <img src="../assets/screenshots/wx-04-subdir.png" alt="Subdirectory">
+                    <div class="caption">Subdirectory — drill into nested folders</div>
+                </div>
+                <div class="screenshot-card">
+                    <img src="../assets/screenshots/wx-05-exit.png" alt="Exit Dialog">
+                    <div class="caption">Exit Confirmation — clean shutdown dialog</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📂</div>
+                    <h3>Dual-Pane Layout</h3>
+                    <p>Left pane shows directory listing, right pane shows file details and preview. Navigate efficiently between directories.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⌨️</div>
+                    <h3>Keyboard-Driven</h3>
+                    <p>Full keyboard navigation. Arrow keys to browse, Enter to open, Backspace to go up. No mouse needed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>File Operations</h3>
+                    <p>Copy, move, delete, and rename files and directories. All operations with confirmation dialogs to prevent accidents.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Text File Preview</h3>
+                    <p>Preview text files directly in the right pane. Quick way to inspect configs, logs, and scripts without opening an editor.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📺</div>
+                    <h3>Framebuffer Rendering</h3>
+                    <p>Renders directly to /dev/fb0. No X11, no Wayland, no desktop environment. Works on any Linux system with a framebuffer.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Static Binary</h3>
+                    <p>Single static binary with zero runtime dependencies. Drop it on any system and run. Under 200KB compiled size.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keyboard Shortcuts -->
+    <section class="shortcuts">
+        <div class="container">
+            <h2>Keyboard Shortcuts</h2>
+            <table class="config-table">
+                <thead>
+                    <tr><th>Key</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>↑</code> / <code>↓</code></td><td>Navigate up/down in file list</td></tr>
+                    <tr><td><code>Enter</code></td><td>Open directory / preview file</td></tr>
+                    <tr><td><code>Backspace</code></td><td>Go to parent directory</td></tr>
+                    <tr><td><code>Tab</code></td><td>Switch between panes</td></tr>
+                    <tr><td><code>c</code></td><td>Copy selected file/directory</td></tr>
+                    <tr><td><code>m</code></td><td>Move selected file/directory</td></tr>
+                    <tr><td><code>d</code></td><td>Delete selected file/directory</td></tr>
+                    <tr><td><code>r</code></td><td>Rename selected file/directory</td></tr>
+                    <tr><td><code>q</code></td><td>Quit / exit explorer</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Build Instructions -->
+    <section class="build">
+        <div class="container">
+            <h2>Build from Source</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 24px;">
+                WayangExplorer is a single C file. Compile it with any GCC that supports static linking.
+            </p>
+            <div class="code-block">
+                <code>git clone https://github.com/mashanz/wayangos-explorer.git
+cd wayangos-explorer
+gcc -static -O2 -Wall -o wayang-explorer explorer.c -lm -lpthread</code>
+            </div>
+            <p style="text-align: center; color: var(--text-dim); margin-top: 16px;">
+                Or download the pre-built ISO from the <a href="../download.html" style="color: var(--accent);">Downloads</a> page.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-aksara">ꦮꦪꦁ</div>
+            <p style="margin-bottom: 8px;">
+                <strong>WayangOS</strong> — The Shadow that Powers the Machine
+            </p>
+            <p style="margin-bottom: 8px; font-style: italic; color: var(--text-secondary);">
+                Ancient Art. Bare Metal.
+            </p>
+            <p>
+                Built by <a href="https://github.com/mashanz" target="_blank">Hans Sumardhi</a> ·
+                <a href="https://github.com/mashanz/wayangos" target="_blank">WayangOS</a> ·
+                <a href="https://github.com/mashanz/wayangos-pos" target="_blank">POS Demo</a> ·
+                <a href="https://github.com/mashanz/wayangos-explorer" target="_blank">Explorer</a> ·
+                <a href="https://github.com/mashanz/wayangos-viewer" target="_blank">Image Viewer</a> ·
+                GPLv2 (kernel) · MIT (userspace)
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -86,7 +86,6 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-gold);
             z-index: 100;
-            overflow: hidden;
         }
 
         nav .container {
@@ -822,6 +821,30 @@
             .download { padding: 40px 0 !important; }
             .terminal-section { padding: 40px 0 !important; }
             .cultural-note { padding: 24px 0 !important; }
+
+            /* Inline-styled sections */
+            #usecases { padding: 40px 0 !important; }
+            #apps { padding: 40px 0 !important; }
+
+            /* Use case cards & inner padding */
+            #usecases .usecases-grid > div { padding: 24px 16px !important; }
+            #usecases .usecases-grid > div > div:last-of-type { font-size: 0.75rem !important; }
+
+            /* Apps CTA inner box */
+            #apps .container > div { padding: 28px 16px !important; }
+            #apps .container > div h2 { font-size: 1.4rem !important; }
+            #apps .container > div > div:last-child { flex-direction: column !important; }
+            #apps .container > div > div:last-child a { width: 100% !important; text-align: center !important; }
+
+            /* Philosophy callout */
+            #usecases .container > div:last-child { padding: 24px 16px !important; }
+            #usecases .container > div:last-child h3 { font-size: 1.1rem !important; }
+
+            /* Touch targets */
+            .btn, .cta-btn, a[style*="padding: 10px 20px"] { min-height: 44px !important; }
+
+            /* Prevent any horizontal overflow */
+            section, div { max-width: 100vw; }
         }
 
         @media (max-width: 480px) {
@@ -850,9 +873,7 @@
             <ul class="nav-links">
                 <li><a href="#features" onclick="document.querySelector('.nav-links').classList.remove('active')">Features</a></li>
                 <li><a href="#performance" onclick="document.querySelector('.nav-links').classList.remove('active')">Performance</a></li>
-                <li><a href="#architectures" onclick="document.querySelector('.nav-links').classList.remove('active')">Architectures</a></li>
-                <li><a href="#download" onclick="document.querySelector('.nav-links').classList.remove('active')">Download</a></li>
-                <li><a href="#usecases" onclick="document.querySelector('.nav-links').classList.remove('active')">Use Cases</a></li>
+                <li><a href="download.html" onclick="document.querySelector('.nav-links').classList.remove('active')">Download</a></li>
                 <li><a href="apps.html" onclick="document.querySelector('.nav-links').classList.remove('active')">Apps</a></li>
                 <li><a href="https://github.com/mashanz/wayangos" target="_blank">GitHub</a></li>
             </ul>
@@ -1280,12 +1301,11 @@
                     <div style="font-size: 2.5rem; margin-bottom: 16px;">🏪</div>
                     <h3 style="color: var(--text-primary); font-size: 1.2rem; margin-bottom: 8px;">Kiosk / Single-App Appliance</h3>
                     <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Boot straight into your application. POS terminal, digital signage, monitoring dashboard. No login screen, no desktop environment, no updates popping up. Add your binary to init.d — it starts on boot, every boot.</p>
-                    <img src="pos-demo.png" alt="WayangOS POS Kiosk Demo — Warung Kopi Nusantara" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 12px;">
-                    <p style="color: var(--text-dim); font-size: 0.75rem; margin-bottom: 12px; text-align: center;">POS kiosk demo — runs on 23 MB RAM, POS v3 renders via direct framebuffer — zero dependencies · <a href="https://github.com/mashanz/wayangos-pos" target="_blank" style="color: var(--accent);">POS Source →</a> · <a href="https://github.com/mashanz/wayangos-viewer" target="_blank" style="color: var(--accent);">Image Viewer →</a></p>
                     <div style="background: var(--bg-secondary); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: var(--text-primary); line-height: 1.6;">
                         <span style="color: var(--text-dim);"># Auto-start app on every boot</span><br>
                         echo '/usr/bin/myapp &amp;' &gt;&gt; /etc/init.d/rcS
                     </div>
+                    <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 12px; text-align: center;"><a href="apps.html" style="color: var(--accent);">See WayangOS Apps →</a></p>
                 </div>
 
                 <!-- Use Case 4: Network Appliance -->
@@ -1363,7 +1383,7 @@
                 <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.8; margin-bottom: 8px;">
                     Production-ready applications built for WayangOS — starting with <strong style="color: var(--text-primary);">WayangPOS</strong>, a complete touchscreen point of sale system for small businesses.
                 </p>
-                <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 24px;">Direct framebuffer rendering · SQLite · ~$85 total hardware cost · $0/mo forever</p>
+                <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 24px;">Direct framebuffer · SQLite · Receipt printing · Stock tracking · Discounts · CSV export · ~$85 hardware · $0/mo forever</p>
                 <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
                     <a href="apps/pos.html" style="display: inline-block; background: var(--accent); color: #000; padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: all 0.2s;">Learn More about WayangPOS →</a>
                     <a href="apps.html" style="display: inline-block; background: transparent; color: var(--text-primary); border: 1px solid var(--border-gold); padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: all 0.2s;">Browse All Apps →</a>
@@ -1386,6 +1406,7 @@
                 Built by <a href="https://github.com/mashanz" target="_blank">Hans Sumardhi</a> ·
                 <a href="https://github.com/mashanz/wayangos" target="_blank">WayangOS</a> ·
                 <a href="https://github.com/mashanz/wayangos-pos" target="_blank">POS Demo</a> ·
+                <a href="https://github.com/mashanz/wayangos-explorer" target="_blank">Explorer</a> ·
                 <a href="https://github.com/mashanz/wayangos-viewer" target="_blank">Image Viewer</a> ·
                 GPLv2 (kernel) · MIT (userspace)
             </p>

@@ -65,7 +65,6 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-gold);
             z-index: 100;
-            overflow: hidden;
         }
 
         nav .container {
@@ -297,7 +296,12 @@
             .page-hero { padding: 110px 16px 48px; }
             .page-hero h1 { font-size: 2.2rem; letter-spacing: -1px; }
             .apps-grid { grid-template-columns: 1fr; gap: 16px; padding-bottom: 48px; }
-            .app-card { padding: 28px 22px; }
+            .app-card { padding: 24px 16px; }
+            .app-card h3 { font-size: 1.2rem; }
+            .app-card .app-desc { font-size: 0.9rem; }
+            .app-card .app-btn { width: 100%; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+            .app-card .coming-badge { width: 100%; }
+            .app-tags .tag { font-size: 0.7rem; padding: 3px 10px; }
             .container { padding: 0 16px; }
         }
     </style>
@@ -314,6 +318,7 @@
             <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
                 <li><a href="download.html">Download</a></li>
                 <li><a href="apps.html" class="active">Apps</a></li>
                 <li><a href="https://github.com/mashanz/wayangos" target="_blank">GitHub</a></li>
@@ -336,15 +341,51 @@
             <div class="app-card">
                 <div class="app-icon">🛒</div>
                 <h3>WayangPOS</h3>
-                <p class="app-desc">Touchscreen Point of Sale system for small businesses. Direct framebuffer rendering, SQLite database, no X11 needed.</p>
-                <img src="pos-demo.png" alt="WayangPOS screenshot" class="app-screenshot">
+                <p class="app-desc">Full-featured Point of Sale for small businesses. SQLite database, receipt printing, stock tracking, discounts, CSV export. Direct framebuffer — no X11 needed.</p>
+                <img src="assets/screenshots/dashboard.png" alt="WayangPOS screenshot" class="app-screenshot">
                 <div class="app-tags">
                     <span class="tag">POS</span>
                     <span class="tag">Touchscreen</span>
                     <span class="tag">Kiosk</span>
                     <span class="tag">SQLite</span>
+                    <span class="tag">Receipt Printing</span>
+                    <span class="tag">Inventory</span>
+                    <span class="tag">CSV Export</span>
                 </div>
                 <a href="apps/pos.html" class="app-btn">Learn More →</a>
+            </div>
+
+            <!-- WayangZeroClient -->
+            <div class="app-card">
+                <div class="app-icon">🖥️</div>
+                <h3>WayangZeroClient</h3>
+                <p class="app-desc">Kiosk zero client that turns any PC into a thin client. Connects to remote desktops via RDP or VNC. Framebuffer launcher boots straight into remote sessions — no desktop environment needed.</p>
+                <img src="assets/screenshots/zeroclient-list.png" alt="WayangZeroClient screenshot" class="app-screenshot">
+                <div class="app-tags">
+                    <span class="tag">Zero Client</span>
+                    <span class="tag">RDP</span>
+                    <span class="tag">VNC</span>
+                    <span class="tag">Kiosk</span>
+                    <span class="tag">Remote Desktop</span>
+                    <span class="tag">Thin Client</span>
+                </div>
+                <a href="apps/zeroclient.html" class="app-btn">Learn More →</a>
+            </div>
+
+            <!-- WayangExplorer -->
+            <div class="app-card">
+                <div class="app-icon">📁</div>
+                <h3>WayangExplorer</h3>
+                <p class="app-desc">Dual-pane file explorer with directory listing and file preview. Keyboard-driven navigation, file operations (copy, move, delete, rename), and text file preview. Direct framebuffer — no X11 needed.</p>
+                <img src="assets/screenshots/wx-02-explorer.png" alt="WayangExplorer screenshot" class="app-screenshot">
+                <div class="app-tags">
+                    <span class="tag">File Explorer</span>
+                    <span class="tag">Dual Pane</span>
+                    <span class="tag">Framebuffer</span>
+                    <span class="tag">File Operations</span>
+                    <span class="tag">Preview</span>
+                </div>
+                <a href="apps/explorer.html" class="app-btn">Learn More →</a>
             </div>
 
             <!-- WayangViewer — Coming Soon -->
@@ -390,7 +431,9 @@
                 Built by <a href="https://github.com/mashanz" target="_blank">Hans Sumardhi</a> ·
                 <a href="https://github.com/mashanz/wayangos" target="_blank">WayangOS</a> ·
                 <a href="https://github.com/mashanz/wayangos-pos" target="_blank">POS Demo</a> ·
+                <a href="https://github.com/mashanz/wayangos-explorer" target="_blank">Explorer</a> ·
                 <a href="https://github.com/mashanz/wayangos-viewer" target="_blank">Image Viewer</a> ·
+                <a href="https://github.com/mashanz/wayangos" target="_blank">Zero Client</a> ·
                 GPLv2 (kernel) · MIT (userspace)
             </p>
         </div>

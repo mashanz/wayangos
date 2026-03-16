@@ -65,7 +65,6 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-gold);
             z-index: 100;
-            overflow: hidden;
         }
 
         nav .container {
@@ -556,15 +555,25 @@
             .pos-hero { padding: 110px 16px 40px; }
             .pos-hero h1 { font-size: 2.5rem; letter-spacing: -1px; }
             .hero-buttons { flex-direction: column; width: 100%; padding: 0 16px; }
-            .hero-buttons .btn { text-align: center; width: 100%; }
+            .hero-buttons .btn { text-align: center; width: 100%; min-height: 44px; display: flex; align-items: center; justify-content: center; }
             .features-grid { grid-template-columns: 1fr; gap: 12px; }
-            .feature-card { padding: 22px 18px; }
-            .dl-box { padding: 32px 20px; }
+            .feature-card { padding: 22px 16px; }
+            .dl-box { padding: 28px 16px; }
+            .dl-select { max-width: 100%; }
+            .dl-btn-main { width: 100%; min-height: 44px; text-align: center; }
             .cost-table { font-size: 0.85rem; }
             .cost-table th, .cost-table td { padding: 10px 14px; }
             .specs-grid { grid-template-columns: 1fr; }
+            .spec-item { padding: 12px 16px; }
             .container { padding: 0 16px; }
             .breadcrumb { font-size: 0.75rem; }
+            .hw-requirements { padding: 24px 16px; }
+            .source-card { padding: 24px 16px; }
+            .build-code { padding: 14px 12px; font-size: 0.75rem; }
+            .hardware-section, .download-section, .source-section, .specs-section { padding: 40px 0; }
+            section[style*="padding: 60px"] { padding: 40px 0 !important; }
+            .section-header h2 { font-size: 1.5rem; }
+            .section-header { margin-bottom: 32px; }
         }
 
         @media (max-width: 480px) {
@@ -585,6 +594,7 @@
             <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">☰</button>
             <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#features">Features</a></li>
                 <li><a href="../download.html">Download</a></li>
                 <li><a href="../apps.html">Apps</a></li>
                 <li><a href="https://github.com/mashanz/wayangos" target="_blank">GitHub</a></li>
@@ -610,18 +620,44 @@
         <div class="hero-icon">🛒</div>
         <h1>Wayang<span class="accent">POS</span></h1>
         <p class="tagline">Touchscreen Point of Sale for Small Businesses</p>
-        <p class="desc">Direct framebuffer rendering. SQLite database. Runs on any hardware with HDMI output.</p>
+        <p class="desc">Direct framebuffer rendering. SQLite database. Receipt printing. Stock tracking. Runs on any hardware with HDMI output.</p>
         <div class="hero-buttons">
             <a href="#download" class="btn btn-primary">⬇ Download ISO</a>
             <a href="https://github.com/mashanz/wayangos-pos" target="_blank" class="btn btn-secondary">View Source →</a>
         </div>
     </section>
 
-    <!-- Screenshot -->
+    <!-- Screenshots -->
     <section class="screenshot-section">
         <div class="container">
-            <img src="../pos-demo.png" alt="WayangPOS — Warung Kopi Nusantara point of sale interface">
+            <img src="../assets/screenshots/dashboard.png" alt="WayangPOS — Dashboard screenshot">
             <p class="caption">WayangPOS running on WayangOS — direct framebuffer rendering, zero dependencies</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 32px;">
+                <div>
+                    <img src="../assets/screenshots/order.png" alt="WayangPOS — Order screen" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                    <p class="caption">Order Screen</p>
+                </div>
+                <div>
+                    <img src="../assets/screenshots/menu-mgmt.png" alt="WayangPOS — Menu Management" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                    <p class="caption">Menu Management</p>
+                </div>
+                <div>
+                    <img src="../assets/screenshots/search.png" alt="WayangPOS — Search" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                    <p class="caption">Search</p>
+                </div>
+                <div>
+                    <img src="../assets/screenshots/history.png" alt="WayangPOS — Order History" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                    <p class="caption">Order History</p>
+                </div>
+                <div>
+                    <img src="../assets/screenshots/settings.png" alt="WayangPOS — Settings" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                    <p class="caption">Settings</p>
+                </div>
+                <div>
+                    <img src="../assets/screenshots/help.png" alt="WayangPOS — Help" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                    <p class="caption">Help</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -638,22 +674,37 @@
                 <div class="feature-card">
                     <div class="icon">🖥️</div>
                     <h3>Direct Framebuffer</h3>
-                    <p>No X11, no Wayland, no SDL2. Renders directly to /dev/fb0 for maximum performance on minimal hardware.</p>
+                    <p>No X11, no Wayland, no SDL2. Renders directly to /dev/fb0 for maximum performance on minimal hardware. Touch + keyboard input.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🗄️</div>
+                    <h3>SQLite Database</h3>
+                    <p>All data persisted in SQLite — orders, menu items, users, inventory. Survives reboots. No external DB needed.</p>
                 </div>
                 <div class="feature-card">
                     <div class="icon">🔐</div>
                     <h3>User Management</h3>
-                    <p>Admin and cashier accounts with password login. CRUD user management.</p>
+                    <p>Admin and cashier roles with password login. CRUD user management. Auto-login mode. Idle auto-lock after 5 minutes.</p>
                 </div>
                 <div class="feature-card">
                     <div class="icon">📋</div>
-                    <h3>Menu Management</h3>
-                    <p>Add, edit, delete menu items with categories (Food/Drinks/Snacks). Set prices and manage inventory.</p>
+                    <h3>Menu & Inventory</h3>
+                    <p>Full menu management with categories. Stock/inventory tracking with low-stock alerts. Search with live filter.</p>
                 </div>
                 <div class="feature-card">
                     <div class="icon">💰</div>
                     <h3>Order & Payment</h3>
-                    <p>Cash and QRIS payment methods. Order history with timestamps.</p>
+                    <p>Cash and QRIS payment. Discount/promo system — percentage or fixed amount. Configurable tax rate.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🧾</div>
+                    <h3>Receipt Printing</h3>
+                    <p>ESC/POS thermal printer support. Print receipts directly to USB thermal printers. Auto-detected.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h3>Reports & Export</h3>
+                    <p>Daily sales report. Order history with pagination. CSV export for orders, menu, and inventory data.</p>
                 </div>
                 <div class="feature-card">
                     <div class="icon">⌨️</div>
@@ -662,18 +713,23 @@
                 </div>
                 <div class="feature-card">
                     <div class="icon">🏪</div>
-                    <h3>Store Settings</h3>
-                    <p>Customizable store name, admin-configurable via settings page.</p>
+                    <h3>Store Customization</h3>
+                    <p>Customizable store name on receipts and UI. Admin-configurable settings page.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="icon">📊</div>
-                    <h3>Order History</h3>
-                    <p>Browse past orders with pagination. Track sales over time.</p>
+                    <div class="icon">🚀</div>
+                    <h3>Kiosk Mode</h3>
+                    <p>Boot straight to POS — no desktop, no login screen. Power on → ready to sell in seconds.</p>
                 </div>
                 <div class="feature-card">
                     <div class="icon">🔧</div>
                     <h3>Minimal Hardware</h3>
-                    <p>Runs on Orange Pi Zero 2W (~$15), Raspberry Pi, or any x86 PC. Total hardware cost under $100.</p>
+                    <p>Runs on Orange Pi Zero 2W (~$15), Raspberry Pi 3, or any x86 PC. Total hardware cost under $100.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔒</div>
+                    <h3>Security</h3>
+                    <p>Idle auto-lock after 5 minutes of inactivity. Role-based access control. No network required to operate.</p>
                 </div>
             </div>
         </div>
@@ -748,8 +804,10 @@
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
                     <select id="pos-dl-select" class="dl-select">
                         <option value="">-- Select edition --</option>
-                        <option value="https://github.com/mashanz/wayangos-pos/releases/download/v3.0.0/wayangos-pos-uefi.iso">💿 WayangPOS UEFI+BIOS (25 MB) — For modern PCs</option>
-                        <option value="https://github.com/mashanz/wayangos-pos/releases/download/v3.0.0/wayangos-pos-v3.iso">📀 WayangPOS BIOS Only (18 MB) — For older PCs</option>
+                        <option value="https://github.com/mashanz/wayangos/releases/latest/download/wayangos-pos-uefi.iso">💿 WayangPOS UEFI+BIOS (25 MB) — Modern PCs</option>
+                        <option value="https://github.com/mashanz/wayangos/releases/latest/download/wayangos-pos-v3.iso">📀 WayangPOS BIOS Only (18 MB) — Older PCs</option>
+                        <option value="https://github.com/mashanz/wayangos/releases/latest/download/wayangos-rpi3-pos.zip">🍓 Raspberry Pi 3 (19 MB) — ARM64 SD card image</option>
+                        <option value="https://github.com/mashanz/wayangos/releases/latest/download/wayangos-orangepi-pos.zip">🍊 Orange Pi Zero 2W (18 MB) — ARM64 SD card image</option>
                     </select>
                     <a id="pos-dl-btn" href="#" class="dl-btn-main" onclick="var sel=document.getElementById('pos-dl-select');if(sel.value){window.location.href=sel.value}else{alert('Please select an edition first.')};return false;">⬇ Download Selected</a>
                     <script>document.getElementById('pos-dl-select').addEventListener('change',function(){var btn=document.getElementById('pos-dl-btn');if(this.value){btn.classList.add('active');btn.href=this.value;}else{btn.classList.remove('active');btn.href='#';}});</script>
@@ -795,7 +853,7 @@
             <div class="specs-grid">
                 <div class="spec-item">
                     <span class="spec-label">Language</span>
-                    <span class="spec-value">C (single file, ~2700 lines)</span>
+                    <span class="spec-value">C (single file, ~5000 lines)</span>
                 </div>
                 <div class="spec-item">
                     <span class="spec-label">Rendering</span>
@@ -843,6 +901,7 @@
                 Built by <a href="https://github.com/mashanz" target="_blank">Hans Sumardhi</a> ·
                 <a href="https://github.com/mashanz/wayangos" target="_blank">WayangOS</a> ·
                 <a href="https://github.com/mashanz/wayangos-pos" target="_blank">POS Demo</a> ·
+                <a href="https://github.com/mashanz/wayangos-explorer" target="_blank">Explorer</a> ·
                 <a href="https://github.com/mashanz/wayangos-viewer" target="_blank">Image Viewer</a> ·
                 GPLv2 (kernel) · MIT (userspace)
             </p>
