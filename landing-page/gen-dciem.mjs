@@ -277,28 +277,32 @@ for (let i = 0; i < NUM_RACKS; i++) {
     
     if (type === 'kvm') {
       const cy = baseY + U*0.45;
-      const pullOut = 0.35; // how far tray slides out from rack
-      const trayZ = frontZ - pullOut;
-      // Slide rails (stay inside rack, extend forward)
-      add(scene,doc,kvmSlideL,[x-DW/2+0.01, cy, trayZ+DD*0.25]);
-      add(scene,doc,kvmSlideR,[x+DW/2-0.01, cy, trayZ+DD*0.25]);
-      // Tray
-      add(scene,doc,kvmTrayM,[x, cy-0.005, trayZ]);
-      // Keyboard on tray
-      add(scene,doc,kvmKbBody,[x, cy+0.005, trayZ+0.02]);
-      add(scene,doc,kvmKbKeys,[x, cy+0.009, trayZ+0.01]);
-      // Touchpad (below keyboard)
-      add(scene,doc,kvmTouchpad,[x, cy+0.005, trayZ-0.11]);
-      // Hinge at back of keyboard
-      add(scene,doc,kvmHinge,[x, cy+0.018, trayZ+0.12]);
-      // Monitor — tilted open (raised behind keyboard)
-      const monY = cy + 0.14;
-      const monZ = trayZ + 0.13;
-      add(scene,doc,kvmMonFrame,[x, monY, monZ]);
-      // Screen with DCIEM dashboard screenshot — named 'kvmscreen' 
-      const kvmScrNode = doc.createNode('kvmscreen').setMesh(kvmScreen).setTranslation([x, monY, monZ-0.009]);
-      scene.addChild(kvmScrNode);
-      // Rail kits
+      // KVM tray group — all parts relative to group origin at (x, cy, frontZ)
+      // This group will be animated (slide Z)
+      const kvmGroup = doc.createNode('kvmTray').setTranslation([x, cy, frontZ]);
+      
+      // Slide rails (extend back into rack)
+      kvmGroup.addChild(doc.createNode('n'+(nodeId++)).setMesh(kvmSlideL).setTranslation([-DW/2+0.01, 0, 0.15]));
+      kvmGroup.addChild(doc.createNode('n'+(nodeId++)).setMesh(kvmSlideR).setTranslation([DW/2-0.01, 0, 0.15]));
+      // Tray surface
+      kvmGroup.addChild(doc.createNode('n'+(nodeId++)).setMesh(kvmTrayM).setTranslation([0, -0.005, 0]));
+      // Keyboard
+      kvmGroup.addChild(doc.createNode('n'+(nodeId++)).setMesh(kvmKbBody).setTranslation([0, 0.005, 0.02]));
+      kvmGroup.addChild(doc.createNode('n'+(nodeId++)).setMesh(kvmKbKeys).setTranslation([0, 0.009, 0.01]));
+      // Touchpad
+      kvmGroup.addChild(doc.createNode('n'+(nodeId++)).setMesh(kvmTouchpad).setTranslation([0, 0.005, -0.11]));
+      // Hinge
+      kvmGroup.addChild(doc.createNode('n'+(nodeId++)).setMesh(kvmHinge).setTranslation([0, 0.018, 0.12]));
+      
+      // Monitor sub-group — will be rotated (open/close) around hinge point
+      // Pivot at hinge position, monitor extends upward from there
+      const monGroup = doc.createNode('kvmMonitor').setTranslation([0, 0.02, 0.12]);
+      kvmGroup.addChild(monGroup);
+      monGroup.addChild(doc.createNode('n'+(nodeId++)).setMesh(kvmMonFrame).setTranslation([0, 0.11, 0]));
+      monGroup.addChild(doc.createNode('kvmscreen').setMesh(kvmScreen).setTranslation([0, 0.11, -0.009]));
+      
+      scene.addChild(kvmGroup);
+      // Rail kits (static, not animated)
       add(scene,doc,rkM,[x-DW/2-0.013, cy, devZ]);
       add(scene,doc,rkM,[x+DW/2+0.013, cy, devZ]);
     }

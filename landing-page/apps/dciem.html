@@ -107,8 +107,8 @@
 
 
     <!-- 3D Product Preview -->
-    <section class="max-w-[800px] mx-auto px-6 pb-12">
-      <div id="viewer3d" style="width:100%; height:400px; border-radius:16px; overflow:hidden; border:1px solid #2e2318; background:#1a1d23;"></div>
+    <section class="max-w-[1200px] mx-auto px-6 pb-12">
+      <div id="viewer3d" style="width:100%; height:500px; border-radius:16px; overflow:hidden; border:1px solid #2e2318; background:#1a1d23;"></div>
       <div class="flex flex-wrap justify-center gap-2 mt-3">
       <button onclick="v3dZoom(-1)" class="px-3 py-2 bg-w-card border border-w-border rounded text-w-text text-sm cursor-pointer hover:bg-w-card-h">&#x2795; Zoom In</button>
       <button onclick="v3dZoom(1)" class="px-3 py-2 bg-w-card border border-w-border rounded text-w-text text-sm cursor-pointer hover:bg-w-card-h">&#x2796; Zoom Out</button>
@@ -219,6 +219,25 @@
       // Save initial view for reset
       window._v3dInitPos = camera.position.clone();
       window._v3dInitTarget = controls.target.clone();
+
+      // KVM animation setup — find ONLY the tray and monitor groups by exact name
+      let kvmTray = null, kvmMon = null;
+      model.traverse((c) => {
+        if (c.name === 'kvmTray' && !kvmTray) kvmTray = c;
+        if (c.name === 'kvmMonitor' && !kvmMon) kvmMon = c;
+      });
+      if (kvmTray) {
+        const trayClosedZ = kvmTray.position.z;
+        const slideDistance = -0.35;
+        if (kvmMon) kvmMon.rotation.x = -Math.PI / 2;
+        // Freeze ALL other nodes so only KVM parts animate
+        model.traverse((c) => {
+          if (c !== kvmTray && !kvmTray.getObjectById(c.id)) {
+            c.matrixAutoUpdate = true; // keep normal but mark as non-animated
+          }
+        });
+        window._kvmAnim = { tray: kvmTray, mon: kvmMon, trayClosedZ, slideDistance };
+      }
     });
 
     window.addEventListener('resize', () => {
@@ -227,9 +246,30 @@
       renderer.setSize(container.clientWidth, container.clientHeight);
     });
 
+    // KVM Animation timeline (9s loop):
+    // 0-1s: pause closed | 1-2s: slide out | 2-3s: monitor opens | 3-6s: hold open (3s) | 6-7s: monitor closes | 7-8s: slide in | 8-9s: pause closed
+    function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
     (function animate() {
       requestAnimationFrame(animate);
       controls.update();
+      const kvm = window._kvmAnim;
+      if (kvm) {
+        const cycle = 9.0;
+        const t = (performance.now() / 1000) % cycle;
+        let slideT = 0, openT = 0; // 0=closed/inside, 1=open/outside
+        if (t < 1)      { slideT = 0; openT = 0; }                          // pause closed
+        else if (t < 2) { slideT = easeInOut(t - 1); openT = 0; }           // slide out
+        else if (t < 3) { slideT = 1; openT = easeInOut(t - 2); }           // monitor opens
+        else if (t < 6) { slideT = 1; openT = 1; }                          // hold open 3s
+        else if (t < 7) { slideT = 1; openT = 1 - easeInOut(t - 6); }      // monitor closes
+        else if (t < 8) { slideT = 1 - easeInOut(t - 7); openT = 0; }      // slide in
+        else             { slideT = 0; openT = 0; }                          // pause closed
+        // Slide tray forward
+        kvm.tray.position.z = kvm.trayClosedZ + kvm.slideDistance * slideT;
+        // Monitor: closed = -PI/2 (flat), open = 0 (upright)
+        if (kvm.mon) kvm.mon.rotation.x = -Math.PI / 2 * (1 - openT);
+      }
       renderer.render(scene, camera);
     })();
     </script>
