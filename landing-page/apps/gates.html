@@ -108,8 +108,14 @@
 
     <!-- 3D Product Preview -->
     <section class="max-w-[800px] mx-auto px-6 pb-12">
-      <div id="viewer3d" style="width:100%; height:400px; border-radius:16px; overflow:hidden; border:1px solid #2e2318; background:#0a0806;"></div>
-      <p class="text-center text-w-dim text-sm mt-3"><span data-en="Drag to rotate &bull; Scroll to zoom" data-id="Geser untuk memutar &bull; Scroll untuk memperbesar">Drag to rotate &bull; Scroll to zoom</span></p>
+      <div id="viewer3d" style="width:100%; height:400px; border-radius:16px; overflow:hidden; border:1px solid #2e2318; background:#1a1d23;"></div>
+      <div class="flex flex-wrap justify-center gap-2 mt-3">
+      <button onclick="v3dZoom(-1)" class="px-3 py-2 bg-w-card border border-w-border rounded text-w-text text-sm cursor-pointer hover:bg-w-card-h">&#x2795; Zoom In</button>
+      <button onclick="v3dZoom(1)" class="px-3 py-2 bg-w-card border border-w-border rounded text-w-text text-sm cursor-pointer hover:bg-w-card-h">&#x2796; Zoom Out</button>
+      <button onclick="v3dRotateToggle()" id="btnRotate" class="px-3 py-2 bg-w-card border border-w-border rounded text-w-text text-sm cursor-pointer hover:bg-w-card-h">&#x23F8; Pause</button>
+      <button onclick="v3dReset()" class="px-3 py-2 bg-w-gold text-black font-semibold rounded text-sm cursor-pointer hover:opacity-90">&#x21BA; Reset</button>
+    </div>
+    <p class="text-center text-w-dim text-xs mt-2"><span data-en="Touch: 1 finger rotate, 2 fingers zoom/pan" data-id="Sentuh: 1 jari putar, 2 jari zoom/geser">Touch: 1 finger rotate, 2 fingers zoom/pan</span></p>
     </section>
 
     <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.162/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.162/examples/jsm/"}}</script>
@@ -120,7 +126,7 @@
 
     const container = document.getElementById('viewer3d');
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0a0806);
+    scene.background = new THREE.Color(0x1a1d23);
     const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
     camera.position.set(0, 1.5, 3.5);
 
@@ -128,28 +134,87 @@
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+    renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
+    window._v3dCamera = camera;
+    window._v3dControls = controls;
     controls.enableDamping = true;
     controls.autoRotate = true;
     controls.autoRotateSpeed = 2;
 
-    // Lighting
-    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight.position.set(5, 5, 5);
-    scene.add(dirLight);
-    const rimLight = new THREE.DirectionalLight(0xc8941a, 0.3);
-    rimLight.position.set(-3, 2, -3);
-    scene.add(rimLight);
+    // 4-point studio lighting — bright, reflections visible
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    scene.add(new THREE.HemisphereLight(0xc8d0e0, 0x202530, 0.6));
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    keyLight.position.set(3, 5, 4);
+    scene.add(keyLight);
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    fillLight.position.set(-3, 4, 3);
+    scene.add(fillLight);
+    const backLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    backLight.position.set(0, 3, -4);
+    scene.add(backLight);
+    const accentLight = new THREE.PointLight(0xc8941a, 0.4, 10);
+    accentLight.position.set(0, -1, 2);
+    scene.add(accentLight);
+
+    
+    // Ground plane
+    const groundGeo = new THREE.CircleGeometry(6, 64);
+    const groundMat = new THREE.MeshStandardMaterial({ color: 0x252830, roughness: 0.8, metalness: 0.05 });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.01;
+    ground.receiveShadow = true;
+    scene.add(ground);
 
     new GLTFLoader().load('../assets/models/gate-system.glb', (gltf) => {
       const model = gltf.scene;
       const box = new THREE.Box3().setFromObject(model);
       const center = box.getCenter(new THREE.Vector3());
-      model.position.sub(center);
+      const size = box.getSize(new THREE.Vector3());
+      model.position.x -= center.x;
+      model.position.z -= center.z;
+      model.position.y -= box.min.y;
       scene.add(model);
+      // Load screenshot for kiosk screen
+      const texLoader = new THREE.TextureLoader();
+      const screenTex = texLoader.load('../assets/screenshots/wg-01-welcome.png');
+      screenTex.colorSpace = THREE.SRGBColorSpace;
+      // Convert to toon shading + apply texture to screen
+      model.traverse((child) => {
+        if (child.isMesh && child.material) {
+          const oldMat = child.material;
+          const isScreen = child.name === 'screen' || (child.parent && child.parent.name === 'screen');
+          if (isScreen) {
+            child.material = new THREE.MeshBasicMaterial({
+              map: screenTex,
+              side: THREE.DoubleSide,
+            });
+          } else {
+            const toonMat = new THREE.MeshToonMaterial({
+              side: THREE.DoubleSide,
+              color: oldMat.color || new THREE.Color(0x888888),
+            });
+            if (oldMat.emissive && (oldMat.emissive.r > 0 || oldMat.emissive.g > 0 || oldMat.emissive.b > 0)) {
+              toonMat.emissive = oldMat.emissive;
+              toonMat.emissiveIntensity = oldMat.emissiveIntensity || 1.0;
+            }
+            child.material = toonMat;
+          }
+        }
+      });
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const dist = maxDim / (2 * Math.tan(Math.PI * 45 / 360)) * 1.4;
+      camera.position.set(dist * 0.6, dist * 0.5, dist * 0.8);
+      controls.target.set(0, size.y * 0.4, 0);
+      controls.update();
+      // Save initial view for reset
+      window._v3dInitPos = camera.position.clone();
+      window._v3dInitTarget = controls.target.clone();
     });
 
     window.addEventListener('resize', () => {
@@ -163,6 +228,26 @@
       controls.update();
       renderer.render(scene, camera);
     })();
+    </script>
+    <script>
+    function v3dZoom(dir) {
+      if (!window._v3dCamera) return;
+      window._v3dCamera.position.multiplyScalar(dir > 0 ? 1.2 : 0.8);
+      window._v3dControls.update();
+    }
+    function v3dRotateToggle() {
+      if (!window._v3dControls) return;
+      window._v3dControls.autoRotate = !window._v3dControls.autoRotate;
+      document.getElementById('btnRotate').innerHTML = window._v3dControls.autoRotate ? '&#x23F8; Pause' : '&#x25B6; Play';
+    }
+    function v3dReset() {
+      if (!window._v3dInitPos) return;
+      window._v3dCamera.position.copy(window._v3dInitPos);
+      window._v3dControls.target.copy(window._v3dInitTarget);
+      window._v3dControls.autoRotate = true;
+      document.getElementById('btnRotate').innerHTML = '&#x23F8; Pause';
+      window._v3dControls.update();
+    }
     </script>
 
     <!-- Features -->
