@@ -131,7 +131,18 @@ const sensorM = createBox(doc,buf,'sens',DW,U*0.9,DD*0.5,...[0.65,0.5,0.1]);
 const sensorFace = createBox(doc,buf,'sface',DW,U*0.9,0.008,...GOLD);
 const goldM = createBox(doc,buf,'gold',DW,0.006,0.004,...GOLD);
 const sensorLabel = createBox(doc,buf,'slbl',0.06,0.015,0.004,...[0.9,0.75,0.15]);
-const scrM = createBox(doc,buf,'scr',0.08,0.022,0.004,...SCREEN_C,true);
+const scrM = createBox(doc,buf,'screen',0.08,0.022,0.004,...SCREEN_C,true);
+
+// KVM sliding tray — pulled out, monitor open
+const kvmTrayM = createBox(doc,buf,'kvmt',DW,0.012,DD*0.8,...RAIL_C);       // Slide-out tray
+const kvmSlideL = createBox(doc,buf,'kvsl',0.02,0.015,DD*0.9,...MOUNT);     // Left slide rail
+const kvmSlideR = createBox(doc,buf,'kvsr',0.02,0.015,DD*0.9,...MOUNT);     // Right slide rail
+const kvmKbBody = createBox(doc,buf,'kvkb',DW*0.85,0.01,0.18,...[0.1,0.1,0.12]);  // Keyboard
+const kvmKbKeys = createBox(doc,buf,'kvkk',DW*0.75,0.005,0.14,...[0.15,0.15,0.18]); // Keycap area
+const kvmTouchpad = createBox(doc,buf,'kvtp',0.08,0.005,0.06,...[0.12,0.12,0.14]);  // Touchpad
+const kvmMonFrame = createBox(doc,buf,'kvmf',DW*0.9,0.22,0.012,...[0.1,0.1,0.12]);  // Monitor frame
+const kvmScreen = createBox(doc,buf,'kvmscreen',DW*0.82,0.18,0.005,...SCREEN_C,true);  // Screen w/ UVs — name must match viewer check
+const kvmHinge = createBox(doc,buf,'kvmh',DW*0.3,0.015,0.02,...MOUNT);      // Hinge
 
 const frontZ = -RD/2 + POST + 0.005; // front face Z for bezels
 const devZ = -RD/2 + POST + DD/2 + 0.01; // center Z for device bodies
@@ -262,6 +273,34 @@ for (let i = 0; i < NUM_RACKS; i++) {
       // LEDs
       add(scene,doc,psuLed,[x-DW/2+0.015, cy+U*1.5, frontZ-0.003]);
       add(scene,doc,psuLed,[x-DW/2+0.015, cy+U*1.2, frontZ-0.003]);
+    }
+    
+    if (type === 'kvm') {
+      const cy = baseY + U*0.45;
+      const pullOut = 0.35; // how far tray slides out from rack
+      const trayZ = frontZ - pullOut;
+      // Slide rails (stay inside rack, extend forward)
+      add(scene,doc,kvmSlideL,[x-DW/2+0.01, cy, trayZ+DD*0.25]);
+      add(scene,doc,kvmSlideR,[x+DW/2-0.01, cy, trayZ+DD*0.25]);
+      // Tray
+      add(scene,doc,kvmTrayM,[x, cy-0.005, trayZ]);
+      // Keyboard on tray
+      add(scene,doc,kvmKbBody,[x, cy+0.005, trayZ+0.02]);
+      add(scene,doc,kvmKbKeys,[x, cy+0.009, trayZ+0.01]);
+      // Touchpad (below keyboard)
+      add(scene,doc,kvmTouchpad,[x, cy+0.005, trayZ-0.11]);
+      // Hinge at back of keyboard
+      add(scene,doc,kvmHinge,[x, cy+0.018, trayZ+0.12]);
+      // Monitor — tilted open (raised behind keyboard)
+      const monY = cy + 0.14;
+      const monZ = trayZ + 0.13;
+      add(scene,doc,kvmMonFrame,[x, monY, monZ]);
+      // Screen with DCIEM dashboard screenshot — named 'kvmscreen' 
+      const kvmScrNode = doc.createNode('kvmscreen').setMesh(kvmScreen).setTranslation([x, monY, monZ-0.009]);
+      scene.addChild(kvmScrNode);
+      // Rail kits
+      add(scene,doc,rkM,[x-DW/2-0.013, cy, devZ]);
+      add(scene,doc,rkM,[x+DW/2+0.013, cy, devZ]);
     }
     
     if (type === 'sensor') {

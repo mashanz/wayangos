@@ -114,6 +114,7 @@
       <button onclick="v3dZoom(1)" class="px-3 py-2 bg-w-card border border-w-border rounded text-w-text text-sm cursor-pointer hover:bg-w-card-h">&#x2796; Zoom Out</button>
       <button onclick="v3dRotateToggle()" id="btnRotate" class="px-3 py-2 bg-w-card border border-w-border rounded text-w-text text-sm cursor-pointer hover:bg-w-card-h">&#x23F8; Pause</button>
       <button onclick="v3dReset()" class="px-3 py-2 bg-w-gold text-black font-semibold rounded text-sm cursor-pointer hover:opacity-90">&#x21BA; Reset</button>
+      <button onclick="v3dFullscreen()" id="btnFullscreen" class="px-3 py-2 bg-w-card border border-w-border rounded text-w-text text-sm cursor-pointer hover:bg-w-card-h">&#x26F6; Fullscreen</button>
     </div>
     <p class="text-center text-w-dim text-xs mt-2"><span data-en="Touch: 1 finger rotate, 2 fingers zoom/pan" data-id="Sentuh: 1 jari putar, 2 jari zoom/geser">Touch: 1 finger rotate, 2 fingers zoom/pan</span></p>
     </section>
@@ -137,6 +138,7 @@
     renderer.toneMappingExposure = 1.0;
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
+    window._v3dRenderer = renderer;
 
     const controls = new OrbitControls(camera, renderer.domElement);
     window._v3dCamera = camera;
@@ -181,20 +183,31 @@
       model.position.z -= center.z;
       model.position.y -= box.min.y;
       scene.add(model);
-      // Convert to anime/toon shading
+      // Load DCIEM dashboard screenshot for KVM screen
+      const texLoader = new THREE.TextureLoader();
+      const screenTex = texLoader.load('../assets/screenshots/dciem-02-overview.png');
+      screenTex.colorSpace = THREE.SRGBColorSpace;
+      // Convert to toon shading + apply texture to screens (detect by UV presence — only screens have UVs)
       model.traverse((child) => {
         if (child.isMesh && child.material) {
           const oldMat = child.material;
-          const toonMat = new THREE.MeshToonMaterial({
-            side: THREE.DoubleSide,
-            color: oldMat.color || new THREE.Color(0x888888),
-          });
-          // Copy emissive if present
-          if (oldMat.emissive && (oldMat.emissive.r > 0 || oldMat.emissive.g > 0 || oldMat.emissive.b > 0)) {
-            toonMat.emissive = oldMat.emissive;
-            toonMat.emissiveIntensity = oldMat.emissiveIntensity || 1.0;
+          const hasUV = child.geometry && child.geometry.attributes && child.geometry.attributes.uv;
+          if (hasUV) {
+            child.material = new THREE.MeshBasicMaterial({
+              map: screenTex,
+              side: THREE.DoubleSide,
+            });
+          } else {
+            const toonMat = new THREE.MeshToonMaterial({
+              side: THREE.DoubleSide,
+              color: oldMat.color || new THREE.Color(0x888888),
+            });
+            if (oldMat.emissive && (oldMat.emissive.r > 0 || oldMat.emissive.g > 0 || oldMat.emissive.b > 0)) {
+              toonMat.emissive = oldMat.emissive;
+              toonMat.emissiveIntensity = oldMat.emissiveIntensity || 1.0;
+            }
+            child.material = toonMat;
           }
-          child.material = toonMat;
         }
       });
       // Auto-fit camera to model
@@ -239,6 +252,34 @@
       document.getElementById('btnRotate').innerHTML = '&#x23F8; Pause';
       window._v3dControls.update();
     }
+    function v3dFullscreen() {
+      const el = document.getElementById('viewer3d');
+      if (!document.fullscreenElement) {
+        el.requestFullscreen().catch(()=>{});
+        document.getElementById('btnFullscreen').innerHTML = '&#x2716; Exit';
+      } else {
+        document.exitFullscreen();
+        document.getElementById('btnFullscreen').innerHTML = '&#x26F6; Fullscreen';
+      }
+    }
+    document.addEventListener('fullscreenchange', () => {
+      const el = document.getElementById('viewer3d');
+      if (document.fullscreenElement) {
+        el.style.borderRadius = '0';
+        document.getElementById('btnFullscreen').innerHTML = '&#x2716; Exit';
+      } else {
+        el.style.borderRadius = '16px';
+        document.getElementById('btnFullscreen').innerHTML = '&#x26F6; Fullscreen';
+      }
+      // Resize renderer to match new container size
+      setTimeout(() => {
+        if (window._v3dCamera && window._v3dRenderer) {
+          window._v3dRenderer.setSize(el.clientWidth, el.clientHeight);
+          window._v3dCamera.aspect = el.clientWidth / el.clientHeight;
+          window._v3dCamera.updateProjectionMatrix();
+        }
+      }, 100);
+    });
     </script>
 
     <!-- Features -->
