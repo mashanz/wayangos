@@ -1,0 +1,251 @@
+/* =============================================================
+   WayangOS — Custom styles (Tailwind handles the rest)
+   Only stuff Tailwind CDN can't do: pseudo-elements, keyframes,
+   complex selectors, custom components.
+   ============================================================= */
+
+/* ---- Batik background pattern ---- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,148,26,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,148,26,.025) 1px, transparent 1px),
+    radial-gradient(ellipse at 30% 60%, rgba(200,148,26,.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 20%, rgba(200,148,26,.03) 0%, transparent 40%);
+  background-size: 60px 60px, 60px 60px, 100% 100%, 100% 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Radial glow behind hero sections ---- */
+.hero-glow::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(700px, 100vw);
+  height: min(700px, 100vw);
+  background: radial-gradient(circle, rgba(200,148,26,.27) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-glow-sm::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 100vw);
+  height: min(600px, 100vw);
+  background: radial-gradient(circle, rgba(200,148,26,.27) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ---- Pulse animation (hero badge dot) ---- */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+.animate-pulse-dot { animation: pulse 2s infinite; }
+
+/* ---- Cultural card decorative aksara ---- */
+.cultural-card::before {
+  content: '꧅';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-size: 8rem;
+  color: #c8941a;
+  opacity: .04;
+  line-height: 1;
+}
+.cultural-card::after {
+  content: '꧅';
+  position: absolute;
+  bottom: -30px;
+  right: 20px;
+  font-size: 8rem;
+  color: #c8941a;
+  opacity: .04;
+  line-height: 1;
+}
+
+/* ---- Terminal dots ---- */
+.terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+.terminal-dot-red   { background: #ff5f57; }
+.terminal-dot-yellow{ background: #febc2e; }
+.terminal-dot-green { background: #28c840; }
+
+/* ---- Mobile nav dropdown ---- */
+@media (max-width: 1024px) {
+  .nav-toggle { display: block !important; }
+  .lang-switch-mobile { display: flex !important; }
+  .nav-links {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #0a0806;
+    z-index: 9998;
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(200,148,26,.27);
+  }
+  .nav-links.active { display: flex !important; }
+  .nav-links li { border-bottom: 1px solid #2e2318; list-style: none; }
+  .nav-links a { display: block; padding: 14px 24px; font-size: 1rem; }
+}
+
+/* ---- WhatsApp floating button ---- */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  background: #25D366;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  transition: transform .3s;
+  text-decoration: none;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+
+/* ---- Gold divider ---- */
+.gold-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c8941a, transparent);
+  margin: 0 auto 24px;
+}
+
+/* ---- Comparison table ---- */
+.comparison-table { width: 100%; border-collapse: collapse; }
+.comparison-table th,
+.comparison-table td { padding: 16px 24px; text-align: left; border-bottom: 1px solid #2e2318; }
+.comparison-table th { color: #5a4a30; font-size: .8rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+.comparison-table td:first-child { font-weight: 600; }
+.comparison-table tr:hover td { background: rgba(200,148,26,.03); }
+.comparison-table .highlight-row td { color: #c8941a; }
+.comparison-table .check { color: #7ec87e; }
+.comparison-table .cross { color: #5a4a30; }
+
+@media (max-width: 768px) {
+  .comparison-table { font-size: .75rem; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .comparison-table th, .comparison-table td { padding: 10px 12px; white-space: nowrap; }
+}
+
+/* ---- Shortcuts table (app pages) ---- */
+.shortcuts-table { width: 100%; border-collapse: collapse; }
+.shortcuts-table th,
+.shortcuts-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #2e2318; font-size: .9rem; }
+.shortcuts-table th { color: #c8941a; font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .5px; }
+.shortcuts-table td { color: #a09070; }
+.shortcuts-table code { background: #110e09; padding: 2px 8px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: .8rem; color: #f0b830; }
+
+/* ---- Download page: GPU guide ---- */
+.gpu-guide { border: 2px solid #c8941a; }
+.gpu-check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.gpu-mapping { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.download-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.download-grid.two-col { grid-template-columns: repeat(2, 1fr); max-width: 680px; }
+.legacy-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.pos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+@media (max-width: 768px) {
+  .gpu-check-grid { grid-template-columns: 1fr; }
+  .download-grid { grid-template-columns: 1fr; }
+  .download-grid.two-col { grid-template-columns: 1fr; max-width: 100%; }
+  .legacy-grid { grid-template-columns: 1fr 1fr; }
+  .pos-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .legacy-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Download card badge ---- */
+.dl-card .card-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #c8941a;
+  color: #000;
+  font-size: .65rem;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* ---- Legacy toggle arrow ---- */
+details[open] .legacy-toggle .arrow { transform: rotate(180deg); }
+
+/* ---- Pricing grid (gates/map pages) ---- */
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.pricing-card.featured { border-color: #c8941a; background: linear-gradient(180deg, #221b13 0%, #1a1410 100%); }
+.pricing-card .plan-desc ul { list-style: none; text-align: left; padding: 0; }
+.pricing-card .plan-desc ul li { padding: 4px 0; }
+.pricing-card .plan-desc ul li::before { content: '✓ '; color: #7ec87e; }
+
+@media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+/* ---- Screenshot gallery (gates/map pages) ---- */
+.screenshot-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.gallery-item img { width: 100%; display: block; image-rendering: pixelated; }
+
+/* ---- Addon grid (map page) ---- */
+.addon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+
+/* ---- POS download selects ---- */
+.dl-select {
+  background: #1a1410;
+  color: #f0e8d8;
+  border: 2px solid #c8941a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.dl-btn-main { opacity: .5; pointer-events: none; }
+.dl-btn-main.active { opacity: 1; pointer-events: auto; }
+
+/* ---- Apps grid (apps.html) ---- */
+.apps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+@media (max-width: 768px) { .apps-grid { grid-template-columns: 1fr; gap: 16px; } }
+
+/* ---- Index: features grid ---- */
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+@media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; gap: 12px; } }
+
+/* ---- Index: arch grid ---- */
+.arch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 768px) { .arch-grid { grid-template-columns: 1fr; gap: 12px; } }
+
+/* ---- Index: usecases grid ---- */
+.usecases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+@media (max-width: 768px) { .usecases-grid { grid-template-columns: 1fr; } }
+
+/* ---- App detail: features grid ---- */
+.app-features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+@media (max-width: 768px) { .app-features-grid { grid-template-columns: 1fr; gap: 12px; } }
+
+/* ---- Misc responsive helpers ---- */
+@media (max-width: 768px) {
+  .hero-buttons-stack { flex-direction: column; width: 100%; }
+  .hero-buttons-stack > * { text-align: center; width: 100%; min-height: 44px; }
+  .screenshot-grid-2 { grid-template-columns: 1fr !important; }
+}
