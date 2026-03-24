@@ -217,6 +217,13 @@
       // Save initial view for reset
       window._v3dInitPos = camera.position.clone();
       window._v3dInitTarget = controls.target.clone();
+
+      // Boom arm animation setup
+      let boomArm = null;
+      model.traverse((c) => { if (c.name === 'boomArm' && !boomArm) boomArm = c; });
+      if (boomArm) {
+        window._gateAnim = { boom: boomArm };
+      }
     });
 
     window.addEventListener('resize', () => {
@@ -225,9 +232,26 @@
       renderer.setSize(container.clientWidth, container.clientHeight);
     });
 
+    // Gate animation (6s loop):
+    // 0-0.5s: pause closed | 0.5-1.5s: arm raises 90° | 1.5-4s: hold open (2.5s) | 4-5s: arm lowers | 5-6s: pause closed
+    function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
     (function animate() {
       requestAnimationFrame(animate);
       controls.update();
+      const ga = window._gateAnim;
+      if (ga) {
+        const cycle = 6.0;
+        const t = (performance.now() / 1000) % cycle;
+        let openT = 0;
+        if (t < 0.5)      { openT = 0; }                             // pause closed
+        else if (t < 1.5)  { openT = easeInOut((t - 0.5) / 1.0); }  // arm raises
+        else if (t < 4.0)  { openT = 1; }                            // hold open
+        else if (t < 5.0)  { openT = 1 - easeInOut((t - 4.0) / 1.0); } // arm lowers
+        else               { openT = 0; }                            // pause closed
+        // Rotate around Z axis: 0 = horizontal (closed), +PI/2 = vertical (open/up)
+        ga.boom.rotation.z = (Math.PI / 2) * openT;
+      }
       renderer.render(scene, camera);
     })();
     </script>

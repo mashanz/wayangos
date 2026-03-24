@@ -215,6 +215,18 @@
       // Save initial view for reset
       window._v3dInitPos = camera.position.clone();
       window._v3dInitTarget = controls.target.clone();
+
+      // POS animation setup — find monitor and receipt groups
+      let posMon = null, posReceipt = null;
+      model.traverse((c) => {
+        if (c.name === 'posMonitor' && !posMon) posMon = c;
+        if (c.name === 'posReceipt' && !posReceipt) posReceipt = c;
+      });
+      if (posMon || posReceipt) {
+        // Receipt starts hidden (scale Y = 0)
+        if (posReceipt) posReceipt.scale.set(1, 0, 1);
+        window._posAnim = { mon: posMon, receipt: posReceipt, receiptBaseY: posReceipt ? posReceipt.position.y : 0 };
+      }
     });
 
     window.addEventListener('resize', () => {
@@ -223,9 +235,33 @@
       renderer.setSize(container.clientWidth, container.clientHeight);
     });
 
+    // POS animation (10s loop):
+    // 0-1s: pause | 1-2s: monitor tilts toward customer | 2-3.5s: hold tilted |
+    // 3.5-5s: receipt prints (grows up) | 5-7s: hold (receipt visible) |
+    // 7-8s: receipt retracts | 8-9s: monitor tilts back | 9-10s: pause
+    function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
     (function animate() {
       requestAnimationFrame(animate);
       controls.update();
+      const pa = window._posAnim;
+      if (pa) {
+        const cycle = 10.0;
+        const t = (performance.now() / 1000) % cycle;
+        let tiltT = 0, printT = 0;
+        if (t < 1)        { tiltT = 0; printT = 0; }                          // pause
+        else if (t < 2)   { tiltT = easeInOut(t - 1); printT = 0; }           // tilt forward
+        else if (t < 3.5) { tiltT = 1; printT = 0; }                          // hold tilted
+        else if (t < 5)   { tiltT = 1; printT = easeInOut((t - 3.5) / 1.5); } // print
+        else if (t < 7)   { tiltT = 1; printT = 1; }                          // hold receipt
+        else if (t < 8)   { tiltT = 1; printT = 1 - easeInOut(t - 7); }       // retract
+        else if (t < 9)   { tiltT = 1 - easeInOut(t - 8); printT = 0; }       // tilt back
+        else              { tiltT = 0; printT = 0; }                           // pause
+        // Monitor tilt: 0 = upright, tilt ~15° forward (toward customer)
+        if (pa.mon) pa.mon.rotation.x = 0.26 * tiltT; // ~15° tilt up toward customer
+        // Receipt: scale Y from 0 to 1 (grows upward from printer slot)
+        if (pa.receipt) pa.receipt.scale.set(1, printT, 1);
+      }
       renderer.render(scene, camera);
     })();
     </script>

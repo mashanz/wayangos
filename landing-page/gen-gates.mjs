@@ -64,10 +64,18 @@ const scene = doc.createScene('Gates');
 addNode(scene, doc, 'housing', createBox(doc,buf,'h', 0.2, 0.9, 0.25, ...BODY), [0, 0.45, 0]);
 addNode(scene, doc, 'htrim', createBox(doc,buf,'ht', 0.205, 0.02, 0.255, ...GOLD), [0, 0.85, 0]);
 
-// Boom arm
-addNode(scene, doc, 'arm', createBox(doc,buf,'arm', 2.0, 0.05, 0.05, ...WHITE), [1.0, 0.88, 0]);
-const stripe = createBox(doc,buf,'stripe', 0.15, 0.052, 0.052, ...RED);
-for (let i = 0; i < 5; i++) addNode(scene, doc, 's'+i, stripe, [0.3+i*0.4, 0.88, 0]);
+// Boom arm group — pivot at hinge point on top of housing
+// Arm rotates around Z axis at (0, 0.88, 0)
+const boomGroup = doc.createNode('boomArm').setTranslation([0, 0.88, 0]);
+const armMesh = createBox(doc,buf,'arm', 2.0, 0.05, 0.05, ...WHITE);
+const stripeMesh = createBox(doc,buf,'stripe', 0.15, 0.052, 0.052, ...RED);
+// Arm — offset from pivot (center of arm is 1.0 to the right of pivot)
+boomGroup.addChild(doc.createNode('armbar').setMesh(armMesh).setTranslation([1.0, 0, 0]));
+// Red stripes on arm
+for (let i = 0; i < 5; i++) {
+  boomGroup.addChild(doc.createNode('st'+i).setMesh(stripeMesh).setTranslation([0.3+i*0.4, 0, 0]));
+}
+scene.addChild(boomGroup);
 
 // Ticket kiosk
 addNode(scene, doc, 'kiosk', createBox(doc,buf,'k', 0.3, 1.2, 0.25, ...BODY), [-0.8, 0.6, 0]);

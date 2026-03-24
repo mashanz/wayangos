@@ -75,28 +75,31 @@ const scene = doc.createScene('POS');
 // Base plate
 addNode(scene, doc, 'base', createBox(doc,buf,'base', 0.22, 0.015, 0.16, ...FRAME), [0, 0.0075, 0]);
 
-// Stand - behind screen
+// Stand
 addNode(scene, doc, 'stand', createBox(doc,buf,'stand', 0.05, 0.18, 0.05, ...FRAME), [0, 0.105, 0.02]);
 
-// Monitor bezel
-const monY = 0.32;
-addNode(scene, doc, 'bezel', createBox(doc,buf,'bezel', 0.38, 0.28, 0.025, ...BODY), [0, monY, 0]);
-
-// Screen - WITH UVs for texture mapping
+// Monitor group — pivot at top of stand for tilting
+const monPivotY = 0.195; // top of stand
+const monGroup = doc.createNode('posMonitor').setTranslation([0, monPivotY, 0.02]);
+const monOffY = 0.32 - monPivotY; // offset from pivot to monitor center
+monGroup.addChild(doc.createNode('n_bezel').setMesh(createBox(doc,buf,'bezel', 0.38, 0.28, 0.025, ...BODY)).setTranslation([0, monOffY, -0.02]));
 const scrMesh = createBox(doc,buf,'screen', 0.32, 0.22, 0.005, ...SCREEN, true);
-scene.addChild(doc.createNode('screen').setMesh(scrMesh).setTranslation([0, monY, -0.014]));
+monGroup.addChild(doc.createNode('screen').setMesh(scrMesh).setTranslation([0, monOffY, -0.034]));
+monGroup.addChild(doc.createNode('n_trimT').setMesh(createBox(doc,buf,'trimT', 0.38, 0.008, 0.028, ...GOLD)).setTranslation([0, monOffY + 0.14, -0.02]));
+monGroup.addChild(doc.createNode('n_trimB').setMesh(createBox(doc,buf,'trimB', 0.38, 0.008, 0.028, ...GOLD)).setTranslation([0, monOffY - 0.14, -0.02]));
+scene.addChild(monGroup);
 
-// Gold trims
-addNode(scene, doc, 'trimTop', createBox(doc,buf,'trimT', 0.38, 0.008, 0.028, ...GOLD), [0, monY + 0.14, 0]);
-addNode(scene, doc, 'trimBot', createBox(doc,buf,'trimB', 0.38, 0.008, 0.028, ...GOLD), [0, monY - 0.14, 0]);
-
-// Printer
+// Printer body (static)
 addNode(scene, doc, 'printer', createBox(doc,buf,'printer', 0.13, 0.1, 0.15, ...BODY), [0.3, 0.05, 0]);
 addNode(scene, doc, 'slot', createBox(doc,buf,'slot', 0.08, 0.005, 0.02, ...DARK), [0.3, 0.1, -0.076]);
 addNode(scene, doc, 'pgold', createBox(doc,buf,'pg', 0.13, 0.006, 0.005, ...GOLD), [0.3, 0.08, -0.076]);
-addNode(scene, doc, 'paper', createBox(doc,buf,'paper', 0.06, 0.07, 0.002, ...WHITE), [0.3, 0.135, -0.078]);
 addNode(scene, doc, 'led1', createBox(doc,buf,'led1', 0.008, 0.008, 0.008, ...LED), [0.26, 0.095, -0.076]);
 addNode(scene, doc, 'led2', createBox(doc,buf,'led2', 0.008, 0.008, 0.008, ...LED), [0.275, 0.095, -0.076]);
+
+// Receipt paper — animated group, slides up from printer slot
+const paperGroup = doc.createNode('posReceipt').setTranslation([0.3, 0.1, -0.078]);
+paperGroup.addChild(doc.createNode('n_paper').setMesh(createBox(doc,buf,'paper', 0.06, 0.12, 0.002, ...WHITE)).setTranslation([0, 0.06, 0]));
+scene.addChild(paperGroup);
 
 await io.write('assets/models/pos-terminal.glb', doc);
 const stats = (await import('fs')).statSync('assets/models/pos-terminal.glb');
