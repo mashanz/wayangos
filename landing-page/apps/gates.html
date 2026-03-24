@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://wayang.dalang.io/apps/gates.html">
     <meta property="og:image" content="https://wayang.dalang.io/assets/og-gates.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WayangGates — Sistem Parkir Otomatis">
+    <meta name="twitter:title" content="WayangGates &#8212; Sistem Parkir Otomatis">
     <meta name="twitter:description" content="Palang pintu otomatis, pengenalan plat nomor, pembayaran QRIS. Mulai Rp 30 juta.">
     <meta name="twitter:image" content="https://wayang.dalang.io/assets/og-gates.png">
     <link rel="canonical" href="https://wayang.dalang.io/apps/gates.html">
@@ -35,45 +35,33 @@
       "image": "https://wayang.dalang.io/assets/og-gates.png"
     }
     </script>
-    <title>WayangGates — Smart Parking Gate System</title>
-    <link rel="stylesheet" href="/assets/lightbox.css?v=3497984">
-        <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'w-bg': '#0a0806','w-bg2': '#110e09','w-card': '#1a1410','w-card-h': '#221b13',
-            'w-gold': '#c8941a','w-gold-b': '#f0b830','w-gold-dim': '#c8941a22','w-gold-glow': '#c8941a44',
-            'w-text': '#f0e8d8','w-text2': '#a09070','w-dim': '#5a4a30',
-            'w-border': '#2e2318','w-border-g': '#c8941a44','w-green': '#7ec87e',
-          }
-        }
-      }
-    }
-    </script>
-    <link rel="stylesheet" href="/assets/style.css?v=3497984">
+    <title>WayangGates &#8212; Smart Parking Gate System</title>
+    <link rel="stylesheet" href="/assets/lightbox.css?v=b01b14e">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=b01b14e">
+    <link rel="stylesheet" href="/assets/style.css?v=b01b14e">
 </head>
 <body class="bg-w-bg text-w-text font-['Inter',system-ui,sans-serif] leading-relaxed overflow-x-hidden w-full">
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 w-full max-w-[100vw] py-4 bg-w-bg border-b border-w-border-g z-[100]">
-        <div class="max-w-[1000px] mx-auto px-6 relative z-[1] flex justify-between items-center">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-[1] flex justify-between items-center">
             <a href="../index.html" class="text-xl font-bold text-w-gold no-underline tracking-tight flex items-center gap-2">
-                <span class="text-lg opacity-70 text-w-gold-b">ê¦®ê¦ªê¦</span>Wayang<span class="text-w-text">OS</span>
+                <span class="text-lg opacity-70 text-w-gold-b">ꦮꦪꦁ</span>
+                Wayang<span class="text-w-text">OS</span>
             </a>
             <div class="flex items-center gap-2">
                 <div class="lang-switch-mobile hidden gap-1 items-center">
                     <button onclick="setLang('en')" class="px-2 py-0.5 rounded text-xs font-semibold bg-transparent text-w-text2 border border-w-border cursor-pointer">EN</button>
                     <button onclick="setLang('id')" class="px-2 py-0.5 rounded text-xs font-semibold bg-w-gold text-black border border-w-gold cursor-pointer">ID</button>
                 </div>
-                <button class="nav-toggle hidden bg-transparent border-none text-w-gold text-2xl cursor-pointer p-1" aria-label="Menu">â˜°</button>
+                <button class="nav-toggle hidden bg-transparent border-none text-w-gold text-2xl cursor-pointer p-1" aria-label="Menu">☰</button>
             </div>
-            <ul class="nav-links flex gap-8 list-none items-center">
+            <ul class="nav-links flex gap-8 list-none">
                 <li><a href="../index.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Home</a></li>
                 <li><a href="../index.html#features" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Features</a></li>
                 <li><a href="../download.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Download</a></li>
-                <li><a href="../apps.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Apps</a></li>
+                <li><a href="../apps.html" class="text-w-gold no-underline text-sm">Apps</a></li>
+                <li><a href="../about.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">About</a></li>
                 <li><a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">GitHub</a></li>
                 <li><div class="lang-switch flex gap-1 items-center ml-2">
                     <button onclick="setLang('en')" id="btn-en" class="px-2 py-0.5 rounded text-xs font-semibold bg-transparent text-w-text2 border border-w-border cursor-pointer">EN</button>
@@ -85,291 +73,344 @@
     </nav>
 
     <!-- Breadcrumb -->
-    <div style="padding-top: 80px;">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="../index.html">Home</a>
-                <span class="sep">›</span>
-                <a href="../apps.html">Apps</a>
-                <span class="sep">›</span>
-                <span class="current">WayangGates</span>
-            </div>
-        </div>
+    <div class="max-w-[1200px] mx-auto px-6 pt-24 pb-2">
+        <nav class="text-sm text-w-dim">
+            <a href="../index.html" class="text-w-text2 hover:text-w-gold no-underline">Home</a>
+            <span class="mx-2">/</span>
+            <a href="../apps.html" class="text-w-text2 hover:text-w-gold no-underline">Apps</a>
+            <span class="mx-2">/</span>
+            <span class="text-w-gold">WayangGates</span>
     </div>
 
     <!-- Hero -->
-    <section class="app-hero" style="padding-top: 40px;">
-        <div class="hero-icon">🏍️</div>
-        <h1>Wayang<span class="accent">Gates</span></h1>
-        <p class="tagline">Automated parking management for motorcycles</p>
-        <p class="desc">Turn any parking lot into a smart facility. Automated entry/exit gates detect plate numbers, print tickets, and accept QRIS payment — no manual attendants needed.</p>
-        <div class="hero-buttons">
-            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangGates" target="_blank" rel="noopener" class="btn btn-primary" style="background:#25D366;">💬 WhatsApp Sales</a>
-            <a href="mailto:sales@dalang.io?subject=WayangGates%20Inquiry" class="btn btn-secondary">Email: Email</a>
-            <a href="#pricing" class="btn btn-secondary">See Pricing ↓</a>
+    <section class="hero-glow-sm text-center pt-8 pb-16 px-6 relative">
+        <div class="text-6xl mb-6 relative z-[1]">&#127949;</div>
+        <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-extrabold tracking-tighter mb-4 relative z-[1]">
+            Wayang<span class="text-w-gold">Gates</span>
+        </h1>
+        <p class="text-[clamp(0.95rem,2vw,1.1rem)] text-w-text2 max-w-[650px] mx-auto mb-4 relative z-[1]">Automated parking management for motorcycles</p>
+        <p class="text-w-dim max-w-3xl mx-auto mb-8 relative z-[1]">Turn any parking lot into a smart facility. Automated entry/exit gates detect plate numbers, print tickets, and accept QRIS payment &#8212; no manual attendants needed.</p>
+        <div class="flex flex-wrap justify-center gap-4 relative z-[1]">
+            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangGates" target="_blank" rel="noopener" class="bg-[#25D366] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition no-underline">&#128172; WhatsApp Sales</a>
+            <a href="mailto:sales@dalang.io?subject=WayangGates%20Inquiry" class="border border-w-border text-w-text2 px-6 py-3 rounded-lg font-semibold hover:border-w-gold hover:text-w-gold transition no-underline">&#9993; Email Sales</a>
+            <a href="#pricing" class="border border-w-border text-w-text2 px-6 py-3 rounded-lg font-semibold hover:border-w-gold hover:text-w-gold transition no-underline">See Pricing &#8595;</a>
         </div>
     </section>
 
     <!-- Hero Screenshot -->
-    <section class="hero-screenshot">
-        <div class="container">
-            <img src="../assets/screenshots/wg-01-welcome.png" alt="WayangGates — Smart Parking Gate System">
-            <p class="caption">Entry gate kiosk — plate detection, ticket printing, and capacity tracking</p>
+    <div class="max-w-[1200px] mx-auto px-6 mb-16">
+        <div class="border border-w-border rounded-xl overflow-hidden">
+            <img src="../assets/screenshots/wg-01-welcome.png" alt="WayangGates &#8212; Smart Parking Gate System" class="w-full">
         </div>
+        <p class="text-center text-w-dim text-sm mt-3">Entry gate kiosk &#8212; plate detection, ticket printing, and capacity tracking</p>
+    </div>
+
+
+    <!-- 3D Product Preview -->
+    <section class="max-w-[800px] mx-auto px-6 pb-12">
+      <div id="viewer3d" style="width:100%; height:400px; border-radius:16px; overflow:hidden; border:1px solid #2e2318; background:#0a0806;"></div>
+      <p class="text-center text-w-dim text-sm mt-3"><span data-en="Drag to rotate &bull; Scroll to zoom" data-id="Geser untuk memutar &bull; Scroll untuk memperbesar">Drag to rotate &bull; Scroll to zoom</span></p>
     </section>
 
-    <!-- Features -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Smart Parking, Zero Hassle</h2>
-                <p>Everything you need to run a modern parking facility.</p>
-            </div>
+    <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.162/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.162/examples/jsm/"}}</script>
+    <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">🏍️</div>
-                    <h3>Automated Entry</h3>
-                    <p>Drive up, get detected. Plate number captured automatically, ticket printed instantly, barrier opens. No waiting.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">💳</div>
-                    <h3>QRIS Payment</h3>
-                    <p>Scan ticket at exit, pay with any e-wallet via QRIS. No cash handling, no change needed.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🎫</div>
-                    <h3>Smart Ticketing</h3>
-                    <p>Thermal-printed tickets with QR code. Lost your ticket? No problem — find it by plate number.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">📊</div>
-                    <h3>Admin Dashboard</h3>
-                    <p>Live occupancy, revenue tracking, hourly distribution, and frequent visitor data. All on one screen.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🔒</div>
-                    <h3>Security</h3>
-                    <p>Every entry and exit recorded with plate number and timestamp. Full audit trail.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">💰</div>
-                    <h3>Flexible Pricing</h3>
-                    <p>Set hourly rates, daily maximums, and lost ticket fees. Different rates for different vehicle types.</p>
-                </div>
+    const container = document.getElementById('viewer3d');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0806);
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+    camera.position.set(0, 1.5, 3.5);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    container.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 2;
+
+    // Lighting
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(5, 5, 5);
+    scene.add(dirLight);
+    const rimLight = new THREE.DirectionalLight(0xc8941a, 0.3);
+    rimLight.position.set(-3, 2, -3);
+    scene.add(rimLight);
+
+    new GLTFLoader().load('../assets/models/gate-system.glb', (gltf) => {
+      const model = gltf.scene;
+      const box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      model.position.sub(center);
+      scene.add(model);
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+
+    (function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    })();
+    </script>
+
+    <!-- Features -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Smart Parking, Zero Hassle</h2>
+            <p class="text-w-dim">Everything you need to run a modern parking facility.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#127949;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Automated Entry</h3>
+                <p class="text-w-dim text-sm">Drive up, get detected. Plate number captured automatically, ticket printed instantly, barrier opens. No waiting.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128179;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">QRIS Payment</h3>
+                <p class="text-w-dim text-sm">Scan ticket at exit, pay with any e-wallet via QRIS. No cash handling, no change needed.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#127915;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Smart Ticketing</h3>
+                <p class="text-w-dim text-sm">Thermal-printed tickets with QR code. Lost your ticket? No problem &#8212; find it by plate number.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128202;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Admin Dashboard</h3>
+                <p class="text-w-dim text-sm">Live occupancy, revenue tracking, hourly distribution, and frequent visitor data. All on one screen.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128274;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Security</h3>
+                <p class="text-w-dim text-sm">Every entry and exit recorded with plate number and timestamp. Full audit trail.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128176;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Flexible Pricing</h3>
+                <p class="text-w-dim text-sm">Set hourly rates, daily maximums, and lost ticket fees. Different rates for different vehicle types.</p>
             </div>
         </div>
     </section>
 
     <!-- Screenshot Gallery -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2><span data-en="See It in Action" data-id="Lihat Aksinya">See It in Action</span></h2>
-                <p>Click any screenshot to enlarge.</p>
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3"><span data-en="See It in Action" data-id="Lihat Aksinya">See It in Action</span></h2>
+            <p class="text-w-dim">Click any screenshot to enlarge.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 screenshot-gallery">
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/wg-01-welcome.png" alt="Welcome Screen" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Entry Gate &#8212; Selamat Datang</p>
             </div>
-
-            <div class="screenshot-gallery">
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/wg-01-welcome.png" alt="Welcome Screen">
-                    <div class="caption">Entry Gate — Selamat Datang</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/wg-03-plate.png" alt="Plate Detection">
-                    <div class="caption">Plate Detection</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/wg-04-ticket.png" alt="Ticket Printed">
-                    <div class="caption">Ticket with QR Code</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/wg-05-exit.png" alt="Exit Screen">
-                    <div class="caption">Exit Gate — Terima Kasih</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/wg-06-admin.png" alt="Admin Dashboard">
-                    <div class="caption">Admin Dashboard</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/wg-07-report.png" alt="Revenue Reports">
-                    <div class="caption">Revenue Reports</div>
-                </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/wg-03-plate.png" alt="Plate Detection" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Plate Detection</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/wg-04-ticket.png" alt="Ticket Printed" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Ticket with QR Code</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/wg-05-exit.png" alt="Exit Screen" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Exit Gate &#8212; Terima Kasih</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/wg-06-admin.png" alt="Admin Dashboard" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Admin Dashboard</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/wg-07-report.png" alt="Revenue Reports" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Revenue Reports</p>
             </div>
         </div>
     </section>
 
     <!-- Pricing -->
-    <section class="app-section" id="pricing">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2><span data-en="Pricing" data-id="Harga">Pricing</span></h2>
-                <p>Hardware + software bundles. One-time purchase, no monthly fees.</p>
+    <section id="pricing" class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3"><span data-en="Pricing" data-id="Harga">Pricing</span></h2>
+            <p class="text-w-dim">Hardware + software bundles. One-time purchase, no monthly fees.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Single Gate</div>
+                <div class="text-3xl font-extrabold text-w-text mb-1">Rp 30 <span class="text-lg font-normal text-w-dim">juta</span></div>
+                <p class="text-w-dim text-sm mb-6"><span data-en="one-time" data-id="sekali bayar">one-time</span></p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 1 gate unit (entry OR exit)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Admin station + 10" touchscreen</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Boom barrier (3-4m arm)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Thermal printer + camera</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> QR barcode scanner</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Installation &amp; configuration</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-day setup support</li>
+                </ul>
             </div>
+            <div class="bg-w-card border-2 border-w-gold rounded-xl p-8 hover:border-w-gold-b transition relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-w-gold text-black px-4 py-1 rounded-full text-xs font-bold">POPULAR</div>
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Entry + Exit</div>
+                <div class="text-3xl font-extrabold text-w-text mb-1">Rp 60 <span class="text-lg font-normal text-w-dim">juta</span></div>
+                <p class="text-w-dim text-sm mb-6">one-time &#8212; most popular</p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 1 entry + 1 exit gate</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 2&#215; boom barriers</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 2&#215; touchscreen + printer + camera</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 2&#215; QR barcode scanner</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Shared database</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> QRIS payment at exit</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Installation &amp; 7-day support</li>
+                </ul>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Multi-Gate</div>
+                <div class="text-3xl font-extrabold text-w-text mb-1">Rp 125 <span class="text-lg font-normal text-w-dim">juta</span></div>
+                <p class="text-w-dim text-sm mb-6">one-time &#8212; up to 4 gates</p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Up to 4 gate units</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 4&#215; boom barriers</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Admin monitoring station</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Networked (all gates linked)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> On-site installation</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-day setup support</li>
+                </ul>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2"><span data-en="Enterprise" data-id="Perusahaan">Enterprise</span></div>
+                <div class="text-3xl font-extrabold text-w-text mb-1"><span data-en="Custom" data-id="Hubungi Kami">Custom</span></div>
+                <p class="text-w-dim text-sm mb-6">mall &#8212; hospital &#8212; airport</p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 5+ gates, any configuration</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Multi-floor support</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> API integration</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Custom branding</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-day setup support</li>
+                </ul>
+            </div>
+        </div>
 
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="plan-name">Single Gate</div>
-                    <div class="price">Rp 30.000.000</div>
-                    <div class="price-note"><span data-en="one-time" data-id="sekali bayar">one-time</span></div>
-                    <div class="plan-desc">
-                        <ul>
-                            <li>1 gate unit (entry OR exit)</li>
-                            <li>Admin station + 10" touchscreen</li>
-                            <li>Boom barrier (3-4m arm)</li>
-                            <li>Thermal printer + camera</li>
-                            <li>QR barcode scanner</li>
-                            <li>Installation & configuration</li>
-                            <li>7-day setup support</li>
-                        </ul>
-                    </div>
+        <!-- Recurring Services -->
+        <div class="mt-12">
+            <div class="text-center mb-8">
+                <h2 class="text-xl font-bold mb-3"><span data-en="Recurring Services" data-id="Layanan Berlangganan">Recurring Services</span></h2>
+                <p class="text-w-dim text-sm">Keep your gates running at peak performance.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                    <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Annual Maintenance</div>
+                    <div class="text-2xl font-extrabold text-w-gold-b mb-1">Rp 3.000.000</div>
+                    <p class="text-w-dim text-sm mb-4">per gate / year</p>
+                    <ul class="space-y-2 text-sm text-w-text2">
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Barrier mechanism inspection</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Printer head &amp; paper replacement</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Camera lens cleaning</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Firmware updates</li>
+                    </ul>
                 </div>
-                <div class="pricing-card featured">
-                    <div class="plan-name">Entry + Exit</div>
-                    <div class="price">Rp 60.000.000</div>
-                    <div class="price-note">one-time · most popular</div>
-                    <div class="plan-desc">
-                        <ul>
-                            <li>1 entry + 1 exit gate</li>
-                            <li>2× boom barriers</li>
-                            <li>2× touchscreen + printer + camera</li>
-                            <li>2× QR barcode scanner</li>
-                            <li>Shared database</li>
-                            <li>QRIS payment at exit</li>
-                            <li>Installation & 7-day support</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="pricing-card">
-                    <div class="plan-name">Multi-Gate</div>
-                    <div class="price">Rp 125.000.000</div>
-                    <div class="price-note">one-time · up to 4 gates</div>
-                    <div class="plan-desc">
-                        <ul>
-                            <li>Up to 4 gate units</li>
-                            <li>4× boom barriers</li>
-                            <li>Admin monitoring station</li>
-                            <li>Networked (all gates linked)</li>
-                            <li>On-site installation</li>
-                            <li>7-day setup support</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="pricing-card">
-                    <div class="plan-name"><span data-en="Enterprise" data-id="Perusahaan">Enterprise</span></div>
-                    <div class="price"><span data-en="Custom" data-id="Hubungi Kami">Custom</span></div>
-                    <div class="price-note">mall · hospital · airport</div>
-                    <div class="plan-desc">
-                        <ul>
-                            <li>5+ gates, any configuration</li>
-                            <li>Multi-floor support</li>
-                            <li>API integration</li>
-                            <li>Custom branding</li>
-                            <li>7-day setup support</li>
-                        </ul>
-                    </div>
+                <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                    <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Remote Monitoring</div>
+                    <div class="text-2xl font-extrabold text-w-gold-b mb-1">Rp 1.500.000</div>
+                    <p class="text-w-dim text-sm mb-4"><span data-en="per month" data-id="per bulan">per month</span></p>
+                    <ul class="space-y-2 text-sm text-w-text2">
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 24/7 gate status monitoring</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Revenue alerts</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Fault detection</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Telegram notifications</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Remote troubleshooting</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-            <!-- Recurring Services -->
-            <div style="margin-top: 48px;">
-                <div class="section-header">
-                    <div class="gold-divider"></div>
-                    <h2><span data-en="Recurring Services" data-id="Layanan Berlangganan">Recurring Services</span></h2>
-                    <p>Keep your gates running at peak performance.</p>
-                </div>
-                <div class="pricing-grid" style="max-width: 500px; margin: 0 auto;">
-                    <div class="pricing-card">
-                        <div class="plan-name">Annual Maintenance</div>
-                        <div class="price">Rp 3.000.000</div>
-                        <div class="price-note">per gate / year</div>
-                        <div class="plan-desc">
-                            <ul>
-                                <li>Barrier mechanism inspection</li>
-                                <li>Printer head & paper replacement</li>
-                                <li>Camera lens cleaning</li>
-                                <li>Barrier mechanism inspection</li>
-                                <li>Firmware updates</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="pricing-card">
-                        <div class="plan-name">Remote Monitoring</div>
-                        <div class="price">Rp 1.500.000</div>
-                        <div class="price-note"><span data-en="per month" data-id="per bulan">per month</span></div>
-                        <div class="plan-desc">
-                            <ul>
-                                <li>24/7 gate status monitoring</li>
-                                <li>Revenue alerts</li>
-                                <li>Fault detection</li>
-                                <li>Telegram notifications</li>
-                                <li>Remote troubleshooting</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 32px;">
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">All prices include standard installation. Remote locations may incur travel costs. Contact us for a quote.</p>
-                <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangGates" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 16px; background:#25D366;">💬 WhatsApp Sales</a>
-            </div>
+        <p class="text-center text-w-dim text-sm mt-8">All prices include standard installation. Remote locations may incur travel costs. Contact us for a quote.</p>
+        <div class="text-center mt-4">
+            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangGates" target="_blank" rel="noopener" class="inline-block bg-[#25D366] text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition no-underline">&#128172; WhatsApp Sales</a>
         </div>
     </section>
 
     <!-- Keyboard Shortcuts -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Keyboard Shortcuts</h2>
-                <p>Operate the gate kiosk with keyboard or touch.</p>
-            </div>
-
-            <table class="shortcuts-table">
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Keyboard Shortcuts</h2>
+            <p class="text-w-dim">Operate the gate kiosk with keyboard or touch.</p>
+        </div>
+        <div class="max-w-2xl mx-auto">
+            <table class="w-full text-sm">
                 <thead>
-                    <tr><th>Key</th><th>Action</th></tr>
+                    <tr class="border-b border-w-border">
+                        <th class="text-left py-3 px-4 text-w-gold font-semibold">Key</th>
+                        <th class="text-left py-3 px-4 text-w-gold font-semibold">Action</th>
+                    </tr>
                 </thead>
-                <tbody>
-                    <tr><td><code>1</code></td><td>Switch to Entry mode</td></tr>
-                    <tr><td><code>2</code></td><td>Switch to Exit mode</td></tr>
-                    <tr><td><code>Tab</code></td><td>Toggle Entry / Exit</td></tr>
-                    <tr><td><code>Space</code></td><td>Simulate plate detection</td></tr>
-                    <tr><td><code>Enter</code></td><td>Confirm / Take ticket / Process</td></tr>
-                    <tr><td><code>A</code></td><td>Admin dashboard (password protected)</td></tr>
-                    <tr><td><code>R</code></td><td>Revenue reports</td></tr>
-                    <tr><td><code>L</code></td><td>Lost ticket flow</td></tr>
-                    <tr><td><code>ESC</code></td><td>Back / Cancel</td></tr>
+                <tbody class="text-w-text2">
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">1</code></td><td class="py-3 px-4">Switch to Entry mode</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">2</code></td><td class="py-3 px-4">Switch to Exit mode</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Tab</code></td><td class="py-3 px-4">Toggle Entry / Exit</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Space</code></td><td class="py-3 px-4">Simulate plate detection</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Enter</code></td><td class="py-3 px-4">Confirm / Take ticket / Process</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">A</code></td><td class="py-3 px-4">Admin dashboard (password protected)</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">R</code></td><td class="py-3 px-4">Revenue reports</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">L</code></td><td class="py-3 px-4">Lost ticket flow</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">ESC</code></td><td class="py-3 px-4">Back / Cancel</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="app-section">
-        <div class="container" style="text-align: center;">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Ready to Automate Your Parking?</h2>
-                <p>Contact our sales team for a demo, quote, or site survey.</p>
+    <!-- CTA -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16 text-center">
+        <h2 class="text-2xl font-bold mb-3">Ready to Automate Your Parking?</h2>
+        <p class="text-w-dim mb-6">Contact our sales team for a demo, quote, or site survey.</p>
+        <a href="mailto:sales@dalang.io?subject=WayangGates%20Demo%20Request" class="inline-block bg-w-gold text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-w-gold-b transition no-underline">Email: sales@dalang.io</a>
+    </section>
+
+    <!-- Trust + Guarantee -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16 border-t border-w-border">
+        <div class="bg-w-card border border-w-border rounded-2xl p-8 text-center">
+            <h3 class="text-lg font-bold text-w-gold mb-6">Garansi &amp; Jaminan Kami</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div class="p-3"><span class="block text-2xl mb-2">&#128737;</span><span class="text-w-text font-semibold">Garansi Hardware 1 Tahun</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128218;</span><span class="text-w-text font-semibold">7 Hari Setup &amp; Pelatihan</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128242;</span><span class="text-w-text font-semibold">Dukungan Teknis via WhatsApp</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128274;</span><span class="text-w-text font-semibold">100% Data Milik Anda &#8212; Tanpa Cloud</span></div>
             </div>
-            <a href="mailto:sales@dalang.io?subject=WayangGates%20Demo%20Request" class="btn btn-primary" style="font-size: 1.1rem; padding: 18px 40px;">Email: sales@dalang.io</a>
         </div>
     </section>
 
+    <!-- Trust Bar -->
+    <div class="border-t border-b border-w-border-g bg-w-bg2 py-4">
+        <div class="max-w-[1200px] mx-auto px-6 flex flex-wrap justify-center gap-6 md:gap-10 text-xs text-w-text2">
+            <span>&#127470;&#127465; Made in Indonesia</span>
+            <span>&#127970; PT Komponen Pusat Data</span>
+            <span>&#128274; 100% Data Milik Anda</span>
+            <span>&#128222; +62 895-4032-00032</span>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="py-12 border-t border-w-border-g text-center">
-        <div class="max-w-[1000px] mx-auto px-6 relative z-[1]">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-[1]">
             <p class="text-w-dim text-sm mb-2">Tel: +62 895-4032-00032 | Email: <a href="mailto:sales@dalang.io" class="text-w-gold no-underline hover:underline">sales@dalang.io</a></p>
-            <p class="text-w-dim text-sm mb-2"><strong>WayangOS</strong> â€” The Shadow that Powers the Machine</p>
+            <p class="text-w-dim text-sm mb-2"><strong>WayangOS</strong> &#8212; The Shadow that Powers the Machine</p>
             <p class="text-w-text2 text-sm italic mb-2">Ancient Art. Bare Metal.</p>
             <p class="text-w-dim text-sm">
-                Built by <a href="https://github.com/mashanz" target="_blank" class="text-w-gold no-underline hover:underline">Hans Sumardhi</a> Â·
-                <a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-gold no-underline hover:underline">WayangOS</a> Â·
-                <a href="../apps.html" class="text-w-gold no-underline hover:underline">Apps</a> Â·
-                GPLv2 (kernel) Â· MIT (userspace)
+                &copy; 2026 Dalang Pte Ltd &#183;
+                <a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-gold no-underline hover:underline">WayangOS</a> &#183;
+                <a href="../apps.html" class="text-w-gold no-underline hover:underline">Apps</a> &#183;
+                GPLv2 (kernel) &#183; MIT (userspace)
             </p>
         </div>
     </footer>
@@ -382,14 +423,13 @@
         <img id="lb-img" class="lb-img" src="" alt="Screenshot preview">
         <div class="lb-counter" id="lb-counter"></div>
     </div>
+    <script src="/assets/lightbox.js?v=b01b14e"></script>
 
-    <script src="/assets/lightbox.js?v=3497984"></script>
-
-<!-- WhatsApp Floating Button -->
+    <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20WayangOS" target="_blank" rel="noopener" class="whatsapp-float">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
-    <script src="/assets/i18n.js?v=3497984"></script>
-    <script src="/assets/main.js?v=3497984"></script>
+    <script src="/assets/i18n.js?v=b01b14e"></script>
+    <script src="/assets/main.js?v=b01b14e"></script>
 </body>
 </html>

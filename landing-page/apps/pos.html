@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://wayang.dalang.io/apps/pos.html">
     <meta property="og:image" content="https://wayang.dalang.io/assets/og-pos.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WayangPOS — Mesin Kasir untuk UMKM">
+    <meta name="twitter:title" content="WayangPOS &#8212; Mesin Kasir untuk UMKM">
     <meta name="twitter:description" content="Sistem kasir lengkap. Layar sentuh, cetak struk, inventaris. Mulai Rp 8 juta.">
     <meta name="twitter:image" content="https://wayang.dalang.io/assets/og-pos.png">
     <link rel="canonical" href="https://wayang.dalang.io/apps/pos.html">
@@ -35,45 +35,33 @@
       "image": "https://wayang.dalang.io/assets/og-pos.png"
     }
     </script>
-    <title>WayangPOS — Turn Any Screen Into a Point of Sale</title>
-    <link rel="stylesheet" href="/assets/lightbox.css?v=3497984">
-        <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'w-bg': '#0a0806','w-bg2': '#110e09','w-card': '#1a1410','w-card-h': '#221b13',
-            'w-gold': '#c8941a','w-gold-b': '#f0b830','w-gold-dim': '#c8941a22','w-gold-glow': '#c8941a44',
-            'w-text': '#f0e8d8','w-text2': '#a09070','w-dim': '#5a4a30',
-            'w-border': '#2e2318','w-border-g': '#c8941a44','w-green': '#7ec87e',
-          }
-        }
-      }
-    }
-    </script>
-    <link rel="stylesheet" href="/assets/style.css?v=3497984">
+    <title>WayangPOS &#8212; Turn Any Screen Into a Point of Sale</title>
+    <link rel="stylesheet" href="/assets/lightbox.css?v=b01b14e">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=b01b14e">
+    <link rel="stylesheet" href="/assets/style.css?v=b01b14e">
 </head>
 <body class="bg-w-bg text-w-text font-['Inter',system-ui,sans-serif] leading-relaxed overflow-x-hidden w-full">
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 w-full max-w-[100vw] py-4 bg-w-bg border-b border-w-border-g z-[100]">
-        <div class="max-w-[1000px] mx-auto px-6 relative z-[1] flex justify-between items-center">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-[1] flex justify-between items-center">
             <a href="../index.html" class="text-xl font-bold text-w-gold no-underline tracking-tight flex items-center gap-2">
-                <span class="text-lg opacity-70 text-w-gold-b">ê¦®ê¦ªê¦</span>Wayang<span class="text-w-text">OS</span>
+                <span class="text-lg opacity-70 text-w-gold-b">ꦮꦪꦁ</span>
+                Wayang<span class="text-w-text">OS</span>
             </a>
             <div class="flex items-center gap-2">
                 <div class="lang-switch-mobile hidden gap-1 items-center">
                     <button onclick="setLang('en')" class="px-2 py-0.5 rounded text-xs font-semibold bg-transparent text-w-text2 border border-w-border cursor-pointer">EN</button>
                     <button onclick="setLang('id')" class="px-2 py-0.5 rounded text-xs font-semibold bg-w-gold text-black border border-w-gold cursor-pointer">ID</button>
                 </div>
-                <button class="nav-toggle hidden bg-transparent border-none text-w-gold text-2xl cursor-pointer p-1" aria-label="Menu">â˜°</button>
+                <button class="nav-toggle hidden bg-transparent border-none text-w-gold text-2xl cursor-pointer p-1" aria-label="Menu">☰</button>
             </div>
-            <ul class="nav-links flex gap-8 list-none items-center">
+            <ul class="nav-links flex gap-8 list-none">
                 <li><a href="../index.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Home</a></li>
                 <li><a href="../index.html#features" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Features</a></li>
                 <li><a href="../download.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Download</a></li>
-                <li><a href="../apps.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Apps</a></li>
+                <li><a href="../apps.html" class="text-w-gold no-underline text-sm">Apps</a></li>
+                <li><a href="../about.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">About</a></li>
                 <li><a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">GitHub</a></li>
                 <li><div class="lang-switch flex gap-1 items-center ml-2">
                     <button onclick="setLang('en')" id="btn-en" class="px-2 py-0.5 rounded text-xs font-semibold bg-transparent text-w-text2 border border-w-border cursor-pointer">EN</button>
@@ -85,257 +73,384 @@
     </nav>
 
     <!-- Breadcrumb -->
-    <div style="padding-top: 80px;">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="../index.html">Home</a>
-                <span class="sep">›</span>
-                <a href="../apps.html">Apps</a>
-                <span class="sep">›</span>
-                <span class="current">WayangPOS</span>
-            </div>
-        </div>
+    <div class="max-w-[1200px] mx-auto px-6 pt-24 pb-2">
+        <nav class="text-sm text-w-dim">
+            <a href="../index.html" class="text-w-text2 hover:text-w-gold no-underline">Home</a>
+            <span class="mx-2">/</span>
+            <a href="../apps.html" class="text-w-text2 hover:text-w-gold no-underline">Apps</a>
+            <span class="mx-2">/</span>
+            <span class="text-w-gold">WayangPOS</span>
     </div>
 
     <!-- Hero -->
-    <section class="app-hero" style="padding-top: 40px;">
-        <div class="hero-icon">🛒</div>
-        <h1>Wayang<span class="accent">POS</span></h1>
-        <p class="tagline">Turn any screen into a complete point of sale system</p>
-        <p class="desc">Perfect for restaurants, cafes, food stalls, and retail shops. Accept payments, print receipts, track inventory — all from one simple device.</p>
-        <div class="hero-buttons">
-            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangPOS" target="_blank" rel="noopener" class="btn btn-primary" style="background:#25D366;">💬 WhatsApp Sales</a>
-            <a href="mailto:sales@dalang.io?subject=WayangPOS%20Inquiry" class="btn btn-secondary">Email: Email</a>
+    <section class="hero-glow-sm text-center pt-8 pb-16 px-6 relative">
+        <div class="text-6xl mb-6 relative z-[1]">&#127978;</div>
+        <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-extrabold tracking-tighter mb-4 relative z-[1]">
+            Wayang<span class="text-w-gold">POS</span>
+        </h1>
+        <p class="text-[clamp(0.95rem,2vw,1.1rem)] text-w-text2 max-w-[650px] mx-auto mb-4 relative z-[1]">Turn any screen into a complete point of sale system</p>
+        <p class="text-w-dim max-w-3xl mx-auto mb-8 relative z-[1]">Perfect for restaurants, cafes, food stalls, and retail shops. Accept payments, print receipts, track inventory &#8212; all from one simple device.</p>
+        <div class="flex flex-wrap justify-center gap-4 relative z-[1]">
+            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangPOS" target="_blank" rel="noopener" class="bg-[#25D366] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition no-underline">&#128172; WhatsApp Sales</a>
+            <a href="mailto:sales@dalang.io?subject=WayangPOS%20Inquiry" class="border border-w-border text-w-text2 px-6 py-3 rounded-lg font-semibold hover:border-w-gold hover:text-w-gold transition no-underline">&#9993; Email Sales</a>
         </div>
     </section>
 
     <!-- Hero Screenshot -->
-    <section class="hero-screenshot">
-        <div class="container">
-            <img src="../assets/screenshots/dashboard.png" alt="WayangPOS Dashboard — complete point of sale running on WayangOS">
-            <p class="caption">WayangPOS running on WayangOS — ready to take orders in seconds</p>
+    <div class="max-w-[1200px] mx-auto px-6 mb-16">
+        <div class="border border-w-border rounded-xl overflow-hidden">
+            <img src="../assets/screenshots/dashboard.png" alt="WayangPOS Dashboard &#8212; complete point of sale running on WayangOS" class="w-full">
         </div>
+        <p class="text-center text-w-dim text-sm mt-3">WayangPOS running on WayangOS &#8212; ready to take orders in seconds</p>
+    </div>
+
+
+    <!-- 3D Product Preview -->
+    <section class="max-w-[800px] mx-auto px-6 pb-12">
+      <div id="viewer3d" style="width:100%; height:400px; border-radius:16px; overflow:hidden; border:1px solid #2e2318; background:#0a0806;"></div>
+      <p class="text-center text-w-dim text-sm mt-3"><span data-en="Drag to rotate &bull; Scroll to zoom" data-id="Geser untuk memutar &bull; Scroll untuk memperbesar">Drag to rotate &bull; Scroll to zoom</span></p>
     </section>
 
-    <!-- Features -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Everything Your Business Needs</h2>
-                <p>A complete point of sale system. No monthly fees. No internet required.</p>
-            </div>
+    <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.162/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.162/examples/jsm/"}}</script>
+    <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">💰</div>
-                    <h3>Take Orders Instantly</h3>
-                    <p>Tap items, adjust quantities, apply discounts — cash and QRIS payments accepted. Fast checkout for busy hours.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🧾</div>
-                    <h3>Print Receipts</h3>
-                    <p>Connect any USB thermal printer and print professional receipts automatically. Your store name, items, and totals — all formatted perfectly.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">📋</div>
-                    <h3>Manage Your Menu</h3>
-                    <p>Add items, set prices, organize by category. Track stock levels and get alerts when inventory runs low.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">📊</div>
-                    <h3>Sales Reports</h3>
-                    <p>Daily sales summaries, order history, and CSV exports. Know exactly how your business is doing at a glance.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🔐</div>
-                    <h3>Staff Accounts</h3>
-                    <p>Admin and cashier roles with password login. Auto-lock after 5 minutes of inactivity keeps your data safe.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🚀</div>
-                    <h3>Boots in Seconds</h3>
-                    <p>Power on and start selling immediately. No desktop, no loading screens — just your POS, ready to go.</p>
-                </div>
+    const container = document.getElementById('viewer3d');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0806);
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+    camera.position.set(0, 1.5, 3.5);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    container.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 2;
+
+    // Lighting
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(5, 5, 5);
+    scene.add(dirLight);
+    const rimLight = new THREE.DirectionalLight(0xc8941a, 0.3);
+    rimLight.position.set(-3, 2, -3);
+    scene.add(rimLight);
+
+    new GLTFLoader().load('../assets/models/pos-terminal.glb', (gltf) => {
+      const model = gltf.scene;
+      const box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      model.position.sub(center);
+      scene.add(model);
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+
+    (function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    })();
+    </script>
+
+    <!-- Features -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Everything Your Business Needs</h2>
+            <p class="text-w-dim">A complete point of sale system. No monthly fees. No internet required.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128722;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Take Orders Instantly</h3>
+                <p class="text-w-dim text-sm">Tap items, adjust quantities, apply discounts &#8212; cash and QRIS payments accepted. Fast checkout for busy hours.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#129534;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Print Receipts</h3>
+                <p class="text-w-dim text-sm">Connect any USB thermal printer and print professional receipts automatically. Your store name, items, and totals &#8212; all formatted perfectly.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128203;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Manage Your Menu</h3>
+                <p class="text-w-dim text-sm">Add items, set prices, organize by category. Track stock levels and get alerts when inventory runs low.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128200;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Sales Reports</h3>
+                <p class="text-w-dim text-sm">Daily sales summaries, order history, and CSV exports. Know exactly how your business is doing at a glance.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128101;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Staff Accounts</h3>
+                <p class="text-w-dim text-sm">Admin and cashier roles with password login. Auto-lock after 5 minutes of inactivity keeps your data safe.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128640;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Boots in Seconds</h3>
+                <p class="text-w-dim text-sm">Power on and start selling immediately. No desktop, no loading screens &#8212; just your POS, ready to go.</p>
             </div>
         </div>
     </section>
 
     <!-- Screenshot Gallery -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2><span data-en="See It in Action" data-id="Lihat Aksinya">See It in Action</span></h2>
-                <p>Click any screenshot to enlarge. Navigate with arrow keys.</p>
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3"><span data-en="See It in Action" data-id="Lihat Aksinya">See It in Action</span></h2>
+            <p class="text-w-dim">Click any screenshot to enlarge. Navigate with arrow keys.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 screenshot-gallery">
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/dashboard.png" alt="Dashboard" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Dashboard</p>
             </div>
-
-            <div class="screenshot-gallery">
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/dashboard.png" alt="Dashboard">
-                    <div class="caption">Dashboard</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/order.png" alt="Order Screen">
-                    <div class="caption">Order Screen</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/menu-mgmt.png" alt="Menu Management">
-                    <div class="caption">Menu Management</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/search.png" alt="Search">
-                    <div class="caption">Search</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/history.png" alt="Order History">
-                    <div class="caption">Order History</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/settings.png" alt="Settings">
-                    <div class="caption">Settings</div>
-                </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/order.png" alt="Order Screen" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Order Screen</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/menu-mgmt.png" alt="Menu Management" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Menu Management</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/search.png" alt="Search" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Search</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/history.png" alt="Order History" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Order History</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/settings.png" alt="Settings" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Settings</p>
             </div>
         </div>
     </section>
 
     <!-- Keyboard Shortcuts -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Keyboard Shortcuts</h2>
-                <p>Navigate everything without leaving the keyboard.</p>
-            </div>
-
-            <table class="shortcuts-table">
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Keyboard Shortcuts</h2>
+            <p class="text-w-dim">Navigate everything without leaving the keyboard.</p>
+        </div>
+        <div class="max-w-2xl mx-auto">
+            <table class="w-full text-sm">
                 <thead>
-                    <tr><th>Key</th><th>Action</th></tr>
+                    <tr class="border-b border-w-border">
+                        <th class="text-left py-3 px-4 text-w-gold font-semibold">Key</th>
+                        <th class="text-left py-3 px-4 text-w-gold font-semibold">Action</th>
+                    </tr>
                 </thead>
-                <tbody>
-                    <tr><td><code>↑</code> / <code>↓</code></td><td>Navigate menu items</td></tr>
-                    <tr><td><code>Enter</code></td><td>Select / confirm</td></tr>
-                    <tr><td><code>Esc</code></td><td>Go back / cancel</td></tr>
-                    <tr><td><code>F1</code> – <code>F5</code></td><td>Switch screens (Dashboard, Orders, Menu, History, Settings)</td></tr>
-                    <tr><td><code>/</code></td><td>Search</td></tr>
-                    <tr><td><code>Tab</code></td><td>Switch between panels</td></tr>
+                <tbody class="text-w-text2">
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">&#8593;</code> / <code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">&#8595;</code></td><td class="py-3 px-4">Navigate menu items</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Enter</code></td><td class="py-3 px-4">Select / confirm</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Esc</code></td><td class="py-3 px-4">Go back / cancel</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">F1</code> &#8211; <code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">F5</code></td><td class="py-3 px-4">Switch screens (Dashboard, Orders, Menu, History, Settings)</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">/</code></td><td class="py-3 px-4">Search</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Tab</code></td><td class="py-3 px-4">Switch between panels</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 
-    <!-- Get Your POS Kit — unique to POS -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Get Your POS Kit</h2>
-                <p>Ready-to-use POS hardware + software. No monthly fees. No subscriptions.</p>
+    <!-- Get Your POS Kit -->
+    <section id="pricing" class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Get Your POS Kit</h2>
+            <p class="text-w-dim">Ready-to-use POS hardware + software. No monthly fees. No subscriptions.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Starter Kit -->
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition text-center">
+                <div class="text-3xl mb-4">&#128230;</div>
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Starter Kit</div>
+                <p class="text-w-dim text-sm mb-3">Perfect for small shops &amp; food stalls</p>
+                <div class="text-3xl font-extrabold text-w-gold-b mb-6">Rp 8.000.000</div>
+                <ul class="text-left space-y-3 text-sm text-w-text2 mb-8">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> WayangPOS Terminal (ready to use)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 10.1" Industrial Touchscreen</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Power supply + cables</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Pre-loaded system storage</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Setup, tested &amp; ready to use</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-day setup support</li>
+                </ul>
+                <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangPOS" target="_blank" rel="noopener" class="block text-center bg-w-gold text-black py-3 rounded-lg font-semibold hover:bg-w-gold-b transition no-underline">&#128172; WhatsApp Order</a>
             </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
-
-                <!-- Starter Kit -->
-                <div style="background: var(--bg-card); border: 2px solid var(--border); border-radius: 12px; padding: 32px; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 12px;">📦</div>
-                    <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 8px;">Starter Kit</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Perfect for small shops & food stalls</p>
-                    <div style="margin-bottom: 20px;">
-                        <span style="font-size: 2rem; font-weight: 800; color: var(--accent);">Rp 8.000.000</span>
-                    </div>
-                    <ul style="text-align: left; list-style: none; padding: 0; margin-bottom: 24px; color: var(--text-primary); font-size: 0.9rem; line-height: 2;">
-                        <li>✅ WayangPOS Terminal (ready to use)</li>
-                        <li>✅ 10.1" Industrial Touchscreen</li>
-                        <li>✅ Power supply + cables</li>
-                        <li>✅ Pre-loaded system storage</li>
-                        <li>✅ Setup, tested & ready to use</li>
-                        <li>✅ 7-day setup support</li>
-                    </ul>
-                    <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangPOS" target="_blank" rel="noopener" style="display: block; background: var(--accent); color: var(--bg-primary); padding: 14px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem;">&#128172; WhatsApp Order</a>
-                </div>
-
-                <!-- Professional Kit -->
-                <div style="background: var(--bg-card); border: 2px solid var(--accent); border-radius: 12px; padding: 32px; text-align: center; position: relative;">
-                    <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--bg-primary); padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">BEST VALUE</div>
-                    <div style="font-size: 2.5rem; margin-bottom: 12px;">🏪</div>
-                    <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 8px;">Professional Kit</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Most popular — print receipts instantly</p>
-                    <div style="margin-bottom: 20px;">
-                        <span style="font-size: 2rem; font-weight: 800; color: var(--accent);">Rp 10.000.000</span>
-                    </div>
-                    <ul style="text-align: left; list-style: none; padding: 0; margin-bottom: 24px; color: var(--text-primary); font-size: 0.9rem; line-height: 2;">
-                        <li>✅ WayangPOS Terminal (ready to use)</li>
-                        <li>✅ 10.1" Industrial Touchscreen</li>
-                        <li>✅ 80mm USB Thermal Printer</li>
-                        <li>✅ Power supply + all cables</li>
-                        <li>✅ Pre-loaded system storage</li>
-                        <li>✅ Setup, tested & ready to use</li>
-                        <li>✅ 7-day setup support</li>
-                    </ul>
-                    <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangPOS" target="_blank" rel="noopener" style="display: block; background: var(--accent); color: var(--bg-primary); padding: 14px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem;">&#128172; WhatsApp Order</a>
-                </div>
-
-                <!-- Complete Kit -->
-                <div style="background: var(--bg-card); border: 2px solid var(--border); border-radius: 12px; padding: 32px; text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 12px;">🏭</div>
-                    <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 8px;">Complete Kit</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px;">Full setup — everything included</p>
-                    <div style="margin-bottom: 20px;">
-                        <span style="font-size: 2rem; font-weight: 800; color: var(--accent);">Rp 12.500.000</span>
-                    </div>
-                    <ul style="text-align: left; list-style: none; padding: 0; margin-bottom: 24px; color: var(--text-primary); font-size: 0.9rem; line-height: 2;">
-                        <li>✅ WayangPOS Terminal (ready to use)</li>
-                        <li>✅ 10.1" Industrial Touchscreen</li>
-                        <li>✅ 80mm USB Thermal Printer</li>
-                        <li>✅ Cash Drawer (auto-open on payment)</li>
-                        <li>✅ Barcode Scanner</li>
-                        <li>✅ Power supply + all cables</li>
-                        <li>✅ Pre-loaded system storage</li>
-                        <li>✅ Setup, tested & ready to use</li>
-                        <li>✅ 7-day setup support</li>
-                    </ul>
-                    <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangPOS" target="_blank" rel="noopener" style="display: block; background: var(--accent); color: var(--bg-primary); padding: 14px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem;">&#128172; WhatsApp Order</a>
-                </div>
-
+            <!-- Professional Kit -->
+            <div class="bg-w-card border-2 border-w-gold rounded-xl p-8 hover:border-w-gold-b transition text-center relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-w-gold text-black px-4 py-1 rounded-full text-xs font-bold">BEST VALUE</div>
+                <div class="text-3xl mb-4">&#11088;</div>
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Professional Kit</div>
+                <p class="text-w-dim text-sm mb-3">Most popular &#8212; print receipts instantly</p>
+                <div class="text-3xl font-extrabold text-w-gold-b mb-6">Rp 10.000.000</div>
+                <ul class="text-left space-y-3 text-sm text-w-text2 mb-8">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> WayangPOS Terminal (ready to use)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 10.1" Industrial Touchscreen</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 80mm USB Thermal Printer</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Power supply + all cables</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Pre-loaded system storage</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Setup, tested &amp; ready to use</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-day setup support</li>
+                </ul>
+                <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangPOS" target="_blank" rel="noopener" class="block text-center bg-w-gold text-black py-3 rounded-lg font-semibold hover:bg-w-gold-b transition no-underline">&#128172; WhatsApp Order</a>
             </div>
-
-            <!-- Annual Care Add-on -->
-            <div style="background: var(--bg-card); border: 2px solid var(--accent); border-radius: 12px; padding: 32px; text-align: center; margin-bottom: 24px;">
-                <h3 style="color: var(--accent); font-size: 1.3rem; margin-bottom: 8px;">🛡️ Annual Care — Rp 1.000.000/year</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Optional add-on for any kit</p>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; color: var(--text-primary); font-size: 0.9rem;">
-                    <span>✅ Priority support</span>
-                    <span>✅ Hardware replacement warranty</span>
-                    <span>✅ Remote troubleshooting</span>
-                    <span>✅ Software updates</span>
-                </div>
+            <!-- Complete Kit -->
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition text-center">
+                <div class="text-3xl mb-4">&#127942;</div>
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Complete Kit</div>
+                <p class="text-w-dim text-sm mb-3">Full setup &#8212; everything included</p>
+                <div class="text-3xl font-extrabold text-w-gold-b mb-6">Rp 12.500.000</div>
+                <ul class="text-left space-y-3 text-sm text-w-text2 mb-8">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> WayangPOS Terminal (ready to use)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 10.1" Industrial Touchscreen</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 80mm USB Thermal Printer</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Cash Drawer (auto-open on payment)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Barcode Scanner</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Power supply + all cables</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Pre-loaded system storage</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Setup, tested &amp; ready to use</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-day setup support</li>
+                </ul>
+                <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangPOS" target="_blank" rel="noopener" class="block text-center bg-w-gold text-black py-3 rounded-lg font-semibold hover:bg-w-gold-b transition no-underline">&#128172; WhatsApp Order</a>
             </div>
+        </div>
 
-            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center;">
-                <h3 style="color: var(--accent); font-size: 1.1rem; margin-bottom: 12px;">Zero Maintenance</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">WayangPOS is designed to just work. No internet needed. No updates. No subscriptions. Power on and sell.</p>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; color: var(--text-secondary); font-size: 0.9rem;">
-                    <span>🔧 Pre-configured & tested</span>
-                    <span>🚀 Boots in 5 seconds</span>
-                    <span>📴 No internet required</span>
-                    <span>🔄 No monthly fees, ever</span>
-                    <span>📦 Ships across Indonesia</span>
-                </div>
+        <!-- Annual Care -->
+        <div class="bg-w-card border-2 border-w-gold rounded-xl p-8 text-center mb-6">
+            <h3 class="text-w-gold text-lg font-bold mb-2">&#128736; Annual Care &#8212; Rp 1.000.000/year</h3>
+            <p class="text-w-dim text-sm mb-4">Optional add-on for any kit</p>
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-w-text2">
+                <span>&#10003; Priority support</span>
+                <span>&#10003; Hardware replacement warranty</span>
+                <span>&#10003; Remote troubleshooting</span>
+                <span>&#10003; Software updates</span>
+            </div>
+        </div>
+
+        <!-- Zero Maintenance -->
+        <div class="bg-w-card border border-w-border rounded-xl p-8 text-center">
+            <h3 class="text-w-gold text-lg font-bold mb-3">Zero Maintenance</h3>
+            <p class="text-w-dim text-sm mb-4">WayangPOS is designed to just work. No internet needed. No updates. No subscriptions. Power on and sell.</p>
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-w-text2">
+                <span>&#9989; Pre-configured &amp; tested</span>
+                <span>&#9889; Boots in 5 seconds</span>
+                <span>&#128274; No internet required</span>
+                <span>&#128176; No monthly fees, ever</span>
+                <span>&#128230; Ships across Indonesia</span>
             </div>
         </div>
     </section>
 
+    <!-- Comparison Table -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-w-gold mb-3">
+                <span data-en="WayangPOS vs. Cloud POS &#8212; 3-Year Cost Comparison" data-id="WayangPOS vs. POS Cloud &#8212; Perbandingan Biaya 3 Tahun">WayangPOS vs. Cloud POS &#8212; 3-Year Cost Comparison</span>
+            </h2>
+            <p class="text-w-dim text-sm">
+                <span data-en="One-time payment vs. never-ending subscriptions. You do the math." data-id="Sekali bayar vs. langganan tanpa akhir. Anda hitung sendiri.">One-time payment vs. never-ending subscriptions. You do the math.</span>
+            </p>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b-2 border-w-gold">
+                        <th class="py-3 px-4 text-left text-w-text2"></th>
+                        <th class="py-3 px-4 text-center text-w-gold font-bold">WayangPOS</th>
+                        <th class="py-3 px-4 text-center text-w-text2">Moka POS</th>
+                        <th class="py-3 px-4 text-center text-w-text2">iSeller</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-w-border">
+                        <td class="py-3 px-4 text-w-text2"><span data-en="Upfront Cost" data-id="Harga Awal">Upfront Cost</span></td>
+                        <td class="py-3 px-4 text-center text-w-gold font-bold">Rp 8 juta</td>
+                        <td class="py-3 px-4 text-center text-w-text2">Gratis</td>
+                        <td class="py-3 px-4 text-center text-w-text2">Gratis</td>
+                    </tr>
+                    <tr class="border-b border-w-border">
+                        <td class="py-3 px-4 text-w-text2"><span data-en="Monthly Fee" data-id="Biaya Bulanan">Monthly Fee</span></td>
+                        <td class="py-3 px-4 text-center text-w-gold font-bold">Rp 0</td>
+                        <td class="py-3 px-4 text-center text-w-text2">Rp 299K&#8211;499K</td>
+                        <td class="py-3 px-4 text-center text-w-text2">Rp 200K&#8211;500K</td>
+                    </tr>
+                    <tr class="border-b border-w-border bg-w-card">
+                        <td class="py-3 px-4 text-w-text font-bold"><span data-en="3-Year Total" data-id="Biaya 3 Tahun">3-Year Total</span></td>
+                        <td class="py-3 px-4 text-center text-w-gold font-extrabold">Rp 8 juta</td>
+                        <td class="py-3 px-4 text-center text-red-500 font-bold">Rp 10.8&#8211;18 juta</td>
+                        <td class="py-3 px-4 text-center text-red-500 font-bold">Rp 7.2&#8211;18 juta</td>
+                    </tr>
+                    <tr class="border-b border-w-border">
+                        <td class="py-3 px-4 text-w-text2"><span data-en="Needs Internet?" data-id="Perlu Internet?">Needs Internet?</span></td>
+                        <td class="py-3 px-4 text-center text-w-gold font-bold">&#10060; Tidak</td>
+                        <td class="py-3 px-4 text-center text-w-text2">&#9989; Ya</td>
+                        <td class="py-3 px-4 text-center text-w-text2">&#9989; Ya</td>
+                    </tr>
+                    <tr class="border-b border-w-border">
+                        <td class="py-3 px-4 text-w-text2"><span data-en="Data in Cloud?" data-id="Data di Cloud?">Data in Cloud?</span></td>
+                        <td class="py-3 px-4 text-center text-w-gold font-bold">&#10060; Lokal</td>
+                        <td class="py-3 px-4 text-center text-w-text2">Server mereka</td>
+                        <td class="py-3 px-4 text-center text-w-text2">Server mereka</td>
+                    </tr>
+                    <tr class="border-b border-w-border">
+                        <td class="py-3 px-4 text-w-text2"><span data-en="Transaction Fee" data-id="Biaya Transaksi">Transaction Fee</span></td>
+                        <td class="py-3 px-4 text-center text-w-gold font-bold">0%</td>
+                        <td class="py-3 px-4 text-center text-w-text2">1.5&#8211;2.5%</td>
+                        <td class="py-3 px-4 text-center text-w-text2">1.5&#8211;2.5%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="text-center text-w-dim text-xs mt-4 italic">
+            <span data-en="* Prices based on publicly available information as of March 2026. Actual prices may vary." data-id="* Harga berdasarkan informasi publik per Maret 2026. Harga aktual dapat berbeda.">* Prices based on publicly available information as of March 2026. Actual prices may vary.</span>
+        </p>
+    </section>
+
+    <!-- Trust + Guarantee -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16 border-t border-w-border">
+        <div class="bg-w-card border border-w-border rounded-2xl p-8 text-center">
+            <h3 class="text-lg font-bold text-w-gold mb-6">Garansi &amp; Jaminan Kami</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div class="p-3"><span class="block text-2xl mb-2">&#128737;</span><span class="text-w-text font-semibold">Garansi Hardware 1 Tahun</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128218;</span><span class="text-w-text font-semibold">7 Hari Setup &amp; Pelatihan</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128242;</span><span class="text-w-text font-semibold">Dukungan Teknis via WhatsApp</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128274;</span><span class="text-w-text font-semibold">100% Data Milik Anda &#8212; Tanpa Cloud</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <div class="border-t border-b border-w-border-g bg-w-bg2 py-4">
+        <div class="max-w-[1200px] mx-auto px-6 flex flex-wrap justify-center gap-6 md:gap-10 text-xs text-w-text2">
+            <span>&#127470;&#127465; Made in Indonesia</span>
+            <span>&#127970; PT Komponen Pusat Data</span>
+            <span>&#128274; 100% Data Milik Anda</span>
+            <span>&#128222; +62 895-4032-00032</span>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="py-12 border-t border-w-border-g text-center">
-        <div class="max-w-[1000px] mx-auto px-6 relative z-[1]">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-[1]">
             <p class="text-w-dim text-sm mb-2">Tel: +62 895-4032-00032 | Email: <a href="mailto:sales@dalang.io" class="text-w-gold no-underline hover:underline">sales@dalang.io</a></p>
-            <p class="text-w-dim text-sm mb-2"><strong>WayangOS</strong> â€” The Shadow that Powers the Machine</p>
+            <p class="text-w-dim text-sm mb-2"><strong>WayangOS</strong> &#8212; The Shadow that Powers the Machine</p>
             <p class="text-w-text2 text-sm italic mb-2">Ancient Art. Bare Metal.</p>
             <p class="text-w-dim text-sm">
-                Built by <a href="https://github.com/mashanz" target="_blank" class="text-w-gold no-underline hover:underline">Hans Sumardhi</a> Â·
-                <a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-gold no-underline hover:underline">WayangOS</a> Â·
-                <a href="../apps.html" class="text-w-gold no-underline hover:underline">Apps</a> Â·
-                GPLv2 (kernel) Â· MIT (userspace)
+                &copy; 2026 Dalang Pte Ltd &#183;
+                <a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-gold no-underline hover:underline">WayangOS</a> &#183;
+                <a href="../apps.html" class="text-w-gold no-underline hover:underline">Apps</a> &#183;
+                GPLv2 (kernel) &#183; MIT (userspace)
             </p>
         </div>
     </footer>
@@ -349,13 +464,13 @@
         <div class="lb-counter" id="lb-counter"></div>
     </div>
 
-    <script src="/assets/lightbox.js?v=3497984"></script>
+    <script src="/assets/lightbox.js?v=b01b14e"></script>
 
-<!-- WhatsApp Floating Button -->
+    <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20WayangOS" target="_blank" rel="noopener" class="whatsapp-float">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
-    <script src="/assets/i18n.js?v=3497984"></script>
-    <script src="/assets/main.js?v=3497984"></script>
+    <script src="/assets/i18n.js?v=b01b14e"></script>
+    <script src="/assets/main.js?v=b01b14e"></script>
 </body>
 </html>

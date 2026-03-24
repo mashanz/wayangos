@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://wayang.dalang.io/apps/zeroclient.html">
     <meta property="og:image" content="https://wayang.dalang.io/assets/og-zeroclient.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WayangZeroClient — Remote Desktop Thin Client">
+    <meta name="twitter:title" content="WayangZeroClient &#8212; Remote Desktop Thin Client">
     <meta name="twitter:description" content="Ubah PC lama jadi thin client. Koneksi RDP/VNC langsung. Boot dalam hitungan detik.">
     <meta name="twitter:image" content="https://wayang.dalang.io/assets/og-zeroclient.png">
     <link rel="canonical" href="https://wayang.dalang.io/apps/zeroclient.html">
@@ -28,45 +28,33 @@
       "offers": {"@type": "Offer", "price": "0", "priceCurrency": "IDR"}
     }
     </script>
-    <title>WayangZeroClient — Connect to Your Desktop from Anywhere</title>
-    <link rel="stylesheet" href="/assets/lightbox.css?v=3497984">
-        <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'w-bg': '#0a0806','w-bg2': '#110e09','w-card': '#1a1410','w-card-h': '#221b13',
-            'w-gold': '#c8941a','w-gold-b': '#f0b830','w-gold-dim': '#c8941a22','w-gold-glow': '#c8941a44',
-            'w-text': '#f0e8d8','w-text2': '#a09070','w-dim': '#5a4a30',
-            'w-border': '#2e2318','w-border-g': '#c8941a44','w-green': '#7ec87e',
-          }
-        }
-      }
-    }
-    </script>
-    <link rel="stylesheet" href="/assets/style.css?v=3497984">
+    <title>WayangZeroClient &#8212; Connect to Your Desktop from Anywhere</title>
+    <link rel="stylesheet" href="/assets/lightbox.css?v=b01b14e">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=b01b14e">
+    <link rel="stylesheet" href="/assets/style.css?v=b01b14e">
 </head>
 <body class="bg-w-bg text-w-text font-['Inter',system-ui,sans-serif] leading-relaxed overflow-x-hidden w-full">
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 w-full max-w-[100vw] py-4 bg-w-bg border-b border-w-border-g z-[100]">
-        <div class="max-w-[1000px] mx-auto px-6 relative z-[1] flex justify-between items-center">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-[1] flex justify-between items-center">
             <a href="../index.html" class="text-xl font-bold text-w-gold no-underline tracking-tight flex items-center gap-2">
-                <span class="text-lg opacity-70 text-w-gold-b">ê¦®ê¦ªê¦</span>Wayang<span class="text-w-text">OS</span>
+                <span class="text-lg opacity-70 text-w-gold-b">ꦮꦪꦁ</span>
+                Wayang<span class="text-w-text">OS</span>
             </a>
             <div class="flex items-center gap-2">
                 <div class="lang-switch-mobile hidden gap-1 items-center">
                     <button onclick="setLang('en')" class="px-2 py-0.5 rounded text-xs font-semibold bg-transparent text-w-text2 border border-w-border cursor-pointer">EN</button>
                     <button onclick="setLang('id')" class="px-2 py-0.5 rounded text-xs font-semibold bg-w-gold text-black border border-w-gold cursor-pointer">ID</button>
                 </div>
-                <button class="nav-toggle hidden bg-transparent border-none text-w-gold text-2xl cursor-pointer p-1" aria-label="Menu">â˜°</button>
+                <button class="nav-toggle hidden bg-transparent border-none text-w-gold text-2xl cursor-pointer p-1" aria-label="Menu">☰</button>
             </div>
-            <ul class="nav-links flex gap-8 list-none items-center">
+            <ul class="nav-links flex gap-8 list-none">
                 <li><a href="../index.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Home</a></li>
                 <li><a href="../index.html#features" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Features</a></li>
                 <li><a href="../download.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Download</a></li>
-                <li><a href="../apps.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Apps</a></li>
+                <li><a href="../apps.html" class="text-w-gold no-underline text-sm">Apps</a></li>
+                <li><a href="../about.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">About</a></li>
                 <li><a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">GitHub</a></li>
                 <li><div class="lang-switch flex gap-1 items-center ml-2">
                     <button onclick="setLang('en')" id="btn-en" class="px-2 py-0.5 rounded text-xs font-semibold bg-transparent text-w-text2 border border-w-border cursor-pointer">EN</button>
@@ -78,154 +66,156 @@
     </nav>
 
     <!-- Breadcrumb -->
-    <div style="padding-top: 80px;">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="../index.html">Home</a>
-                <span class="sep">›</span>
-                <a href="../apps.html">Apps</a>
-                <span class="sep">›</span>
-                <span class="current">WayangZeroClient</span>
-            </div>
-        </div>
+    <div class="max-w-[1200px] mx-auto px-6 pt-24 pb-2">
+        <nav class="text-sm text-w-dim">
+            <a href="../index.html" class="text-w-text2 hover:text-w-gold no-underline">Home</a>
+            <span class="mx-2">/</span>
+            <a href="../apps.html" class="text-w-text2 hover:text-w-gold no-underline">Apps</a>
+            <span class="mx-2">/</span>
+            <span class="text-w-gold">WayangZeroClient</span>
     </div>
 
     <!-- Hero -->
-    <section class="app-hero" style="padding-top: 40px;">
-        <div class="hero-icon">🖥️</div>
-        <h1>Wayang<span class="accent">ZeroClient</span></h1>
-        <p class="tagline"><span data-en="Connect to your desktop from anywhere" data-id="Sambungkan ke desktop Anda dari mana saja">Connect to your desktop from anywhere</span></p>
-        <p class="desc"><span data-en="Turn a simple device into a powerful workstation by connecting to your office computer remotely. No expensive hardware needed." data-id="Ubah perangkat sederhana menjadi workstation canggih dengan menghubungkan ke komputer kantor secara remote. Tanpa hardware mahal." data-i18n-html>Turn a simple device into a powerful workstation by connecting to your office computer remotely. No expensive hardware needed.</span></p>
-        <div class="hero-buttons">
-            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20WayangOS" target="_blank" rel="noopener" class="btn btn-primary" style="background:#25D366;">💬 WhatsApp Sales</a>
-            <a href="mailto:sales@dalang.io?subject=WayangZeroClient%20Inquiry" class="btn btn-secondary">Email: Email</a>
+    <section class="hero-glow-sm text-center pt-8 pb-16 px-6 relative">
+        <div class="text-6xl mb-6 relative z-[1]">&#128187;</div>
+        <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-extrabold tracking-tighter mb-4 relative z-[1]">
+            Wayang<span class="text-w-gold">ZeroClient</span>
+        </h1>
+        <p class="text-[clamp(0.95rem,2vw,1.1rem)] text-w-text2 max-w-[650px] mx-auto mb-4 relative z-[1]"><span data-en="Connect to your desktop from anywhere" data-id="Sambungkan ke desktop Anda dari mana saja">Connect to your desktop from anywhere</span></p>
+        <p class="text-w-dim max-w-3xl mx-auto mb-8 relative z-[1]"><span data-en="Turn a simple device into a powerful workstation by connecting to your office computer remotely. No expensive hardware needed." data-id="Ubah perangkat sederhana menjadi workstation canggih dengan menghubungkan ke komputer kantor secara remote. Tanpa hardware mahal." data-i18n-html>Turn a simple device into a powerful workstation by connecting to your office computer remotely. No expensive hardware needed.</span></p>
+        <div class="flex flex-wrap justify-center gap-4 relative z-[1]">
+            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20WayangOS" target="_blank" rel="noopener" class="bg-[#25D366] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition no-underline">&#128172; WhatsApp Sales</a>
+            <a href="mailto:sales@dalang.io?subject=WayangZeroClient%20Inquiry" class="border border-w-border text-w-text2 px-6 py-3 rounded-lg font-semibold hover:border-w-gold hover:text-w-gold transition no-underline">&#9993; Email Sales</a>
         </div>
     </section>
 
     <!-- Hero Screenshot -->
-    <section class="hero-screenshot">
-        <div class="container">
-            <img src="../assets/screenshots/zc-02-list.png" alt="WayangZeroClient — saved remote connections ready to launch">
-            <p class="caption">Manage all your remote desktop connections from one simple screen</p>
+    <div class="max-w-[1200px] mx-auto px-6 mb-16">
+        <div class="border border-w-border rounded-xl overflow-hidden">
+            <img src="../assets/screenshots/zc-02-list.png" alt="WayangZeroClient &#8212; saved remote connections ready to launch" class="w-full">
         </div>
-    </section>
+        <p class="text-center text-w-dim text-sm mt-3">Manage all your remote desktop connections from one simple screen</p>
+    </div>
 
     <!-- Features -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Remote Desktop Made Simple</h2>
-                <p>Boot, connect, and work. It's that easy.</p>
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Remote Desktop Made Simple</h2>
+            <p class="text-w-dim">Boot, connect, and work. It&#8217;s that easy.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128421;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Windows, Linux &amp; Mac</h3>
+                <p class="text-w-dim text-sm">Connect to any remote desktop &#8212; Windows via RDP, Linux or Mac via VNC. Works with what you already have.</p>
             </div>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">🔗</div>
-                    <h3>Windows, Linux & Mac</h3>
-                    <p>Connect to any remote desktop — Windows via RDP, Linux or Mac via VNC. Works with what you already have.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">📋</div>
-                    <h3>Save Your Connections</h3>
-                    <p>Store multiple remote desktops with names, addresses, and credentials. Switch between workstations with a single click.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🔄</div>
-                    <h3>Auto-Reconnect</h3>
-                    <p>Network hiccup? No problem. Automatic reconnection keeps your session alive through interruptions.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🔒</div>
-                    <h3>Kiosk Mode</h3>
-                    <p>Boot straight into the connection screen. No shell, no escape — perfect for shared workstations and public terminals.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">⚡</div>
-                    <h3>Instant Boot</h3>
-                    <p>The entire system boots in seconds from a USB drive or SD card. No installation, no waiting — just plug in and connect.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">💾</div>
-                    <h3>Runs on Anything</h3>
-                    <p>Old PCs, thin clients, any device with HDMI — if it has HDMI and a network port, it can be a workstation.</p>
-                </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128190;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Save Your Connections</h3>
+                <p class="text-w-dim text-sm">Store multiple remote desktops with names, addresses, and credentials. Switch between workstations with a single click.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128260;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Auto-Reconnect</h3>
+                <p class="text-w-dim text-sm">Network hiccup? No problem. Automatic reconnection keeps your session alive through interruptions.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128274;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Kiosk Mode</h3>
+                <p class="text-w-dim text-sm">Boot straight into the connection screen. No shell, no escape &#8212; perfect for shared workstations and public terminals.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#9889;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Instant Boot</h3>
+                <p class="text-w-dim text-sm">The entire system boots in seconds from a USB drive or SD card. No installation, no waiting &#8212; just plug in and connect.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128187;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Runs on Anything</h3>
+                <p class="text-w-dim text-sm">Old PCs, thin clients, any device with HDMI &#8212; if it has HDMI and a network port, it can be a workstation.</p>
             </div>
         </div>
     </section>
 
     <!-- Screenshot Gallery -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2><span data-en="See It in Action" data-id="Lihat Aksinya">See It in Action</span></h2>
-                <p>Click any screenshot to enlarge. Navigate with arrow keys.</p>
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3"><span data-en="See It in Action" data-id="Lihat Aksinya">See It in Action</span></h2>
+            <p class="text-w-dim">Click any screenshot to enlarge. Navigate with arrow keys.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 screenshot-gallery">
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/zc-01-welcome.png" alt="Welcome Screen" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Welcome Screen</p>
             </div>
-
-            <div class="screenshot-gallery">
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/zc-01-welcome.png" alt="Welcome Screen">
-                    <div class="caption">Welcome Screen</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/zc-02-list.png" alt="Connection List">
-                    <div class="caption">Connection Manager</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/zc-03-edit.png" alt="Edit Connection">
-                    <div class="caption">Edit Connection</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/zc-04-connecting.png" alt="Connecting">
-                    <div class="caption">Connecting</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/zc-05-error.png" alt="Error Handling">
-                    <div class="caption">Error Handling</div>
-                </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/zc-02-list.png" alt="Connection List" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Connection Manager</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/zc-03-edit.png" alt="Edit Connection" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Edit Connection</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/zc-04-connecting.png" alt="Connecting" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Connecting</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/zc-05-error.png" alt="Error Handling" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Error Handling</p>
             </div>
         </div>
     </section>
 
     <!-- Keyboard Shortcuts -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Keyboard Shortcuts</h2>
-                <p>Navigate everything without leaving the keyboard.</p>
-            </div>
-
-            <table class="shortcuts-table">
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Keyboard Shortcuts</h2>
+            <p class="text-w-dim">Navigate everything without leaving the keyboard.</p>
+        </div>
+        <div class="max-w-2xl mx-auto">
+            <table class="w-full text-sm">
                 <thead>
-                    <tr><th>Key</th><th>Action</th></tr>
+                    <tr class="border-b border-w-border">
+                        <th class="text-left py-3 px-4 text-w-gold font-semibold">Key</th>
+                        <th class="text-left py-3 px-4 text-w-gold font-semibold">Action</th>
+                    </tr>
                 </thead>
-                <tbody>
-                    <tr><td><code>↑</code> / <code>↓</code></td><td>Navigate connection list</td></tr>
-                    <tr><td><code>Enter</code></td><td>Connect to selected server</td></tr>
-                    <tr><td><code>n</code></td><td>New connection</td></tr>
-                    <tr><td><code>e</code></td><td>Edit selected connection</td></tr>
-                    <tr><td><code>d</code></td><td>Delete selected connection</td></tr>
-                    <tr><td><code>Tab</code></td><td>Switch between form fields</td></tr>
-                    <tr><td><code>Esc</code></td><td>Cancel / go back</td></tr>
-                    <tr><td><code>q</code></td><td>Quit</td></tr>
+                <tbody class="text-w-text2">
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">&#9650;</code> / <code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">&#9660;</code></td><td class="py-3 px-4">Navigate connection list</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Enter</code></td><td class="py-3 px-4">Connect to selected server</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">n</code></td><td class="py-3 px-4">New connection</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">e</code></td><td class="py-3 px-4">Edit selected connection</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">d</code></td><td class="py-3 px-4">Delete selected connection</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Tab</code></td><td class="py-3 px-4">Switch between form fields</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Esc</code></td><td class="py-3 px-4">Cancel / go back</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">q</code></td><td class="py-3 px-4">Quit</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 
+    <!-- Trust Bar -->
+    <div class="border-t border-b border-w-border-g bg-w-bg2 py-4">
+        <div class="max-w-[1200px] mx-auto px-6 flex flex-wrap justify-center gap-6 md:gap-10 text-xs text-w-text2">
+            <span>&#127470;&#127465; Made in Indonesia</span>
+            <span>&#128187; Free with WayangOS</span>
+            <span>&#128274; 100% Offline &#8212; No Cloud</span>
+            <span>&#128222; +62 895-4032-00032</span>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="py-12 border-t border-w-border-g text-center">
-        <div class="max-w-[1000px] mx-auto px-6 relative z-[1]">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-[1]">
             <p class="text-w-dim text-sm mb-2">Tel: +62 895-4032-00032 | Email: <a href="mailto:sales@dalang.io" class="text-w-gold no-underline hover:underline">sales@dalang.io</a></p>
-            <p class="text-w-dim text-sm mb-2"><strong>WayangOS</strong> â€” The Shadow that Powers the Machine</p>
+            <p class="text-w-dim text-sm mb-2"><strong>WayangOS</strong> &#8212; The Shadow that Powers the Machine</p>
             <p class="text-w-text2 text-sm italic mb-2">Ancient Art. Bare Metal.</p>
             <p class="text-w-dim text-sm">
-                Built by <a href="https://github.com/mashanz" target="_blank" class="text-w-gold no-underline hover:underline">Hans Sumardhi</a> Â·
-                <a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-gold no-underline hover:underline">WayangOS</a> Â·
-                <a href="../apps.html" class="text-w-gold no-underline hover:underline">Apps</a> Â·
-                GPLv2 (kernel) Â· MIT (userspace)
+                &copy; 2026 Dalang Pte Ltd &#183;
+                <a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-gold no-underline hover:underline">WayangOS</a> &#183;
+                <a href="../apps.html" class="text-w-gold no-underline hover:underline">Apps</a> &#183;
+                GPLv2 (kernel) &#183; MIT (userspace)
             </p>
         </div>
     </footer>
@@ -239,13 +229,13 @@
         <div class="lb-counter" id="lb-counter"></div>
     </div>
 
-    <script src="/assets/lightbox.js?v=3497984"></script>
+    <script src="/assets/lightbox.js?v=b01b14e"></script>
 
-<!-- WhatsApp Floating Button -->
+    <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20WayangOS" target="_blank" rel="noopener" class="whatsapp-float">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
-    <script src="/assets/i18n.js?v=3497984"></script>
-    <script src="/assets/main.js?v=3497984"></script>
+    <script src="/assets/i18n.js?v=b01b14e"></script>
+    <script src="/assets/main.js?v=b01b14e"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://wayang.dalang.io/apps/dciem.html">
     <meta property="og:image" content="https://wayang.dalang.io/assets/og-dciem.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WayangDCIEM — Monitoring Infrastruktur Data Center">
+    <meta name="twitter:title" content="WayangDCIEM &#8212; Monitoring Infrastruktur Data Center">
     <meta name="twitter:description" content="Monitoring real-time suhu, kelembaban, daya listrik. Dashboard langsung, alert otomatis.">
     <meta name="twitter:image" content="https://wayang.dalang.io/assets/og-dciem.png">
     <link rel="canonical" href="https://wayang.dalang.io/apps/dciem.html">
@@ -35,45 +35,33 @@
       "image": "https://wayang.dalang.io/assets/og-dciem.png"
     }
     </script>
-    <title>WayangDCIEM — Data Center Infrastructure & Environment Monitoring</title>
-    <link rel="stylesheet" href="/assets/lightbox.css?v=3497984">
-        <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'w-bg': '#0a0806','w-bg2': '#110e09','w-card': '#1a1410','w-card-h': '#221b13',
-            'w-gold': '#c8941a','w-gold-b': '#f0b830','w-gold-dim': '#c8941a22','w-gold-glow': '#c8941a44',
-            'w-text': '#f0e8d8','w-text2': '#a09070','w-dim': '#5a4a30',
-            'w-border': '#2e2318','w-border-g': '#c8941a44','w-green': '#7ec87e',
-          }
-        }
-      }
-    }
-    </script>
-    <link rel="stylesheet" href="/assets/style.css?v=3497984">
+    <title>WayangDCIEM &#8212; Data Center Infrastructure &amp; Environment Monitoring</title>
+    <link rel="stylesheet" href="/assets/lightbox.css?v=b01b14e">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=b01b14e">
+    <link rel="stylesheet" href="/assets/style.css?v=b01b14e">
 </head>
 <body class="bg-w-bg text-w-text font-['Inter',system-ui,sans-serif] leading-relaxed overflow-x-hidden w-full">
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 w-full max-w-[100vw] py-4 bg-w-bg border-b border-w-border-g z-[100]">
-        <div class="max-w-[1000px] mx-auto px-6 relative z-[1] flex justify-between items-center">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-[1] flex justify-between items-center">
             <a href="../index.html" class="text-xl font-bold text-w-gold no-underline tracking-tight flex items-center gap-2">
-                <span class="text-lg opacity-70 text-w-gold-b">ê¦®ê¦ªê¦</span>Wayang<span class="text-w-text">OS</span>
+                <span class="text-lg opacity-70 text-w-gold-b">ꦮꦪꦁ</span>
+                Wayang<span class="text-w-text">OS</span>
             </a>
             <div class="flex items-center gap-2">
                 <div class="lang-switch-mobile hidden gap-1 items-center">
                     <button onclick="setLang('en')" class="px-2 py-0.5 rounded text-xs font-semibold bg-transparent text-w-text2 border border-w-border cursor-pointer">EN</button>
                     <button onclick="setLang('id')" class="px-2 py-0.5 rounded text-xs font-semibold bg-w-gold text-black border border-w-gold cursor-pointer">ID</button>
                 </div>
-                <button class="nav-toggle hidden bg-transparent border-none text-w-gold text-2xl cursor-pointer p-1" aria-label="Menu">â˜°</button>
+                <button class="nav-toggle hidden bg-transparent border-none text-w-gold text-2xl cursor-pointer p-1" aria-label="Menu">☰</button>
             </div>
-            <ul class="nav-links flex gap-8 list-none items-center">
+            <ul class="nav-links flex gap-8 list-none">
                 <li><a href="../index.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Home</a></li>
                 <li><a href="../index.html#features" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Features</a></li>
                 <li><a href="../download.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Download</a></li>
-                <li><a href="../apps.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Apps</a></li>
+                <li><a href="../apps.html" class="text-w-gold no-underline text-sm">Apps</a></li>
+                <li><a href="../about.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">About</a></li>
                 <li><a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">GitHub</a></li>
                 <li><div class="lang-switch flex gap-1 items-center ml-2">
                     <button onclick="setLang('en')" id="btn-en" class="px-2 py-0.5 rounded text-xs font-semibold bg-transparent text-w-text2 border border-w-border cursor-pointer">EN</button>
@@ -85,279 +73,352 @@
     </nav>
 
     <!-- Breadcrumb -->
-    <div style="padding-top: 80px;">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="../index.html">Home</a>
-                <span class="sep">›</span>
-                <a href="../apps.html">Apps</a>
-                <span class="sep">›</span>
-                <span class="current">WayangDCIEM</span>
-            </div>
-        </div>
+    <div class="max-w-[1200px] mx-auto px-6 pt-24 pb-2">
+        <nav class="text-sm text-w-dim">
+            <a href="../index.html" class="text-w-text2 hover:text-w-gold no-underline">Home</a>
+            <span class="mx-2">/</span>
+            <a href="../apps.html" class="text-w-text2 hover:text-w-gold no-underline">Apps</a>
+            <span class="mx-2">/</span>
+            <span class="text-w-gold">WayangDCIEM</span>
     </div>
 
     <!-- Hero -->
-    <section class="app-hero" style="padding-top: 40px;">
-        <div class="hero-icon">🏢</div>
-        <h1>Wayang<span class="accent">DCIEM</span></h1>
-        <p class="tagline">Monitor your entire data center from a single screen</p>
-        <p class="desc">Real-time monitoring of temperature, humidity, power, and security across your data center. Color-coded rack status, UPS/PUE dashboards, alert management, and historical trending — all in a lightweight kiosk display.</p>
-        <div class="hero-buttons">
-            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangDCIEM" target="_blank" rel="noopener" class="btn btn-primary" style="background:#25D366;">💬 WhatsApp Sales</a>
-            <a href="mailto:sales@dalang.io?subject=WayangDCIEM%20Inquiry" class="btn btn-secondary">Email: Email</a>
-            <a href="#pricing" class="btn btn-secondary">See Pricing ↓</a>
+    <section class="hero-glow-sm text-center pt-8 pb-16 px-6 relative">
+        <div class="text-6xl mb-6 relative z-[1]">&#127777;</div>
+        <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-extrabold tracking-tighter mb-4 relative z-[1]">
+            Wayang<span class="text-w-gold">DCIEM</span>
+        </h1>
+        <p class="text-[clamp(0.95rem,2vw,1.1rem)] text-w-text2 max-w-[650px] mx-auto mb-4 relative z-[1]">Monitor your entire data center from a single screen</p>
+        <p class="text-w-dim max-w-3xl mx-auto mb-8 relative z-[1]">Real-time monitoring of temperature, humidity, power, and security across your data center. Color-coded rack status, UPS/PUE dashboards, alert management, and historical trending &#8212; all in a lightweight kiosk display.</p>
+        <div class="flex flex-wrap justify-center gap-4 relative z-[1]">
+            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangDCIEM" target="_blank" rel="noopener" class="bg-[#25D366] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition no-underline">&#128172; WhatsApp Sales</a>
+            <a href="mailto:sales@dalang.io?subject=WayangDCIEM%20Inquiry" class="border border-w-border text-w-text2 px-6 py-3 rounded-lg font-semibold hover:border-w-gold hover:text-w-gold transition no-underline">&#9993; Email Sales</a>
+            <a href="#pricing" class="border border-w-border text-w-text2 px-6 py-3 rounded-lg font-semibold hover:border-w-gold hover:text-w-gold transition no-underline">See Pricing &#8595;</a>
         </div>
     </section>
 
     <!-- Hero Screenshot -->
-    <section class="hero-screenshot">
-        <div class="container">
-            <img src="../assets/screenshots/dciem-02-overview.png" alt="WayangDCIEM — Data center floor plan with 8 racks showing temperature, humidity, power and alerts">
-            <p class="caption">Data center floor plan — 8 racks with real-time temperature, humidity, power, and alert status</p>
+    <div class="max-w-[1200px] mx-auto px-6 mb-16">
+        <div class="border border-w-border rounded-xl overflow-hidden">
+            <img src="../assets/screenshots/dciem-02-overview.png" alt="WayangDCIEM &#8212; Data center floor plan with 8 racks showing temperature, humidity, power and alerts" class="w-full">
         </div>
+        <p class="text-center text-w-dim text-sm mt-3">Data center floor plan &#8212; 8 racks with real-time temperature, humidity, power, and alert status</p>
+    </div>
+
+
+    <!-- 3D Product Preview -->
+    <section class="max-w-[800px] mx-auto px-6 pb-12">
+      <div id="viewer3d" style="width:100%; height:400px; border-radius:16px; overflow:hidden; border:1px solid #2e2318; background:#0a0806;"></div>
+      <p class="text-center text-w-dim text-sm mt-3"><span data-en="Drag to rotate &bull; Scroll to zoom" data-id="Geser untuk memutar &bull; Scroll untuk memperbesar">Drag to rotate &bull; Scroll to zoom</span></p>
     </section>
 
-    <!-- Features -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Complete Data Center Visibility</h2>
-                <p>Everything you need to monitor your facility, on a single display.</p>
-            </div>
+    <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.162/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.162/examples/jsm/"}}</script>
+    <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">🏢</div>
-                    <h3>Floor Plan Overview</h3>
-                    <p>See every rack at a glance. Color-coded status shows temperature health instantly — green, yellow, or red.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🌡️</div>
-                    <h3>Environmental Monitoring</h3>
-                    <p>Track temperature and humidity per rack with front/rear probes. Instant alerts when thresholds are exceeded.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">⚡</div>
-                    <h3>Power Analytics</h3>
-                    <p>Monitor UPS battery, load, and runtime. Track PUE efficiency and per-rack power consumption in real time.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🚨</div>
-                    <h3>Alert Management</h3>
-                    <p>Severity-based alerts with acknowledgment. Filter by Critical, Warning, or Info. Never miss a rack overheating.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">📊</div>
-                    <h3>Historical Trends</h3>
-                    <p>24-hour, 7-day, and 30-day trending for temperature, power, and humidity. Spot patterns before they become problems.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🔌</div>
-                    <h3>Wireless Sensor Network</h3>
-                    <p>Wireless sensor nodes per rack with plug-and-play deployment. Just mount, power on, and the dashboard detects them automatically.</p>
-                </div>
+    const container = document.getElementById('viewer3d');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0806);
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+    camera.position.set(0, 1.5, 3.5);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    container.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 2;
+
+    // Lighting
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(5, 5, 5);
+    scene.add(dirLight);
+    const rimLight = new THREE.DirectionalLight(0xc8941a, 0.3);
+    rimLight.position.set(-3, 2, -3);
+    scene.add(rimLight);
+
+    new GLTFLoader().load('../assets/models/dciem-rack.glb', (gltf) => {
+      const model = gltf.scene;
+      const box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      model.position.sub(center);
+      scene.add(model);
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+
+    (function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    })();
+    </script>
+
+    <!-- Features -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Complete Data Center Visibility</h2>
+            <p class="text-w-dim">Everything you need to monitor your facility, on a single display.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#127959;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Floor Plan Overview</h3>
+                <p class="text-w-dim text-sm">See every rack at a glance. Color-coded status shows temperature health instantly &#8212; green, yellow, or red.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#127777;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Environmental Monitoring</h3>
+                <p class="text-w-dim text-sm">Track temperature and humidity per rack with front/rear probes. Instant alerts when thresholds are exceeded.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#9889;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Power Analytics</h3>
+                <p class="text-w-dim text-sm">Monitor UPS battery, load, and runtime. Track PUE efficiency and per-rack power consumption in real time.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128276;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Alert Management</h3>
+                <p class="text-w-dim text-sm">Severity-based alerts with acknowledgment. Filter by Critical, Warning, or Info. Never miss a rack overheating.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128200;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Historical Trends</h3>
+                <p class="text-w-dim text-sm">24-hour, 7-day, and 30-day trending for temperature, power, and humidity. Spot patterns before they become problems.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128225;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Wireless Sensor Network</h3>
+                <p class="text-w-dim text-sm">Wireless sensor nodes per rack with plug-and-play deployment. Just mount, power on, and the dashboard detects them automatically.</p>
             </div>
         </div>
     </section>
 
     <!-- Screenshot Gallery -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2><span data-en="See It in Action" data-id="Lihat Aksinya">See It in Action</span></h2>
-                <p>Click any screenshot to enlarge. Navigate with arrow keys.</p>
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3"><span data-en="See It in Action" data-id="Lihat Aksinya">See It in Action</span></h2>
+            <p class="text-w-dim">Click any screenshot to enlarge. Navigate with arrow keys.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 screenshot-gallery">
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/dciem-01-welcome.png" alt="Welcome Screen" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Welcome Screen</p>
             </div>
-
-            <div class="screenshot-gallery">
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/dciem-01-welcome.png" alt="Welcome Screen">
-                    <div class="caption">Welcome Screen</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/dciem-02-overview.png" alt="Floor Plan Overview">
-                    <div class="caption">Floor Plan Overview</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/dciem-03-rack.png" alt="Rack Detail">
-                    <div class="caption">Rack Detail</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/dciem-04-power.png" alt="Power Dashboard">
-                    <div class="caption">Power Dashboard</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/dciem-05-alerts.png" alt="Alert Management">
-                    <div class="caption">Alert Management</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/dciem-06-history.png" alt="Historical Trends">
-                    <div class="caption">Historical Trends</div>
-                </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/dciem-02-overview.png" alt="Floor Plan Overview" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Floor Plan Overview</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/dciem-03-rack.png" alt="Rack Detail" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Rack Detail</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/dciem-04-power.png" alt="Power Dashboard" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Power Dashboard</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/dciem-05-alerts.png" alt="Alert Management" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Alert Management</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/dciem-06-history.png" alt="Historical Trends" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Historical Trends</p>
             </div>
         </div>
     </section>
 
     <!-- Keyboard Shortcuts -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Keyboard Shortcuts</h2>
-                <p>Navigate everything without leaving the keyboard.</p>
-            </div>
-
-            <table class="shortcuts-table">
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Keyboard Shortcuts</h2>
+            <p class="text-w-dim">Navigate everything without leaving the keyboard.</p>
+        </div>
+        <div class="max-w-2xl mx-auto">
+            <table class="w-full text-sm">
                 <thead>
-                    <tr><th>Key</th><th>Action</th></tr>
+                    <tr class="border-b border-w-border">
+                        <th class="text-left py-3 px-4 text-w-gold font-semibold">Key</th>
+                        <th class="text-left py-3 px-4 text-w-gold font-semibold">Action</th>
+                    </tr>
                 </thead>
-                <tbody>
-                    <tr><td><code>O</code></td><td>Overview (floor plan)</td></tr>
-                    <tr><td><code>1</code> – <code>8</code></td><td>Jump to Rack 1–8 detail</td></tr>
-                    <tr><td><code>P</code></td><td>Power dashboard</td></tr>
-                    <tr><td><code>A</code></td><td>Alerts panel</td></tr>
-                    <tr><td><code>H</code></td><td>Historical trends</td></tr>
-                    <tr><td><code>S</code></td><td>Settings</td></tr>
-                    <tr><td><code>Tab</code></td><td>Cycle sub-views / filters</td></tr>
-                    <tr><td><code>Space</code></td><td>Pause / Resume data updates</td></tr>
-                    <tr><td><code>Enter</code></td><td>Open selected rack</td></tr>
-                    <tr><td><code>ESC</code></td><td>Back / Exit</td></tr>
+                <tbody class="text-w-text2">
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">O</code></td><td class="py-3 px-4">Overview (floor plan)</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">1</code> &#8211; <code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">8</code></td><td class="py-3 px-4">Jump to Rack 1&#8211;8 detail</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">P</code></td><td class="py-3 px-4">Power dashboard</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">A</code></td><td class="py-3 px-4">Alerts panel</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">H</code></td><td class="py-3 px-4">Historical trends</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">S</code></td><td class="py-3 px-4">Settings</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Tab</code></td><td class="py-3 px-4">Cycle sub-views / filters</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Space</code></td><td class="py-3 px-4">Pause / Resume data updates</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">Enter</code></td><td class="py-3 px-4">Open selected rack</td></tr>
+                    <tr class="border-b border-w-border"><td class="py-3 px-4"><code class="bg-w-card px-2 py-0.5 rounded text-w-text text-xs">ESC</code></td><td class="py-3 px-4">Back / Exit</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 
     <!-- Pricing -->
-    <section class="app-section" id="pricing">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2><span data-en="Pricing" data-id="Harga">Pricing</span></h2>
-                <p>Complete hardware + software packages. Installed and configured by our team — plug in and monitor.</p>
+    <section id="pricing" class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3"><span data-en="Pricing" data-id="Harga">Pricing</span></h2>
+            <p class="text-w-dim">Complete hardware + software packages. Installed and configured by our team &#8212; plug in and monitor.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Starter Kit -->
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128230;</div>
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Starter Kit</div>
+                <div class="text-3xl font-extrabold text-w-text mb-1">Rp 10 <span class="text-lg font-normal text-w-dim">juta</span></div>
+                <p class="text-w-dim text-sm mb-6">Up to 4 racks</p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 4&#215; Sensor Nodes (temp + humidity + power)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 1&#215; Monitoring Gateway</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 1&#215; 7" Touchscreen Display</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> WayangDCIEM Software</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Installation &amp; Configuration</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-Day Setup Support</li>
+                </ul>
+                <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangDCIEM" target="_blank" rel="noopener" class="block mt-8 text-center bg-w-gold text-black py-3 rounded-lg font-semibold hover:bg-w-gold-b transition no-underline">&#128172; WhatsApp Order</a>
             </div>
-
-            <div class="features-grid">
-                <div class="feature-card" style="border-color: var(--border-gold);">
-                    <div class="icon">🏢</div>
-                    <h3>Starter Kit</h3>
-                    <p style="font-size: 2rem; color: var(--accent-bright); margin: 12px 0;">Rp 10.000.000</p>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">Up to 4 racks</p>
-                    <ul style="text-align: left; color: var(--text-secondary); font-size: 0.9rem; line-height: 2;">
-                        <li>4× Sensor Nodes (temp + humidity + power)</li>
-                        <li>1× Monitoring Gateway</li>
-                        <li>1× 7" Touchscreen Display</li>
-                        <li>WayangDCIEM Software</li>
-                        <li>Installation & Configuration</li>
-                        <li>7-Day Setup Support</li>
-                    </ul>
-                    <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangDCIEM" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 20px; display: inline-block;">&#128172; WhatsApp Order</a>
-                </div>
-
-                <div class="feature-card" style="border-color: var(--accent); border-width: 2px;">
-                    <div class="icon">🏗️</div>
-                    <h3>Standard Kit</h3>
-                    <p style="font-size: 2rem; color: var(--accent-bright); margin: 12px 0;">Rp 25.000.000</p>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">Up to 12 racks</p>
-                    <ul style="text-align: left; color: var(--text-secondary); font-size: 0.9rem; line-height: 2;">
-                        <li>12× Sensor Nodes (temp + humidity + power)</li>
-                        <li>1× Monitoring Gateway</li>
-                        <li>1× 10" Touchscreen Display</li>
-                        <li>4× Door Sensors</li>
-                        <li>2× Water Leak Sensors</li>
-                        <li>WayangDCIEM Software</li>
-                        <li>Installation & Configuration</li>
-                        <li>7-Day Setup Support</li>
-                        <li>Email/Telegram Alerts</li>
-                    </ul>
-                    <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangDCIEM" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 20px; display: inline-block;">&#128172; WhatsApp Order</a>
-                </div>
-
-                <div class="feature-card" style="border-color: var(--border-gold);">
-                    <div class="icon">🏗️</div>
-                    <h3>Professional Kit</h3>
-                    <p style="font-size: 2rem; color: var(--accent-bright); margin: 12px 0;">Rp 40.000.000</p>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">Up to 24 racks</p>
-                    <ul style="text-align: left; color: var(--text-secondary); font-size: 0.9rem; line-height: 2;">
-                        <li>24× Sensor Nodes (temp + humidity + power)</li>
-                        <li>2× Gateways (redundant failover)</li>
-                        <li>1× 10" Touchscreen Display</li>
-                        <li>8× Door Sensors</li>
-                        <li>4× Water Leak Sensors</li>
-                        <li>2× Smoke Detectors</li>
-                        <li>WayangDCIEM Software</li>
-                        <li>On-site Installation & Configuration</li>
-                        <li>7-Day Setup Support</li>
-                        <li>Email/Telegram/SMS Alerts</li>
-                        <li>REST API Access</li>
-                    </ul>
-                    <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangDCIEM" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 20px; display: inline-block;">&#128172; WhatsApp Order</a>
-                </div>
-
-                <div class="feature-card" style="border-color: var(--border-gold);">
-                    <div class="icon">🏭</div>
-                    <h3>Enterprise</h3>
-                    <p style="font-size: 2rem; color: var(--accent-bright); margin: 12px 0;">Custom</p>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px;">40+ racks / multi-site</p>
-                    <ul style="text-align: left; color: var(--text-secondary); font-size: 0.9rem; line-height: 2;">
-                        <li>Custom sensor node count</li>
-                        <li>Redundant gateways per site</li>
-                        <li>SNMP integration</li>
-                        <li>REST API + Webhook</li>
-                        <li>Multi-site dashboard</li>
-                        <li>Custom branding</li>
-                        <li>On-site installation</li>
-                        <li>7-Day Setup Support</li>
-                        <li>24/7 Monitoring Option</li>
-                    </ul>
-                    <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangDCIEM%20Enterprise" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 20px; display: inline-block; background:#25D366;">💬 WhatsApp Sales</a>
-                </div>
+            <!-- Standard Kit -->
+            <div class="bg-w-card border-2 border-w-gold rounded-xl p-8 hover:border-w-gold-b transition relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-w-gold text-black px-4 py-1 rounded-full text-xs font-bold">POPULAR</div>
+                <div class="text-3xl mb-4">&#11088;</div>
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Standard Kit</div>
+                <div class="text-3xl font-extrabold text-w-text mb-1">Rp 25 <span class="text-lg font-normal text-w-dim">juta</span></div>
+                <p class="text-w-dim text-sm mb-6">Up to 12 racks</p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 12&#215; Sensor Nodes (temp + humidity + power)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 1&#215; Monitoring Gateway</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 1&#215; 10" Touchscreen Display</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 4&#215; Door Sensors</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 2&#215; Water Leak Sensors</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> WayangDCIEM Software</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Installation &amp; Configuration</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-Day Setup Support</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Email/Telegram Alerts</li>
+                </ul>
+                <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangDCIEM" target="_blank" rel="noopener" class="block mt-8 text-center bg-w-gold text-black py-3 rounded-lg font-semibold hover:bg-w-gold-b transition no-underline">&#128172; WhatsApp Order</a>
             </div>
-
-            <!-- Recurring Services -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 32px;">
-                <div style="background: var(--bg-card); border: 2px solid var(--accent); border-radius: 12px; padding: 28px; text-align: center;">
-                    <h3 style="color: var(--accent); font-size: 1.1rem; margin-bottom: 8px;">🛡️ Annual Maintenance</h3>
-                    <p style="font-size: 1.5rem; color: var(--accent-bright); margin: 8px 0;">Rp 5.000.000/year</p>
-                    <ul style="text-align: left; color: var(--text-secondary); font-size: 0.85rem; line-height: 2; margin-top: 12px;">
-                        <li>Annual on-site inspection & calibration</li>
-                        <li>Sensor replacement warranty</li>
-                        <li>Software updates</li>
-                        <li>Priority support</li>
-                    </ul>
-                </div>
-                <div style="background: var(--bg-card); border: 2px solid var(--accent); border-radius: 12px; padding: 28px; text-align: center;">
-                    <h3 style="color: var(--accent); font-size: 1.1rem; margin-bottom: 8px;">📡 Remote Monitoring</h3>
-                    <p style="font-size: 1.5rem; color: var(--accent-bright); margin: 8px 0;">Rp 2.000.000/month</p>
-                    <ul style="text-align: left; color: var(--text-secondary); font-size: 0.85rem; line-height: 2; margin-top: 12px;">
-                        <li>24/7 automated alert monitoring</li>
-                        <li>Instant Telegram/email escalation</li>
-                        <li>Monthly health report</li>
-                        <li>Remote troubleshooting</li>
-                    </ul>
-                </div>
+            <!-- Professional Kit -->
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#127942;</div>
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Professional Kit</div>
+                <div class="text-3xl font-extrabold text-w-text mb-1">Rp 40 <span class="text-lg font-normal text-w-dim">juta</span></div>
+                <p class="text-w-dim text-sm mb-6">Up to 24 racks</p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 24&#215; Sensor Nodes (temp + humidity + power)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 2&#215; Gateways (redundant failover)</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 1&#215; 10" Touchscreen Display</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 8&#215; Door Sensors</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 4&#215; Water Leak Sensors</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 2&#215; Smoke Detectors</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> WayangDCIEM Software</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> On-site Installation &amp; Configuration</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-Day Setup Support</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Email/Telegram/SMS Alerts</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> REST API Access</li>
+                </ul>
+                <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangDCIEM" target="_blank" rel="noopener" class="block mt-8 text-center bg-w-gold text-black py-3 rounded-lg font-semibold hover:bg-w-gold-b transition no-underline">&#128172; WhatsApp Order</a>
             </div>
+            <!-- Enterprise -->
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#127970;</div>
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Enterprise</div>
+                <div class="text-3xl font-extrabold text-w-text mb-1">Custom</div>
+                <p class="text-w-dim text-sm mb-6">40+ racks / multi-site</p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Custom sensor node count</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Redundant gateways per site</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> SNMP integration</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> REST API + Webhook</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Multi-site dashboard</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Custom branding</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> On-site installation</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-Day Setup Support</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 24/7 Monitoring Option</li>
+                </ul>
+                <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangDCIEM%20Enterprise" target="_blank" rel="noopener" class="block mt-8 text-center bg-[#25D366] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition no-underline">&#128172; WhatsApp Sales</a>
+            </div>
+        </div>
 
-            <p style="text-align: center; color: var(--text-dim); margin-top: 32px; font-size: 0.85rem;">
-                All packages include hardware, software, and installation. No DIY — we set everything up for you.<br>
-                The system runs independently with zero maintenance. Optional services available for peace of mind.<br>
-                Contact <strong>sales@dalang.io</strong> for custom requirements or volume pricing.
-            </p>
+        <!-- Recurring Services -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+            <div class="bg-w-card border-2 border-w-gold rounded-xl p-8 text-center">
+                <h3 class="text-w-gold text-lg font-bold mb-2">&#128736; Annual Maintenance</h3>
+                <div class="text-2xl font-extrabold text-w-gold-b mb-2">Rp 5.000.000<span class="text-sm font-normal text-w-dim">/year</span></div>
+                <ul class="text-left text-sm text-w-text2 space-y-2 mt-4">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Annual on-site inspection &amp; calibration</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Sensor replacement warranty</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Software updates</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Priority support</li>
+                </ul>
+            </div>
+            <div class="bg-w-card border-2 border-w-gold rounded-xl p-8 text-center">
+                <h3 class="text-w-gold text-lg font-bold mb-2">&#128225; Remote Monitoring</h3>
+                <div class="text-2xl font-extrabold text-w-gold-b mb-2">Rp 2.000.000<span class="text-sm font-normal text-w-dim">/month</span></div>
+                <ul class="text-left text-sm text-w-text2 space-y-2 mt-4">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 24/7 automated alert monitoring</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Instant Telegram/email escalation</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Monthly health report</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Remote troubleshooting</li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="text-center text-w-dim text-sm mt-8">
+            All packages include hardware, software, and installation. No DIY &#8212; we set everything up for you.<br>
+            The system runs independently with zero maintenance. Optional services available for peace of mind.<br>
+            Contact <strong>sales@dalang.io</strong> for custom requirements or volume pricing.
+        </p>
+    </section>
+
+    <!-- Trust + Guarantee -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16 border-t border-w-border">
+        <div class="bg-w-card border border-w-border rounded-2xl p-8 text-center">
+            <h3 class="text-lg font-bold text-w-gold mb-6">Garansi &amp; Jaminan Kami</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div class="p-3"><span class="block text-2xl mb-2">&#128737;</span><span class="text-w-text font-semibold">Garansi Hardware 1 Tahun</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128218;</span><span class="text-w-text font-semibold">7 Hari Setup &amp; Pelatihan</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128242;</span><span class="text-w-text font-semibold">Dukungan Teknis via WhatsApp</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128274;</span><span class="text-w-text font-semibold">100% Data Milik Anda &#8212; Tanpa Cloud</span></div>
+            </div>
         </div>
     </section>
 
+    <!-- Trust Bar -->
+    <div class="border-t border-b border-w-border-g bg-w-bg2 py-4">
+        <div class="max-w-[1200px] mx-auto px-6 flex flex-wrap justify-center gap-6 md:gap-10 text-xs text-w-text2">
+            <span>&#127470;&#127465; Made in Indonesia</span>
+            <span>&#127970; PT Komponen Pusat Data</span>
+            <span>&#128274; 100% Data Milik Anda</span>
+            <span>&#128222; +62 895-4032-00032</span>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="py-12 border-t border-w-border-g text-center">
-        <div class="max-w-[1000px] mx-auto px-6 relative z-[1]">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-[1]">
             <p class="text-w-dim text-sm mb-2">Tel: +62 895-4032-00032 | Email: <a href="mailto:sales@dalang.io" class="text-w-gold no-underline hover:underline">sales@dalang.io</a></p>
-            <p class="text-w-dim text-sm mb-2"><strong>WayangOS</strong> â€” The Shadow that Powers the Machine</p>
+            <p class="text-w-dim text-sm mb-2"><strong>WayangOS</strong> &#8212; The Shadow that Powers the Machine</p>
             <p class="text-w-text2 text-sm italic mb-2">Ancient Art. Bare Metal.</p>
             <p class="text-w-dim text-sm">
-                Built by <a href="https://github.com/mashanz" target="_blank" class="text-w-gold no-underline hover:underline">Hans Sumardhi</a> Â·
-                <a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-gold no-underline hover:underline">WayangOS</a> Â·
-                <a href="../apps.html" class="text-w-gold no-underline hover:underline">Apps</a> Â·
-                GPLv2 (kernel) Â· MIT (userspace)
+                &copy; 2026 Dalang Pte Ltd &#183;
+                <a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-gold no-underline hover:underline">WayangOS</a> &#183;
+                <a href="../apps.html" class="text-w-gold no-underline hover:underline">Apps</a> &#183;
+                GPLv2 (kernel) &#183; MIT (userspace)
             </p>
         </div>
     </footer>
@@ -371,13 +432,13 @@
         <div class="lb-counter" id="lb-counter"></div>
     </div>
 
-    <script src="/assets/lightbox.js?v=3497984"></script>
+    <script src="/assets/lightbox.js?v=b01b14e"></script>
 
-<!-- WhatsApp Floating Button -->
+    <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20WayangOS" target="_blank" rel="noopener" class="whatsapp-float">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
-    <script src="/assets/i18n.js?v=3497984"></script>
-    <script src="/assets/main.js?v=3497984"></script>
+    <script src="/assets/i18n.js?v=b01b14e"></script>
+    <script src="/assets/main.js?v=b01b14e"></script>
 </body>
 </html>

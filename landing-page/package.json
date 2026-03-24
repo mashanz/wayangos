@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  },
+  "dependencies": {
+    "@gltf-transform/core": "^4.3.0",
+    "three": "^0.183.2"
+  }
+}

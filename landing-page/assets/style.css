@@ -4,6 +4,324 @@
    complex selectors, custom components.
    ============================================================= */
 
+/* ---- CSS Custom Properties (used in inline styles) ---- */
+:root {
+  --bg-primary: #0a0806;
+  --bg-card: #1a1410;
+  --accent: #c8941a;
+  --accent-bright: #f0b830;
+  --text-primary: #f0e8d8;
+  --text-secondary: #a09070;
+  --text-dim: #5a4a30;
+  --border: #2e2318;
+  --border-gold: #c8941a44;
+  --green: #7ec87e;
+}
+
+/* ---- Container ---- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---- Breadcrumb ---- */
+.breadcrumb {
+  font-size: 0.85rem;
+  color: #a09070;
+  padding: 12px 0;
+}
+.breadcrumb a {
+  color: #a09070;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.breadcrumb a:hover { color: #c8941a; }
+.breadcrumb .sep { margin: 0 8px; color: #5a4a30; }
+.breadcrumb .current { color: #f0e8d8; }
+
+/* ---- App Hero Section ---- */
+.app-hero {
+  text-align: center;
+  padding: 80px 24px 48px;
+  position: relative;
+}
+.app-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #f0e8d8;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+.hero-icon {
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+  display: block;
+}
+.accent { color: #c8941a; }
+.tagline {
+  color: #a09070;
+  font-size: 1.2rem;
+  margin: 0 0 12px;
+  font-weight: 500;
+}
+.desc {
+  color: #5a4a30;
+  font-size: 0.95rem;
+  max-width: 640px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+
+/* ---- Hero Buttons ---- */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.btn-primary {
+  background: #c8941a;
+  color: #0a0806;
+  border-color: #c8941a;
+}
+.btn-primary:hover {
+  background: #f0b830;
+  border-color: #f0b830;
+}
+.btn-secondary {
+  background: transparent;
+  color: #c8941a;
+  border-color: #c8941a;
+}
+.btn-secondary:hover {
+  background: rgba(200, 148, 26, 0.1);
+  color: #f0b830;
+  border-color: #f0b830;
+}
+
+/* ---- Hero Screenshot ---- */
+.hero-screenshot {
+  padding: 0 24px 48px;
+}
+.hero-screenshot img {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid #2e2318;
+  image-rendering: pixelated;
+}
+.hero-screenshot .caption,
+.caption {
+  text-align: center;
+  color: #5a4a30;
+  font-size: 0.8rem;
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ---- App Sections ---- */
+.app-section {
+  padding: 48px 0;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.section-header h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #f0e8d8;
+  margin: 0 0 8px;
+}
+.section-header p {
+  color: #a09070;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ---- Feature Cards ---- */
+.feature-card {
+  background: #1a1410;
+  border: 1px solid #2e2318;
+  border-radius: 12px;
+  padding: 28px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.feature-card:hover {
+  border-color: #c8941a44;
+  transform: translateY(-2px);
+}
+.feature-card .icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+.feature-card h3 {
+  color: #f0e8d8;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+.feature-card p {
+  color: #a09070;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---- Pricing Cards ---- */
+.pricing-card {
+  background: #1a1410;
+  border: 1px solid #2e2318;
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.pricing-card:hover {
+  border-color: #c8941a44;
+  transform: translateY(-2px);
+}
+.plan-name {
+  color: #c8941a;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.price {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #f0b830;
+  margin: 8px 0;
+}
+.price-note {
+  color: #a09070;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+.plan-desc {
+  color: #a09070;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.plan-desc ul {
+  list-style: none;
+  text-align: left;
+  padding: 0;
+}
+.plan-desc ul li {
+  padding: 4px 0;
+}
+.plan-desc ul li::before {
+  content: '✓ ';
+  color: #7ec87e;
+}
+.pricing-card .btn {
+  margin-top: 16px;
+  display: inline-flex;
+}
+
+/* ---- Addon Cards ---- */
+.addon-card {
+  background: #1a1410;
+  border: 1px solid #2e2318;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+.addon-card h4 {
+  color: #f0e8d8;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+.addon-price {
+  color: #f0b830;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.addon-card p {
+  color: #a09070;
+  font-size: 0.85rem;
+  margin: 4px 0 0;
+}
+
+/* ---- Usecase Cards ---- */
+.usecase-card {
+  background: #1a1410;
+  border: 1px solid #2e2318;
+  border-radius: 12px;
+  padding: 24px;
+}
+.usecase-card .uc-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.usecase-card h3 {
+  color: #f0e8d8;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+.usecase-card p {
+  color: #a09070;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---- Screenshot Gallery ---- */
+.gallery-item {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #2e2318;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.gallery-item:hover {
+  border-color: #c8941a44;
+  transform: translateY(-2px);
+}
+.gallery-item .caption {
+  background: #1a1410;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: #a09070;
+  text-align: center;
+  font-style: normal;
+  margin-top: 0;
+}
+
+/* ---- Mobile responsive for app pages ---- */
+@media (max-width: 768px) {
+  .app-hero h1 { font-size: 2rem; }
+  .hero-icon { font-size: 2.5rem; }
+  .tagline { font-size: 1rem; }
+  .desc { font-size: 0.9rem; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .hero-buttons .btn { width: 100%; max-width: 320px; justify-content: center; }
+  .section-header h2 { font-size: 1.3rem; }
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+
 /* ---- Batik background pattern ---- */
 body::before {
   content: '';
@@ -88,6 +406,8 @@ body::before {
     top: 100%;
     left: 0;
     right: 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
     background: #0a0806;
     z-index: 9998;
     flex-direction: column;

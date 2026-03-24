@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://wayang.dalang.io/apps/map.html">
     <meta property="og:image" content="https://wayang.dalang.io/assets/og-map.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WayangMAP — Peta Interaktif Offline">
+    <meta name="twitter:title" content="WayangMAP &#8212; Peta Interaktif Offline">
     <meta name="twitter:description" content="Terminal peta interaktif untuk wayfinding. Tanpa internet. Untuk mall, rumah sakit, kampus.">
     <meta name="twitter:image" content="https://wayang.dalang.io/assets/og-map.png">
     <link rel="canonical" href="https://wayang.dalang.io/apps/map.html">
@@ -35,45 +35,33 @@
       "image": "https://wayang.dalang.io/assets/og-map.png"
     }
     </script>
-    <title>WayangMAP — Interactive Offline Map Terminal</title>
-    <link rel="stylesheet" href="/assets/lightbox.css?v=3497984">
-        <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'w-bg': '#0a0806','w-bg2': '#110e09','w-card': '#1a1410','w-card-h': '#221b13',
-            'w-gold': '#c8941a','w-gold-b': '#f0b830','w-gold-dim': '#c8941a22','w-gold-glow': '#c8941a44',
-            'w-text': '#f0e8d8','w-text2': '#a09070','w-dim': '#5a4a30',
-            'w-border': '#2e2318','w-border-g': '#c8941a44','w-green': '#7ec87e',
-          }
-        }
-      }
-    }
-    </script>
-    <link rel="stylesheet" href="/assets/style.css?v=3497984">
+    <title>WayangMAP &#8212; Interactive Offline Map Terminal</title>
+    <link rel="stylesheet" href="/assets/lightbox.css?v=b01b14e">
+    <link rel="stylesheet" href="/assets/tailwind.css?v=b01b14e">
+    <link rel="stylesheet" href="/assets/style.css?v=b01b14e">
 </head>
 <body class="bg-w-bg text-w-text font-['Inter',system-ui,sans-serif] leading-relaxed overflow-x-hidden w-full">
 
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 w-full max-w-[100vw] py-4 bg-w-bg border-b border-w-border-g z-[100]">
-        <div class="max-w-[1000px] mx-auto px-6 relative z-[1] flex justify-between items-center">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-[1] flex justify-between items-center">
             <a href="../index.html" class="text-xl font-bold text-w-gold no-underline tracking-tight flex items-center gap-2">
-                <span class="text-lg opacity-70 text-w-gold-b">ê¦®ê¦ªê¦</span>Wayang<span class="text-w-text">OS</span>
+                <span class="text-lg opacity-70 text-w-gold-b">ꦮꦪꦁ</span>
+                Wayang<span class="text-w-text">OS</span>
             </a>
             <div class="flex items-center gap-2">
                 <div class="lang-switch-mobile hidden gap-1 items-center">
                     <button onclick="setLang('en')" class="px-2 py-0.5 rounded text-xs font-semibold bg-transparent text-w-text2 border border-w-border cursor-pointer">EN</button>
                     <button onclick="setLang('id')" class="px-2 py-0.5 rounded text-xs font-semibold bg-w-gold text-black border border-w-gold cursor-pointer">ID</button>
                 </div>
-                <button class="nav-toggle hidden bg-transparent border-none text-w-gold text-2xl cursor-pointer p-1" aria-label="Menu">â˜°</button>
+                <button class="nav-toggle hidden bg-transparent border-none text-w-gold text-2xl cursor-pointer p-1" aria-label="Menu">☰</button>
             </div>
-            <ul class="nav-links flex gap-8 list-none items-center">
+            <ul class="nav-links flex gap-8 list-none">
                 <li><a href="../index.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Home</a></li>
                 <li><a href="../index.html#features" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Features</a></li>
                 <li><a href="../download.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Download</a></li>
-                <li><a href="../apps.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">Apps</a></li>
+                <li><a href="../apps.html" class="text-w-gold no-underline text-sm">Apps</a></li>
+                <li><a href="../about.html" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">About</a></li>
                 <li><a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-text2 no-underline text-sm hover:text-w-gold transition-colors">GitHub</a></li>
                 <li><div class="lang-switch flex gap-1 items-center ml-2">
                     <button onclick="setLang('en')" id="btn-en" class="px-2 py-0.5 rounded text-xs font-semibold bg-transparent text-w-text2 border border-w-border cursor-pointer">EN</button>
@@ -85,329 +73,359 @@
     </nav>
 
     <!-- Breadcrumb -->
-    <div style="padding-top: 80px;">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="../index.html">Home</a>
-                <span class="sep">›</span>
-                <a href="../apps.html">Apps</a>
-                <span class="sep">›</span>
-                <span class="current">WayangMAP</span>
-            </div>
-        </div>
+    <div class="max-w-[1200px] mx-auto px-6 pt-24 pb-2">
+        <nav class="text-sm text-w-dim">
+            <a href="../index.html" class="text-w-text2 hover:text-w-gold no-underline">Home</a>
+            <span class="mx-2">/</span>
+            <a href="../apps.html" class="text-w-text2 hover:text-w-gold no-underline">Apps</a>
+            <span class="mx-2">/</span>
+            <span class="text-w-gold">WayangMAP</span>
     </div>
 
     <!-- Hero -->
-    <section class="app-hero" style="padding-top: 40px;">
-        <div class="hero-icon">🗺️</div>
-        <h1>Wayang<span class="accent">MAP</span> Kiosk</h1>
-        <p class="tagline"><span data-en="Interactive Offline Map Terminal" data-id="Terminal Peta Interaktif Offline">Interactive Offline Map Terminal</span></p>
-        <p class="desc">Touch-screen wayfinding and directory kiosk. No internet required. Deploy interactive maps in malls, hospitals, campuses, and office buildings — fully offline, zero maintenance.</p>
-        <div class="hero-buttons">
-            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangMAP" target="_blank" rel="noopener" class="btn btn-primary" style="background:#25D366;">💬 WhatsApp Sales</a>
-            <a href="mailto:sales@dalang.io?subject=WayangMAP%20Inquiry" class="btn btn-secondary">Email: Email</a>
-            <a href="#pricing" class="btn btn-secondary">See Pricing ↓</a>
+    <section class="hero-glow-sm text-center pt-8 pb-16 px-6 relative">
+        <div class="text-6xl mb-6 relative z-[1]">&#128506;</div>
+        <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-extrabold tracking-tighter mb-4 relative z-[1]">
+            Wayang<span class="text-w-gold">MAP</span> Kiosk
+        </h1>
+        <p class="text-[clamp(0.95rem,2vw,1.1rem)] text-w-text2 max-w-[650px] mx-auto mb-4 relative z-[1]"><span data-en="Interactive Offline Map Terminal" data-id="Terminal Peta Interaktif Offline">Interactive Offline Map Terminal</span></p>
+        <p class="text-w-dim max-w-3xl mx-auto mb-8 relative z-[1]">Touch-screen wayfinding and directory kiosk. No internet required. Deploy interactive maps in malls, hospitals, campuses, and office buildings &#8212; fully offline, zero maintenance.</p>
+        <div class="flex flex-wrap justify-center gap-4 relative z-[1]">
+            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangMAP" target="_blank" rel="noopener" class="bg-[#25D366] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition no-underline">&#128172; WhatsApp Sales</a>
+            <a href="mailto:sales@dalang.io?subject=WayangMAP%20Inquiry" class="border border-w-border text-w-text2 px-6 py-3 rounded-lg font-semibold hover:border-w-gold hover:text-w-gold transition no-underline">&#9993; Email Sales</a>
+            <a href="#pricing" class="border border-w-border text-w-text2 px-6 py-3 rounded-lg font-semibold hover:border-w-gold hover:text-w-gold transition no-underline">See Pricing &#8595;</a>
         </div>
     </section>
 
     <!-- Hero Screenshot -->
-    <section class="hero-screenshot">
-        <div class="container">
-            <img src="../assets/screenshots/wmap-tile-02.png" alt="WayangMAP Kiosk — Interactive Offline Map Terminal">
-            <p class="caption">WayangMAP Kiosk — touch-screen wayfinding with built-in map engine</p>
+    <div class="max-w-[1200px] mx-auto px-6 mb-16">
+        <div class="border border-w-border rounded-xl overflow-hidden">
+            <img src="../assets/screenshots/wmap-tile-02.png" alt="WayangMAP Kiosk &#8212; Interactive Offline Map Terminal" class="w-full">
         </div>
+        <p class="text-center text-w-dim text-sm mt-3">WayangMAP Kiosk &#8212; touch-screen wayfinding with built-in map engine</p>
+    </div>
+
+
+    <!-- 3D Product Preview -->
+    <section class="max-w-[800px] mx-auto px-6 pb-12">
+      <div id="viewer3d" style="width:100%; height:400px; border-radius:16px; overflow:hidden; border:1px solid #2e2318; background:#0a0806;"></div>
+      <p class="text-center text-w-dim text-sm mt-3"><span data-en="Drag to rotate &bull; Scroll to zoom" data-id="Geser untuk memutar &bull; Scroll untuk memperbesar">Drag to rotate &bull; Scroll to zoom</span></p>
     </section>
 
-    <!-- Features -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Wayfinding Made Simple</h2>
-                <p>Everything your visitors need to find their way — without an internet connection.</p>
-            </div>
+    <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.162/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.162/examples/jsm/"}}</script>
+    <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">🌐</div>
-                    <h3>Offline Maps</h3>
-                    <p>Full map data stored locally on the terminal. Works without internet, Wi-Fi, or cloud services. Always on, always fast.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">👆</div>
-                    <h3>Touch Navigation</h3>
-                    <p>Pinch to zoom, tap to search, swipe to pan. Intuitive wayfinding that anyone can use — no training needed.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">📍</div>
-                    <h3>Custom POI Overlay</h3>
-                    <p>Add your own locations, tenants, facilities, and rooms. Fully customizable points of interest tailored to your venue.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🏢</div>
-                    <h3>Multi-Floor Support</h3>
-                    <p>Navigate between floors with a single tap. Perfect for multi-story malls, hospitals, and office buildings.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🔍</div>
-                    <h3>Search Directory</h3>
-                    <p>Find tenants, departments, or rooms instantly. Type a name and get directions — fast and accurate.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">⚡</div>
-                    <h3>Zero Maintenance</h3>
-                    <p>No servers, no subscriptions, no updates needed. Runs directly on hardware with a built-in map engine. Set it and forget it.</p>
-                </div>
+    const container = document.getElementById('viewer3d');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0806);
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+    camera.position.set(0, 1.5, 3.5);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    container.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 2;
+
+    // Lighting
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(5, 5, 5);
+    scene.add(dirLight);
+    const rimLight = new THREE.DirectionalLight(0xc8941a, 0.3);
+    rimLight.position.set(-3, 2, -3);
+    scene.add(rimLight);
+
+    new GLTFLoader().load('../assets/models/map-kiosk.glb', (gltf) => {
+      const model = gltf.scene;
+      const box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      model.position.sub(center);
+      scene.add(model);
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    });
+
+    (function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    })();
+    </script>
+
+    <!-- Features -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Wayfinding Made Simple</h2>
+            <p class="text-w-dim">Everything your visitors need to find their way &#8212; without an internet connection.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#127760;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Offline Maps</h3>
+                <p class="text-w-dim text-sm">Full map data stored locally on the terminal. Works without internet, Wi-Fi, or cloud services. Always on, always fast.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128070;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Touch Navigation</h3>
+                <p class="text-w-dim text-sm">Pinch to zoom, tap to search, swipe to pan. Intuitive wayfinding that anyone can use &#8212; no training needed.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128204;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Custom POI Overlay</h3>
+                <p class="text-w-dim text-sm">Add your own locations, tenants, facilities, and rooms. Fully customizable points of interest tailored to your venue.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#127970;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Multi-Floor Support</h3>
+                <p class="text-w-dim text-sm">Navigate between floors with a single tap. Perfect for multi-story malls, hospitals, and office buildings.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#128269;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Search Directory</h3>
+                <p class="text-w-dim text-sm">Find tenants, departments, or rooms instantly. Type a name and get directions &#8212; fast and accurate.</p>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                <div class="text-3xl mb-4">&#9881;</div>
+                <h3 class="text-lg font-bold text-w-text mb-2">Zero Maintenance</h3>
+                <p class="text-w-dim text-sm">No servers, no subscriptions, no updates needed. Runs directly on hardware with a built-in map engine. Set it and forget it.</p>
             </div>
         </div>
     </section>
 
     <!-- Use Cases -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Built for Every Venue</h2>
-                <p>From shopping malls to industrial parks — WayangMAP adapts to your space.</p>
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3">Built for Every Venue</h2>
+            <p class="text-w-dim">From shopping malls to industrial parks &#8212; WayangMAP adapts to your space.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition flex gap-4">
+                <div class="text-3xl">&#127978;</div>
+                <div><h3 class="text-lg font-bold text-w-text mb-1">Shopping Malls</h3><p class="text-w-dim text-sm">Tenant directory &amp; wayfinding. Help shoppers find stores, restaurants, and amenities across multiple floors.</p></div>
             </div>
-
-            <div class="usecases-grid">
-                <div class="usecase-card">
-                    <div class="uc-icon">🏬</div>
-                    <div>
-                        <h3>Shopping Malls</h3>
-                        <p>Tenant directory & wayfinding. Help shoppers find stores, restaurants, and amenities across multiple floors.</p>
-                    </div>
-                </div>
-                <div class="usecase-card">
-                    <div class="uc-icon">🏥</div>
-                    <div>
-                        <h3>Hospitals</h3>
-                        <p>Department & room finder. Guide patients and visitors to clinics, wards, labs, and pharmacies.</p>
-                    </div>
-                </div>
-                <div class="usecase-card">
-                    <div class="uc-icon">🏭</div>
-                    <div>
-                        <h3>Industrial Parks</h3>
-                        <p>Facility & warehouse map. Navigate large complexes with clear directions to every building and unit.</p>
-                    </div>
-                </div>
-                <div class="usecase-card">
-                    <div class="uc-icon">🏫</div>
-                    <div>
-                        <h3>Campuses</h3>
-                        <p>Building & room navigator. Help students and visitors find classrooms, offices, and facilities.</p>
-                    </div>
-                </div>
-                <div class="usecase-card">
-                    <div class="uc-icon">🅿️</div>
-                    <div>
-                        <h3>Parking Lots</h3>
-                        <p>Spot availability display. Integrates with WayangGates for real-time parking zone visualization.</p>
-                    </div>
-                </div>
-                <div class="usecase-card">
-                    <div class="uc-icon">🏢</div>
-                    <div>
-                        <h3>Office Buildings</h3>
-                        <p>Tenant & meeting room directory. Help visitors find companies, conference rooms, and shared spaces.</p>
-                    </div>
-                </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition flex gap-4">
+                <div class="text-3xl">&#127973;</div>
+                <div><h3 class="text-lg font-bold text-w-text mb-1">Hospitals</h3><p class="text-w-dim text-sm">Department &amp; room finder. Guide patients and visitors to clinics, wards, labs, and pharmacies.</p></div>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition flex gap-4">
+                <div class="text-3xl">&#127981;</div>
+                <div><h3 class="text-lg font-bold text-w-text mb-1">Industrial Parks</h3><p class="text-w-dim text-sm">Facility &amp; warehouse map. Navigate large complexes with clear directions to every building and unit.</p></div>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition flex gap-4">
+                <div class="text-3xl">&#127891;</div>
+                <div><h3 class="text-lg font-bold text-w-text mb-1">Campuses</h3><p class="text-w-dim text-sm">Building &amp; room navigator. Help students and visitors find classrooms, offices, and facilities.</p></div>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition flex gap-4">
+                <div class="text-3xl">&#127359;</div>
+                <div><h3 class="text-lg font-bold text-w-text mb-1">Parking Lots</h3><p class="text-w-dim text-sm">Spot availability display. Integrates with WayangGates for real-time parking zone visualization.</p></div>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition flex gap-4">
+                <div class="text-3xl">&#127970;</div>
+                <div><h3 class="text-lg font-bold text-w-text mb-1">Office Buildings</h3><p class="text-w-dim text-sm">Tenant &amp; meeting room directory. Help visitors find companies, conference rooms, and shared spaces.</p></div>
             </div>
         </div>
     </section>
 
     <!-- Screenshots -->
-    <section class="app-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2><span data-en="See It in Action" data-id="Lihat Aksinya">See It in Action</span></h2>
-                <p>Click any screenshot to enlarge.</p>
+    <section class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3"><span data-en="See It in Action" data-id="Lihat Aksinya">See It in Action</span></h2>
+            <p class="text-w-dim">Click any screenshot to enlarge.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 screenshot-gallery">
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/wmap-tile-01.png" alt="WayangMAP Welcome Screen" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Welcome Screen</p>
             </div>
-
-            <div class="screenshot-gallery">
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/wmap-tile-01.png" alt="WayangMAP Welcome Screen">
-                    <div class="caption">Welcome Screen</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/wmap-tile-02.png" alt="WayangMAP Overview">
-                    <div class="caption">Map Overview — Full Region View</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/wmap-tile-03.png" alt="WayangMAP Zoomed In">
-                    <div class="caption">Zoomed In — Roads & Boundaries</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../assets/screenshots/wmap-tile-04.png" alt="WayangMAP Detail View">
-                    <div class="caption">Detail View — Street Level</div>
-                </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/wmap-tile-02.png" alt="WayangMAP Overview" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Map Overview &#8212; Full Region View</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/wmap-tile-03.png" alt="WayangMAP Zoomed In" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Zoomed In &#8212; Roads &amp; Boundaries</p>
+            </div>
+            <div class="gallery-item border border-w-border rounded-lg overflow-hidden cursor-pointer hover:border-w-gold transition">
+                <img src="../assets/screenshots/wmap-tile-04.png" alt="WayangMAP Detail View" class="w-full">
+                <p class="text-center text-w-dim text-xs py-2">Detail View &#8212; Street Level</p>
             </div>
         </div>
     </section>
 
     <!-- Pricing -->
-    <section class="app-section" id="pricing">
-        <div class="container">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2><span data-en="Pricing" data-id="Harga">Pricing</span></h2>
-                <p>Hardware + software bundles. One-time purchase, no monthly fees.</p>
+    <section id="pricing" class="max-w-[1200px] mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl font-bold mb-3"><span data-en="Pricing" data-id="Harga">Pricing</span></h2>
+            <p class="text-w-dim">Hardware + software bundles. One-time purchase, no monthly fees.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2"><span data-en="Basic" data-id="Dasar">Basic</span></div>
+                <div class="text-3xl font-extrabold text-w-text mb-1">Rp 8 <span class="text-lg font-normal text-w-dim">juta</span></div>
+                <p class="text-w-dim text-sm mb-6"><span data-en="one-time" data-id="sekali bayar">one-time</span></p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 10.1" touchscreen terminal</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Single map / floor</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Up to 50 POIs</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-day setup support</li>
+                </ul>
             </div>
-
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="plan-name"><span data-en="Basic" data-id="Dasar">Basic</span></div>
-                    <div class="price">Rp 8.000.000</div>
-                    <div class="price-note"><span data-en="one-time" data-id="sekali bayar">one-time</span></div>
-                    <div class="plan-desc">
-                        <ul>
-                            <li>10.1" touchscreen terminal</li>
-                            <li>Single map / floor</li>
-                            <li>Up to 50 POIs</li>
-                            <li>7-day setup support</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="pricing-card featured">
-                    <div class="plan-name"><span data-en="Professional" data-id="Profesional">Professional</span></div>
-                    <div class="price">Rp 12.000.000</div>
-                    <div class="price-note">one-time · most popular</div>
-                    <div class="plan-desc">
-                        <ul>
-                            <li>10.1" touchscreen terminal</li>
-                            <li>Multi-floor navigation</li>
-                            <li>Unlimited POIs</li>
-                            <li>Search directory</li>
-                            <li>7-day setup support</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="pricing-card">
-                    <div class="plan-name"><span data-en="Display" data-id="Tampilan">Display</span></div>
-                    <div class="price">Rp 25.000.000</div>
-                    <div class="price-note">one-time · large format</div>
-                    <div class="plan-desc">
-                        <ul>
-                            <li>21.5" touchscreen display</li>
-                            <li>Multi-floor wayfinding</li>
-                            <li>Unlimited POIs</li>
-                            <li>Full search & directory</li>
-                            <li>Custom branding</li>
-                            <li>7-day setup support</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="pricing-card">
-                    <div class="plan-name"><span data-en="Enterprise" data-id="Perusahaan">Enterprise</span></div>
-                    <div class="price"><span data-en="Custom" data-id="Hubungi Kami">Custom</span></div>
-                    <div class="price-note">mall · hospital · campus</div>
-                    <div class="plan-desc">
-                        <ul>
-                            <li>Multiple kiosks</li>
-                            <li>Central management</li>
-                            <li>Custom branding & design</li>
-                            <li>Dedicated support</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="bg-w-card border-2 border-w-gold rounded-xl p-8 hover:border-w-gold-b transition relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-w-gold text-black px-4 py-1 rounded-full text-xs font-bold">POPULAR</div>
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2"><span data-en="Professional" data-id="Profesional">Professional</span></div>
+                <div class="text-3xl font-extrabold text-w-text mb-1">Rp 12 <span class="text-lg font-normal text-w-dim">juta</span></div>
+                <p class="text-w-dim text-sm mb-6">one-time &#8212; most popular</p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 10.1" touchscreen terminal</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Multi-floor navigation</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Unlimited POIs</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Search directory</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-day setup support</li>
+                </ul>
             </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2"><span data-en="Display" data-id="Tampilan">Display</span></div>
+                <div class="text-3xl font-extrabold text-w-text mb-1">Rp 25 <span class="text-lg font-normal text-w-dim">juta</span></div>
+                <p class="text-w-dim text-sm mb-6">one-time &#8212; large format</p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 21.5" touchscreen display</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Multi-floor wayfinding</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Unlimited POIs</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Full search &amp; directory</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Custom branding</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> 7-day setup support</li>
+                </ul>
+            </div>
+            <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2"><span data-en="Enterprise" data-id="Perusahaan">Enterprise</span></div>
+                <div class="text-3xl font-extrabold text-w-text mb-1"><span data-en="Custom" data-id="Hubungi Kami">Custom</span></div>
+                <p class="text-w-dim text-sm mb-6">mall &#8212; hospital &#8212; campus</p>
+                <ul class="space-y-3 text-sm text-w-text2">
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Multiple kiosks</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Central management</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Custom branding &amp; design</li>
+                    <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Dedicated support</li>
+                </ul>
+            </div>
+        </div>
 
-            <!-- Add-ons -->
-            <div style="margin-top: 48px;">
-                <div class="section-header">
-                    <div class="gold-divider"></div>
-                    <h2><span data-en="Add-ons" data-id="Tambahan">Add-ons</span></h2>
-                    <p>Already have a WayangOS product? Add WayangMAP to your existing setup.</p>
+        <!-- Add-ons -->
+        <div class="mt-12">
+            <div class="text-center mb-8">
+                <h2 class="text-xl font-bold mb-3"><span data-en="Add-ons" data-id="Tambahan">Add-ons</span></h2>
+                <p class="text-w-dim text-sm">Already have a WayangOS product? Add WayangMAP to your existing setup.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                    <h3 class="text-w-gold font-bold mb-1">WayangPOS + Map</h3>
+                    <div class="text-xl font-extrabold text-w-gold-b mb-2">+Rp 2.000.000</div>
+                    <p class="text-w-dim text-sm">Delivery zone visualization. See your coverage area and plan routes on a map overlay.</p>
                 </div>
-                <div class="addon-grid">
-                    <div class="addon-card">
-                        <h3>WayangPOS + Map</h3>
-                        <div class="addon-price">+Rp 2.000.000</div>
-                        <p>Delivery zone visualization. See your coverage area and plan routes on a map overlay.</p>
-                    </div>
-                    <div class="addon-card">
-                        <h3>WayangDCIEM + Map</h3>
-                        <div class="addon-price">+Rp 3.000.000</div>
-                        <p>Facility floor plan with sensor overlay. Visualize temperature, humidity, and power data on your building map.</p>
-                    </div>
-                    <div class="addon-card">
-                        <h3>WayangGates + Map</h3>
-                        <div class="addon-price">+Rp 3.000.000</div>
-                        <p>Parking lot map with gate locations and traffic flow. Show available spots and guide drivers to open areas.</p>
-                    </div>
+                <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                    <h3 class="text-w-gold font-bold mb-1">WayangDCIEM + Map</h3>
+                    <div class="text-xl font-extrabold text-w-gold-b mb-2">+Rp 3.000.000</div>
+                    <p class="text-w-dim text-sm">Facility floor plan with sensor overlay. Visualize temperature, humidity, and power data on your building map.</p>
+                </div>
+                <div class="bg-w-card border border-w-border rounded-xl p-6 hover:border-w-gold transition">
+                    <h3 class="text-w-gold font-bold mb-1">WayangGates + Map</h3>
+                    <div class="text-xl font-extrabold text-w-gold-b mb-2">+Rp 3.000.000</div>
+                    <p class="text-w-dim text-sm">Parking lot map with gate locations and traffic flow. Show available spots and guide drivers to open areas.</p>
                 </div>
             </div>
+        </div>
 
-            <!-- Recurring Services -->
-            <div style="margin-top: 48px;">
-                <div class="section-header">
-                    <div class="gold-divider"></div>
-                    <h2><span data-en="Recurring Services" data-id="Layanan Berlangganan">Recurring Services</span></h2>
-                    <p>Keep your maps current and your kiosks managed.</p>
+        <!-- Recurring -->
+        <div class="mt-12">
+            <div class="text-center mb-8">
+                <h2 class="text-xl font-bold mb-3"><span data-en="Recurring Services" data-id="Layanan Berlangganan">Recurring Services</span></h2>
+                <p class="text-w-dim text-sm">Keep your maps current and your kiosks managed.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                    <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Map Update Service</div>
+                    <div class="text-2xl font-extrabold text-w-gold-b mb-1">Rp 2.000.000</div>
+                    <p class="text-w-dim text-sm mb-4"><span data-en="per year" data-id="per tahun">per year</span></p>
+                    <ul class="space-y-2 text-sm text-w-text2">
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Unlimited map updates</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> POI changes &amp; additions</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Floor plan revisions</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> On-site or remote update</li>
+                    </ul>
                 </div>
-                <div class="pricing-grid" style="max-width: 500px; margin: 0 auto;">
-                    <div class="pricing-card">
-                        <div class="plan-name">Map Update Service</div>
-                        <div class="price">Rp 2.000.000</div>
-                        <div class="price-note"><span data-en="per year" data-id="per tahun">per year</span></div>
-                        <div class="plan-desc">
-                            <ul>
-                                <li>Unlimited map updates</li>
-                                <li>POI changes & additions</li>
-                                <li>Floor plan revisions</li>
-                                <li>On-site or remote update</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="pricing-card">
-                        <div class="plan-name">Remote Management</div>
-                        <div class="price">Rp 1.000.000</div>
-                        <div class="price-note"><span data-en="per month" data-id="per bulan">per month</span></div>
-                        <div class="plan-desc">
-                            <ul>
-                                <li>Multi-kiosk management</li>
-                                <li>Remote content updates</li>
-                                <li>Health monitoring</li>
-                                <li>Priority support</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="bg-w-card border border-w-border rounded-xl p-8 hover:border-w-gold transition">
+                    <div class="text-w-gold text-sm font-bold uppercase tracking-wider mb-2">Remote Management</div>
+                    <div class="text-2xl font-extrabold text-w-gold-b mb-1">Rp 1.000.000</div>
+                    <p class="text-w-dim text-sm mb-4"><span data-en="per month" data-id="per bulan">per month</span></p>
+                    <ul class="space-y-2 text-sm text-w-text2">
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Multi-kiosk management</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Remote content updates</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Health monitoring</li>
+                        <li class="flex items-start gap-2"><span class="text-w-green">&#10003;</span> Priority support</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-            <div style="text-align: center; margin-top: 32px;">
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">All prices include standard installation. Remote locations may incur travel costs. Contact us for a quote.</p>
-                <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangMAP" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 16px; background:#25D366;">💬 WhatsApp Sales</a>
+        <p class="text-center text-w-dim text-sm mt-8">All prices include standard installation. Remote locations may incur travel costs. Contact us for a quote.</p>
+        <div class="text-center mt-4">
+            <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20WayangMAP" target="_blank" rel="noopener" class="inline-block bg-[#25D366] text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition no-underline">&#128172; WhatsApp Sales</a>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16 text-center">
+        <h2 class="text-2xl font-bold mb-3">Ready to Guide Your Visitors?</h2>
+        <p class="text-w-dim mb-6">Contact our sales team for a demo, quote, or site survey.</p>
+        <a href="mailto:sales@dalang.io?subject=WayangMAP%20Demo%20Request" class="inline-block bg-w-gold text-black px-8 py-4 rounded-lg font-bold text-lg hover:bg-w-gold-b transition no-underline">Email: sales@dalang.io</a>
+    </section>
+
+    <!-- Trust + Guarantee -->
+    <section class="max-w-[1200px] mx-auto px-6 py-16 border-t border-w-border">
+        <div class="bg-w-card border border-w-border rounded-2xl p-8 text-center">
+            <h3 class="text-lg font-bold text-w-gold mb-6">Garansi &amp; Jaminan Kami</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div class="p-3"><span class="block text-2xl mb-2">&#128737;</span><span class="text-w-text font-semibold">Garansi Hardware 1 Tahun</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128218;</span><span class="text-w-text font-semibold">7 Hari Setup &amp; Pelatihan</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128242;</span><span class="text-w-text font-semibold">Dukungan Teknis via WhatsApp</span></div>
+                <div class="p-3"><span class="block text-2xl mb-2">&#128274;</span><span class="text-w-text font-semibold">100% Data Milik Anda &#8212; Tanpa Cloud</span></div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="app-section">
-        <div class="container" style="text-align: center;">
-            <div class="section-header">
-                <div class="gold-divider"></div>
-                <h2>Ready to Guide Your Visitors?</h2>
-                <p>Contact our sales team for a demo, quote, or site survey.</p>
-            </div>
-            <a href="mailto:sales@dalang.io?subject=WayangMAP%20Demo%20Request" class="btn btn-primary" style="font-size: 1.1rem; padding: 18px 40px;">Email: sales@dalang.io</a>
+    <!-- Trust Bar -->
+    <div class="border-t border-b border-w-border-g bg-w-bg2 py-4">
+        <div class="max-w-[1200px] mx-auto px-6 flex flex-wrap justify-center gap-6 md:gap-10 text-xs text-w-text2">
+            <span>&#127470;&#127465; Made in Indonesia</span>
+            <span>&#127970; PT Komponen Pusat Data</span>
+            <span>&#128274; 100% Data Milik Anda</span>
+            <span>&#128222; +62 895-4032-00032</span>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="py-12 border-t border-w-border-g text-center">
-        <div class="max-w-[1000px] mx-auto px-6 relative z-[1]">
+        <div class="max-w-[1200px] mx-auto px-6 relative z-[1]">
             <p class="text-w-dim text-sm mb-2">Tel: +62 895-4032-00032 | Email: <a href="mailto:sales@dalang.io" class="text-w-gold no-underline hover:underline">sales@dalang.io</a></p>
-            <p class="text-w-dim text-sm mb-2"><strong>WayangOS</strong> â€” The Shadow that Powers the Machine</p>
+            <p class="text-w-dim text-sm mb-2"><strong>WayangOS</strong> &#8212; The Shadow that Powers the Machine</p>
             <p class="text-w-text2 text-sm italic mb-2">Ancient Art. Bare Metal.</p>
             <p class="text-w-dim text-sm">
-                Built by <a href="https://github.com/mashanz" target="_blank" class="text-w-gold no-underline hover:underline">Hans Sumardhi</a> Â·
-                <a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-gold no-underline hover:underline">WayangOS</a> Â·
-                <a href="../apps.html" class="text-w-gold no-underline hover:underline">Apps</a> Â·
-                GPLv2 (kernel) Â· MIT (userspace)
+                &copy; 2026 Dalang Pte Ltd &#183;
+                <a href="https://github.com/mashanz/wayangos" target="_blank" class="text-w-gold no-underline hover:underline">WayangOS</a> &#183;
+                <a href="../apps.html" class="text-w-gold no-underline hover:underline">Apps</a> &#183;
+                GPLv2 (kernel) &#183; MIT (userspace)
             </p>
         </div>
     </footer>
@@ -420,14 +438,13 @@
         <img id="lb-img" class="lb-img" src="" alt="Screenshot preview">
         <div class="lb-counter" id="lb-counter"></div>
     </div>
+    <script src="/assets/lightbox.js?v=b01b14e"></script>
 
-    <script src="/assets/lightbox.js?v=3497984"></script>
-
-<!-- WhatsApp Floating Button -->
+    <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/62895403200032?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20WayangOS" target="_blank" rel="noopener" class="whatsapp-float">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
-    <script src="/assets/i18n.js?v=3497984"></script>
-    <script src="/assets/main.js?v=3497984"></script>
+    <script src="/assets/i18n.js?v=b01b14e"></script>
+    <script src="/assets/main.js?v=b01b14e"></script>
 </body>
 </html>
